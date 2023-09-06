@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0C5561D32AA5E11700F71C58 /* RadioButtonVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5561D22AA5E11700F71C58 /* RadioButtonVC.swift */; };
+		0CA2C5EB2AA88D4B00E3C308 /* FormTextFieldVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA2C5EA2AA88D4B00E3C308 /* FormTextFieldVC.swift */; };
+		0CA2C5ED2AA88D6100E3C308 /* ButtonsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA2C5EC2AA88D6100E3C308 /* ButtonsVC.swift */; };
 		0CAEA95A2AA718600004A11F /* DesignComponents in Frameworks */ = {isa = PBXBuildFile; productRef = 0CAEA9592AA718600004A11F /* DesignComponents */; };
 		88AE88D82A248586001D1777 /* UIFont+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AE88D72A248586001D1777 /* UIFont+Custom.swift */; };
 		88AE88E12A24A25E001D1777 /* Inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88AE88DD2A24A25E001D1777 /* Inter-Bold.ttf */; };
@@ -23,6 +25,8 @@
 
 /* Begin PBXFileReference section */
 		0C5561D22AA5E11700F71C58 /* RadioButtonVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButtonVC.swift; sourceTree = "<group>"; };
+		0CA2C5EA2AA88D4B00E3C308 /* FormTextFieldVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTextFieldVC.swift; sourceTree = "<group>"; };
+		0CA2C5EC2AA88D6100E3C308 /* ButtonsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsVC.swift; sourceTree = "<group>"; };
 		0CAEA9572AA717570004A11F /* DesignComponents */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DesignComponents; path = ../DesignComponents; sourceTree = "<group>"; };
 		88AE88D72A248586001D1777 /* UIFont+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Custom.swift"; sourceTree = "<group>"; };
 		88AE88DD2A24A25E001D1777 /* Inter-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Bold.ttf"; sourceTree = "<group>"; };
@@ -99,6 +103,8 @@
 			children = (
 				88DF85862A0CB3B5001724EC /* AppDelegate.swift */,
 				88DF858A2A0CB3B5001724EC /* ViewController.swift */,
+				0CA2C5EA2AA88D4B00E3C308 /* FormTextFieldVC.swift */,
+				0CA2C5EC2AA88D6100E3C308 /* ButtonsVC.swift */,
 				0C5561D22AA5E11700F71C58 /* RadioButtonVC.swift */,
 				88AE88D72A248586001D1777 /* UIFont+Custom.swift */,
 				88DF859A2A0CB419001724EC /* Storyboards */,
@@ -204,6 +210,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CA2C5ED2AA88D6100E3C308 /* ButtonsVC.swift in Sources */,
+				0CA2C5EB2AA88D4B00E3C308 /* FormTextFieldVC.swift in Sources */,
 				88DF858B2A0CB3B5001724EC /* ViewController.swift in Sources */,
 				88AE88D82A248586001D1777 /* UIFont+Custom.swift in Sources */,
 				88DF85872A0CB3B5001724EC /* AppDelegate.swift in Sources */,

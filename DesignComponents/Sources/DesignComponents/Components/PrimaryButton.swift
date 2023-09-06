@@ -22,7 +22,14 @@ public class PrimaryButton: UIButton {
         }
     }
     
-    private var cornerRadius: CGFloat = 10
+    var cornerRadius: CGFloat = 10
+    var borderWidth: CGFloat = 1
+    var borderColor: UIColor = UIColor.clear {
+        didSet {
+            configureUI()
+        }
+    }
+    
     
     // MARK: - Initializers
     override init(frame: CGRect) {
@@ -46,12 +53,17 @@ public class PrimaryButton: UIButton {
     
     private func configureUI() {
         self.setTitleColor(textStyle.color, for: .normal)
-        // self.titleLabel?.font = textStyle.font
+        self.titleLabel?.font = textStyle.font
         self.backgroundColor = textStyle.backgroundColor
         
         if self.cornerRadius > 0 {
             self.layer.cornerRadius = self.cornerRadius
             self.clipsToBounds = true
+        }
+        
+        if borderWidth > 0 {
+            self.layer.borderWidth = self.borderWidth
+            self.layer.borderColor = self.borderColor.cgColor
         }
     }
     
