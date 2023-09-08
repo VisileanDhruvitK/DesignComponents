@@ -1,6 +1,6 @@
 //
 //  Fonts.swift
-//  DesignComponentsDemo
+//  DesignComponents
 //
 //  Created by Dhruvit Kachhiya on 11/05/23.
 //
@@ -17,13 +17,15 @@ public enum FontSize: CGFloat {
 extension UIFont {
     
     static let formItemTitle = VLFont(size: .font16, weigth: .medium)
-    static let formItemText = UIFont.systemFont(ofSize: 16, weight: .regular)
+    static let formItemText = VLFont(size: .font16, weigth: .regular)
     
-    static let primaryButtonTitle = UIFont.systemFont(ofSize: 12, weight: .semibold)
-    static let secondaryButtonTitle = UIFont.systemFont(ofSize: 12, weight: .semibold)
+    static let primaryButtonTitle = VLFont(size: .font12, weigth: .semibold)
+    static let secondaryButtonTitle = VLFont(size: .font12, weigth: .semibold)
+    static let linkButtonTitle = VLFont(size: .font14, weigth: .semibold)
+    static let secondaryImageButtonTitle = VLFont(size: .font16, weigth: .semibold)
     
-    static let radioButton = UIFont.systemFont(ofSize: 14, weight: .medium)
-    static let checkBox = UIFont.systemFont(ofSize: 14, weight: .medium)
+    static let radioButton = VLFont(size: .font14, weigth: .medium)
+    static let checkBox = VLFont(size: .font14, weigth: .medium)
     
 }
 

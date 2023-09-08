@@ -1,8 +1,8 @@
 //
 //  CheckBoxView.swift
-//  DesignComponentsDemo
+//  DesignComponents
 //
-//  Created by VisiLean Admin on 05/09/23.
+//  Created by Dhruvit Kachhiya on 05/09/23.
 //
 
 import UIKit

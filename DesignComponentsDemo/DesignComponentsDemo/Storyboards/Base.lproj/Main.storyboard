@@ -124,21 +124,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="YQq-SZ-QPn">
-                                <rect key="frame" x="30" y="270" width="315" height="272"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="YQq-SZ-QPn">
+                                <rect key="frame" x="30" y="310" width="315" height="192"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0PP-zF-ILC" customClass="RadioButton" customModule="DesignComponents">
+                                        <rect key="frame" x="0.0" y="0.0" width="315" height="40"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="7e7-yA-5Xb"/>
+                                        </constraints>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KTH-Ar-pVr" customClass="RadioButtonView" customModule="DesignComponents">
-                                        <rect key="frame" x="0.0" y="0.0" width="315" height="120"/>
+                                        <rect key="frame" x="0.0" y="72" width="315" height="120"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="120" id="hUQ-4y-h6c"/>
-                                        </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jJB-P4-cRW" customClass="CheckBoxView" customModule="DesignComponents">
-                                        <rect key="frame" x="0.0" y="152" width="315" height="120"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="120" id="tKv-v2-jta"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -154,7 +154,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Z0q-Dm-3AX"/>
                     <connections>
-                        <outlet property="checkBoxes" destination="jJB-P4-cRW" id="EXg-qR-N9L"/>
+                        <outlet property="radioButton" destination="0PP-zF-ILC" id="t7C-cf-ECi"/>
                         <outlet property="radioButtons" destination="KTH-Ar-pVr" id="fNp-hI-7g4"/>
                     </connections>
                 </viewController>
@@ -171,29 +171,64 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="2ca-4P-ydS">
-                                <rect key="frame" x="93.666666666666671" y="350" width="187.66666666666663" height="112"/>
+                                <rect key="frame" x="93.666666666666671" y="254" width="187.66666666666663" height="304"/>
                                 <subviews>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v8g-cT-g3P" customClass="PrimaryButton" customModule="DesignComponents">
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lmm-7o-T9T" customClass="VLButton" customModule="DesignComponents">
                                         <rect key="frame" x="0.0" y="0.0" width="187.66666666666666" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="J6f-bV-lH9"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Button CTA">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="buttonClickedWithSender:" destination="Nwk-Bz-ge2" eventType="touchUpInside" id="TWi-LK-zhb"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v8g-cT-g3P" customClass="VLButton" customModule="DesignComponents">
+                                        <rect key="frame" x="0.0" y="64" width="187.66666666666666" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="tqQ-0j-9kg"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="Submit"/>
+                                        <state key="normal" title="Button CTA">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
-                                            <action selector="submitClickedWithSender:" destination="Nwk-Bz-ge2" eventType="touchUpInside" id="5bS-5D-5sa"/>
+                                            <action selector="buttonClickedWithSender:" destination="Nwk-Bz-ge2" eventType="touchUpInside" id="fac-cg-oUB"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rs0-6R-DNr" customClass="SecondaryButton" customModule="DesignComponents">
-                                        <rect key="frame" x="0.0" y="64" width="187.66666666666666" height="48"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rs0-6R-DNr" customClass="VLButton" customModule="DesignComponents">
+                                        <rect key="frame" x="0.0" y="128" width="187.66666666666666" height="48"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="Cancel"/>
+                                        <state key="normal" title="Button CTA">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
-                                            <action selector="cancelClickedWithSender:" destination="Nwk-Bz-ge2" eventType="touchUpInside" id="549-1y-BF9"/>
+                                            <action selector="buttonClickedWithSender:" destination="Nwk-Bz-ge2" eventType="touchUpInside" id="gZ2-fg-NxF"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vgK-QU-Kp0" customClass="VLButton" customModule="DesignComponents">
+                                        <rect key="frame" x="0.0" y="192" width="187.66666666666666" height="48"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                        <state key="normal" title="Button CTA">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="buttonClickedWithSender:" destination="Nwk-Bz-ge2" eventType="touchUpInside" id="y2G-lj-wMP"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gJ2-9A-LR4" customClass="RightImageButton" customModule="DesignComponents">
+                                        <rect key="frame" x="0.0" y="256" width="187.66666666666666" height="48"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <connections>
+                                            <action selector="rightImageButtonClickedWithSender:" destination="Nwk-Bz-ge2" eventType="touchUpInside" id="ja5-O3-V8u"/>
+                                        </connections>
+                                    </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="rs0-6R-DNr" firstAttribute="height" secondItem="v8g-cT-g3P" secondAttribute="height" id="shE-46-sO3"/>
@@ -210,13 +245,62 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="cancelButton" destination="rs0-6R-DNr" id="rXw-Ne-dF5"/>
-                        <outlet property="submitButton" destination="v8g-cT-g3P" id="nxe-pG-LEG"/>
+                        <outlet property="linkButton" destination="rs0-6R-DNr" id="1KX-yS-Ti2"/>
+                        <outlet property="primaryButton" destination="lmm-7o-T9T" id="vD6-im-Zb7"/>
+                        <outlet property="secondaryButton" destination="v8g-cT-g3P" id="vZO-nc-U61"/>
+                        <outlet property="secondaryImageButton" destination="vgK-QU-Kp0" id="Ica-3g-X4O"/>
+                        <outlet property="secondaryRightImageButton" destination="gJ2-9A-LR4" id="9FF-mr-p9f"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cyI-JP-E1Z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1873" y="680"/>
+        </scene>
+        <!--Check BoxVC-->
+        <scene sceneID="nBN-2L-q0u">
+            <objects>
+                <viewController storyboardIdentifier="CheckBoxVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ysy-vU-Lwj" customClass="CheckBoxVC" customModule="DesignComponentsDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="taM-Uy-U46">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="DRs-R5-Yp7">
+                                <rect key="frame" x="30" y="310" width="315" height="192"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YNm-ZQ-tKm" customClass="CheckBox" customModule="DesignComponents">
+                                        <rect key="frame" x="0.0" y="0.0" width="315" height="40"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="wTM-em-HYq"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iY3-Au-K4s" customClass="CheckBoxView" customModule="DesignComponents">
+                                        <rect key="frame" x="0.0" y="72" width="315" height="120"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="120" id="Lkq-vL-6TV"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="kTf-T8-m6U"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="DRs-R5-Yp7" firstAttribute="centerX" secondItem="taM-Uy-U46" secondAttribute="centerX" id="PbG-Sc-Wrk"/>
+                            <constraint firstItem="DRs-R5-Yp7" firstAttribute="centerY" secondItem="taM-Uy-U46" secondAttribute="centerY" id="hIT-w4-VkO"/>
+                            <constraint firstItem="DRs-R5-Yp7" firstAttribute="leading" secondItem="kTf-T8-m6U" secondAttribute="leading" constant="30" id="sSB-5i-iDk"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="wxm-k0-YGv"/>
+                    <connections>
+                        <outlet property="checkBox" destination="YNm-ZQ-tKm" id="awi-o2-R9u"/>
+                        <outlet property="checkBoxes" destination="iY3-Au-K4s" id="NsN-No-7yC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EfS-hJ-Yol" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1057" y="680"/>
         </scene>
     </scenes>
     <resources>

@@ -1,17 +1,17 @@
 //
-//  RadioButtonVC.swift
+//  CheckBoxVC.swift
 //  DesignComponentsDemo
 //
-//  Created by VisiLean Admin on 04/09/23.
+//  Created by VisiLean Admin on 08/09/23.
 //
 
 import UIKit
 import DesignComponents
 
-class RadioButtonVC: UIViewController {
+class CheckBoxVC: UIViewController {
     
-    @IBOutlet weak var radioButton: RadioButton!
-    @IBOutlet weak var radioButtons: RadioButtonView!
+    @IBOutlet weak var checkBox: CheckBox!
+    @IBOutlet weak var checkBoxes: CheckBoxView!
     
     var options = [SelectionOption]()
     
@@ -21,11 +21,11 @@ class RadioButtonVC: UIViewController {
         
         fetchOptions()
         
-        radioButton.setOption(option: SelectionOption(title: "Single Radio", isOn: true))
-        radioButton.addTarget(self, action: #selector(radioSelected(_:)), for: .valueChanged)
+        checkBox.setOption(option: SelectionOption(title: "Single CheckBox", isOn: true))
+        checkBox.addTarget(self, action: #selector(checkBoxSelected(_:)), for: .valueChanged)
         
-        radioButtons.set(options)
-        radioButtons.delegate = self
+        checkBoxes.set(options)
+        checkBoxes.delegate = self
     }
     
     func fetchOptions() {
@@ -39,18 +39,17 @@ class RadioButtonVC: UIViewController {
         options.append(contentsOf: [option1, option2, option3])
     }
     
-    @objc func radioSelected(_ sender: RadioButton) {
+    @objc func checkBoxSelected(_ sender: RadioButton) {
         sender.isOn.toggle()
         print("isON - ",sender.isOn)
     }
     
 }
 
-
-extension RadioButtonVC: RadioSelectionDelegate {
+extension CheckBoxVC: CheckBoxSelectionDelegate {
     
-    func didSelectRadioButton(indexes: Set<Int>) {
-        print("Radio -----------")
+    func didSelectCheckBox(indexes: Set<Int>) {
+        print("CheckBox -----------")
         indexes.forEach { index in
             print("\(options[index])")
         }

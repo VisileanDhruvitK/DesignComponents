@@ -1,8 +1,8 @@
 //
 //  Images.swift
-//  DesignComponentsDemo
+//  DesignComponents
 //
-//  Created by VisiLean Admin on 05/09/23.
+//  Created by Dhruvit Kachhiya on 05/09/23.
 //
 
 import Foundation
@@ -16,6 +16,7 @@ public extension UIImage {
     static let checkBox = VLImage(named: "checkBox")
     static let checkBoxSelected = VLImage(named: "checkBox_selected")
     
+    static let arrowDown = VLImage(named: "arrowDown")
 }
 
 

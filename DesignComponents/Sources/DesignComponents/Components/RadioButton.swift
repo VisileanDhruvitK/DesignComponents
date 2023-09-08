@@ -1,13 +1,13 @@
 //
 //  RadioButton.swift
-//  DesignComponentsDemo
+//  DesignComponents
 //
-//  Created by VisiLean Admin on 01/09/23.
+//  Created by Dhruvit Kachhiya on 01/09/23.
 //
 
 import UIKit
 
-class RadioButton: UIControl {
+public class RadioButton: UIControl {
     
     private var textStyle: TextStyle = .radioButton
     private var disabledTextStyle: TextStyle = .radioButtonDisabled
@@ -17,7 +17,7 @@ class RadioButton: UIControl {
     
     var title: String = ""
     
-    var isOn: Bool = false {
+    public var isOn: Bool = false {
         didSet {
             updateState()
         }
@@ -26,6 +26,7 @@ class RadioButton: UIControl {
     private let imageView: UIImageView = {
         let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.contentMode = .scaleAspectFit
         return view
     }()
     
@@ -92,7 +93,7 @@ class RadioButton: UIControl {
         imageView.image = (isOn ? selectedImage : image)
     }
     
-    func setOption(option: SelectionOption) {
+    public func setOption(option: SelectionOption) {
         titleLabel.text = option.title
         isOn = option.isOn
         isEnabled = option.isEnabled
@@ -105,13 +106,13 @@ class RadioButton: UIControl {
         isOn = select
     }
     
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
         sendActions(for: .valueChanged)
         // isOn.toggle()
     }
     
-    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+    public override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         return bounds.inset(by: UIEdgeInsets(top: -10, left: -10, bottom: -10, right: -10)).contains(point)
     }
     

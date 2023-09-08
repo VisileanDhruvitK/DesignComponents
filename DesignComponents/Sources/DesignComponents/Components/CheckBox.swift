@@ -1,8 +1,8 @@
 //
 //  CheckBox.swift
-//  DesignComponentsDemo
+//  DesignComponents
 //
-//  Created by VisiLean Admin on 05/09/23.
+//  Created by Dhruvit Kachhiya on 05/09/23.
 //
 
 import UIKit
@@ -20,7 +20,7 @@ public struct SelectionOption {
     
 }
 
-class CheckBox: UIControl {
+public class CheckBox: UIControl {
     
     private var textStyle: TextStyle = .checkBox
     private var disabledTextStyle: TextStyle = .checkBoxDisabled
@@ -30,7 +30,7 @@ class CheckBox: UIControl {
     
     var title: String = ""
     
-    var isOn: Bool = false {
+    public var isOn: Bool = false {
         didSet {
             updateState()
         }
@@ -39,6 +39,7 @@ class CheckBox: UIControl {
     private let imageView: UIImageView = {
         let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.contentMode = .scaleAspectFit
         return view
     }()
     
@@ -105,7 +106,7 @@ class CheckBox: UIControl {
         imageView.image = (isOn ? selectedImage : image)
     }
     
-    func setOption(option: SelectionOption) {
+    public func setOption(option: SelectionOption) {
         titleLabel.text = option.title
         isOn = option.isOn
         isEnabled = option.isEnabled
@@ -118,13 +119,13 @@ class CheckBox: UIControl {
         isOn = select
     }
     
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
         sendActions(for: .valueChanged)
         // isOn.toggle()
     }
     
-    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+    public override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         return bounds.inset(by: UIEdgeInsets(top: -10, left: -10, bottom: -10, right: -10)).contains(point)
     }
     
