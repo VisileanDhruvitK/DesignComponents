@@ -256,6 +256,38 @@
             </objects>
             <point key="canvasLocation" x="1873" y="680"/>
         </scene>
+        <!--ToggleVC-->
+        <scene sceneID="kbP-it-x95">
+            <objects>
+                <viewController storyboardIdentifier="ToggleVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="RcL-aK-Lwa" customClass="ToggleVC" customModule="DesignComponentsDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="OjB-DP-uZj">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TgQ-6a-o88" customClass="ToggleView" customModule="DesignComponents">
+                                <rect key="frame" x="32" y="386" width="311" height="40"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="XvA-qs-AW1"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="gPh-6A-vIL"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="TgQ-6a-o88" firstAttribute="leading" secondItem="gPh-6A-vIL" secondAttribute="leading" constant="32" id="Um9-bi-0ZO"/>
+                            <constraint firstItem="TgQ-6a-o88" firstAttribute="centerY" secondItem="OjB-DP-uZj" secondAttribute="centerY" id="Wrb-33-L49"/>
+                            <constraint firstItem="TgQ-6a-o88" firstAttribute="centerX" secondItem="OjB-DP-uZj" secondAttribute="centerX" id="jMA-LU-AOV"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="toggleView" destination="TgQ-6a-o88" id="0Zm-Oy-gf0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fOX-5H-e8M" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2649" y="680"/>
+        </scene>
         <!--Check BoxVC-->
         <scene sceneID="nBN-2L-q0u">
             <objects>

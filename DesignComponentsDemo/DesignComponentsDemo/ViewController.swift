@@ -12,6 +12,7 @@ enum ControlType: CaseIterable {
     case checkBox
     case button
     case formTextField
+    case toggle
     
     var title: String {
         switch self {
@@ -23,6 +24,8 @@ enum ControlType: CaseIterable {
             return "Buttons"
         case .formTextField:
             return "FormTextField"
+        case .toggle:
+            return "Toggle"
         }
     }
 }
@@ -84,6 +87,11 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         
         case .formTextField:
             let aVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "FormTextFieldVC")
+            aVC.title = arrayMenu[indexPath.row].title
+            self.navigationController?.pushViewController(aVC, animated: true)
+            
+        case .toggle:
+            let aVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "ToggleVC")
             aVC.title = arrayMenu[indexPath.row].title
             self.navigationController?.pushViewController(aVC, animated: true)
         }
