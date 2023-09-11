@@ -36,3 +36,16 @@ public extension Appearance {
     static let secondaryImageButtonDisabled = Appearance(backgroundColor: .neutral_0_5, cornerRadius: 10)
     
 }
+
+public struct Appearances {
+    var enableUI: Appearance = Appearance()
+    var disableUI: Appearance = Appearance()
+}
+
+public extension Appearances {
+    
+    static let primaryButton = Appearances(enableUI: .primaryButton, disableUI: .primaryButtonDisabled)
+    static let secondaryButton = Appearances(enableUI: .secondaryButton, disableUI: .secondaryButtonDisabled)
+    static let secondaryImageButton = Appearances(enableUI: .secondaryImageButton, disableUI: .secondaryImageButtonDisabled)
+    
+}

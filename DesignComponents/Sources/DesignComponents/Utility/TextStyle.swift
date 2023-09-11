@@ -46,3 +46,22 @@ public extension TextStyle {
     static let checkBoxDisabled = TextStyle(font: .checkBox, color: .primary_2)
     
 }
+
+public struct TextStyles {
+    var enableUI: TextStyle = TextStyle()
+    var disableUI: TextStyle = TextStyle()
+    
+    init(enableUI: TextStyle = TextStyle(), disableUI: TextStyle = TextStyle()) {
+        self.enableUI = enableUI
+        self.disableUI = disableUI
+    }
+    
+}
+
+public extension TextStyles {
+    
+    static let linkButton = TextStyles(enableUI: .linkButton, disableUI: .linkButtonDisabled)
+    static let primaryButton = TextStyles(enableUI: .primaryButton, disableUI: .primaryButtonDisabled)
+    static let secondaryButton = TextStyles(enableUI: .secondaryButton, disableUI: .secondaryButtonDisabled)
+    static let secondaryImageButton = TextStyles(enableUI: .secondaryImageButton, disableUI: .secondaryImageButtonDisabled)
+}

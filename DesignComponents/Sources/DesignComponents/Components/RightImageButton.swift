@@ -11,13 +11,13 @@ import UIKit
 public class RightImageButton: UIControl {
     
     // MARK: - Properties
-    public var textStyle: (enableUI: TextStyle, disableUI: TextStyle) = (TextStyle(), TextStyle()) {
+    public var textStyle: TextStyles = TextStyles() {
         didSet {
             configureUI()
         }
     }
     
-    public var apperance: (enableUI: Appearance, disableUI: Appearance) = (Appearance(), Appearance()) {
+    public var apperance: Appearances = Appearances() {
         didSet {
             configureUI()
         }

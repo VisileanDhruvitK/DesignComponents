@@ -20,20 +20,20 @@ class ButtonsVC: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        linkButton.textStyle = (.linkButton, .linkButtonDisabled)
+        linkButton.textStyle = TextStyles.linkButton
         
-        primaryButton.textStyle = (.primaryButton, .primaryButtonDisabled)
-        primaryButton.apperance = (.primaryButton, .primaryButtonDisabled)
+        primaryButton.textStyle = .primaryButton
+        primaryButton.apperance = .primaryButton
         
-        secondaryButton.textStyle = (.secondaryButton, .secondaryButtonDisabled)
-        secondaryButton.apperance = (.secondaryButton, .secondaryButtonDisabled)
+        secondaryButton.textStyle = .secondaryButton
+        secondaryButton.apperance = .secondaryButton
         
-        secondaryImageButton.textStyle = (.secondaryImageButton, .secondaryImageButtonDisabled)
-        secondaryImageButton.apperance = (.secondaryImageButton, .secondaryImageButtonDisabled)
+        secondaryImageButton.textStyle = .secondaryImageButton
+        secondaryImageButton.apperance = .secondaryImageButton
         secondaryImageButton.setImage(.arrowDown, for: .normal)
         
-        secondaryRightImageButton.textStyle = (.secondaryImageButton, .secondaryImageButtonDisabled)
-        secondaryRightImageButton.apperance = (.secondaryImageButton, .secondaryImageButtonDisabled)
+        secondaryRightImageButton.textStyle = .secondaryImageButton
+        secondaryRightImageButton.apperance = .secondaryImageButton
         secondaryRightImageButton.setTitle("Test")
         secondaryRightImageButton.setImage(.arrowDown)
     }
