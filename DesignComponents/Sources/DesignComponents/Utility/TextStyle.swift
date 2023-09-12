@@ -45,6 +45,8 @@ public extension TextStyle {
     static let checkBox = TextStyle(font: .checkBox, color: .primary_7)
     static let checkBoxDisabled = TextStyle(font: .checkBox, color: .primary_2)
     
+    static let toggleTitle = TextStyle(font: .toggleTitle, color: .neutral_8_5)
+    static let toggleSubTitle = TextStyle(font: .toggleSubTitle, color: .neutral_7)
 }
 
 public struct TextStyles {

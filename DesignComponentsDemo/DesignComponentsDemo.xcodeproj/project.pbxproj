@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C4A42732AAF1137009207EA /* ToggleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4A42722AAF1137009207EA /* ToggleVC.swift */; };
 		0C5561D32AA5E11700F71C58 /* RadioButtonVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5561D22AA5E11700F71C58 /* RadioButtonVC.swift */; };
 		0C56BAF32AAB068200C84187 /* CheckBoxVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C56BAF22AAB068200C84187 /* CheckBoxVC.swift */; };
 		0CA2C5EB2AA88D4B00E3C308 /* FormTextFieldVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA2C5EA2AA88D4B00E3C308 /* FormTextFieldVC.swift */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C4A42722AAF1137009207EA /* ToggleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleVC.swift; sourceTree = "<group>"; };
 		0C5561D22AA5E11700F71C58 /* RadioButtonVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButtonVC.swift; sourceTree = "<group>"; };
 		0C56BAF22AAB068200C84187 /* CheckBoxVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxVC.swift; sourceTree = "<group>"; };
 		0CA2C5EA2AA88D4B00E3C308 /* FormTextFieldVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTextFieldVC.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				0CA2C5EC2AA88D6100E3C308 /* ButtonsVC.swift */,
 				0C5561D22AA5E11700F71C58 /* RadioButtonVC.swift */,
 				0C56BAF22AAB068200C84187 /* CheckBoxVC.swift */,
+				0C4A42722AAF1137009207EA /* ToggleVC.swift */,
 				88AE88D72A248586001D1777 /* UIFont+Custom.swift */,
 				88DF859A2A0CB419001724EC /* Storyboards */,
 				88DF859D2A0CB483001724EC /* Supporting Files */,
@@ -217,6 +220,7 @@
 				0CA2C5EB2AA88D4B00E3C308 /* FormTextFieldVC.swift in Sources */,
 				88DF858B2A0CB3B5001724EC /* ViewController.swift in Sources */,
 				88AE88D82A248586001D1777 /* UIFont+Custom.swift in Sources */,
+				0C4A42732AAF1137009207EA /* ToggleVC.swift in Sources */,
 				0C56BAF32AAB068200C84187 /* CheckBoxVC.swift in Sources */,
 				88DF85872A0CB3B5001724EC /* AppDelegate.swift in Sources */,
 				0C5561D32AA5E11700F71C58 /* RadioButtonVC.swift in Sources */,

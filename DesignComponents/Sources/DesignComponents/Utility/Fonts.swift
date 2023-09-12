@@ -27,6 +27,8 @@ extension UIFont {
     static let radioButton = VLFont(size: .font14, weigth: .medium)
     static let checkBox = VLFont(size: .font14, weigth: .medium)
     
+    static let toggleTitle = VLFont(size: .font14, weigth: .medium)
+    static let toggleSubTitle = VLFont(size: .font14, weigth: .regular)
 }
 
 public func VLFont(size: FontSize, weigth: UIFont.Weight) -> UIFont {
