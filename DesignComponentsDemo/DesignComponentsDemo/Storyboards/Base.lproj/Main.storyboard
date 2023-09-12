@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="EUw-WT-Nzr">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="EUw-WT-Nzr">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -15,7 +15,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="EUw-WT-Nzr" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="yCh-24-tCs">
-                        <rect key="frame" x="0.0" y="47" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="50" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -36,7 +36,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="zhE-kH-rvw">
-                                <rect key="frame" x="0.0" y="91" width="375" height="687"/>
+                                <rect key="frame" x="0.0" y="94" width="375" height="684"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <connections>
                                     <outlet property="dataSource" destination="O1V-V1-Rlb" id="qFM-z5-L0N"/>
@@ -115,6 +115,60 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xW6-l4-2ZV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1874" y="-28"/>
+        </scene>
+        <!--ChipVC-->
+        <scene sceneID="XFu-K4-EIR">
+            <objects>
+                <viewController storyboardIdentifier="ChipVC" id="Vfe-tw-Gro" customClass="ChipVC" customModule="DesignComponentsDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="wjy-hB-6iO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="I6n-8j-m1b">
+                                <rect key="frame" x="20" y="324" width="335" height="164"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lIq-6m-CQY" customClass="ChipControl" customModule="DesignComponents">
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="48"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="tUj-cx-LMS"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w4h-lZ-kIN" customClass="ChipControl" customModule="DesignComponents">
+                                        <rect key="frame" x="0.0" y="58" width="335" height="48"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="b9f-F4-d0a"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2gA-DQ-U7x" customClass="ChipControl" customModule="DesignComponents">
+                                        <rect key="frame" x="0.0" y="116" width="335" height="48"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="2tb-a0-wwp"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="uiI-9x-tSX"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="I6n-8j-m1b" firstAttribute="centerX" secondItem="wjy-hB-6iO" secondAttribute="centerX" id="CJY-x2-Iwz"/>
+                            <constraint firstItem="I6n-8j-m1b" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="uiI-9x-tSX" secondAttribute="leading" constant="20" id="XZ2-Q6-mgR"/>
+                            <constraint firstItem="uiI-9x-tSX" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="I6n-8j-m1b" secondAttribute="trailing" constant="20" id="caF-fJ-RGj"/>
+                            <constraint firstItem="I6n-8j-m1b" firstAttribute="centerY" secondItem="wjy-hB-6iO" secondAttribute="centerY" id="sco-LG-iFh"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="chipTextonly" destination="lIq-6m-CQY" id="EHb-8S-Ehb"/>
+                        <outlet property="chipWithImage" destination="w4h-lZ-kIN" id="w1R-xo-yqc"/>
+                        <outlet property="chipwithCloseBTN" destination="2gA-DQ-U7x" id="kfQ-1m-iOB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FEg-Bh-IqH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2690" y="-29"/>
         </scene>
         <!--Radio ButtonVC-->
         <scene sceneID="Ow4-jk-QTN">
