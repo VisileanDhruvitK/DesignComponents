@@ -88,11 +88,11 @@ public class ToggleView: UIControl {
     
     private func setup() {
         addSubview(stackView)
-        stackView.addArrangedSubview(imageView)
         
         verticalStackView.addArrangedSubview(titleLabel)
         verticalStackView.addArrangedSubview(descriptionLabel)
         stackView.addArrangedSubview(verticalStackView)
+        stackView.addArrangedSubview(imageView)
         
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: topAnchor),
@@ -105,6 +105,11 @@ public class ToggleView: UIControl {
             
             titleLabel.heightAnchor.constraint(equalToConstant: 20)
         ])
+        
+        titleLabel.setContentHuggingPriority(UILayoutPriority(1000), for: .horizontal)
+        titleLabel.setContentCompressionResistancePriority(UILayoutPriority(1000), for: .horizontal)
+        descriptionLabel.setContentHuggingPriority(UILayoutPriority(1000), for: .horizontal)
+        descriptionLabel.setContentCompressionResistancePriority(UILayoutPriority(1000), for: .horizontal)
         
         configureUI()
     }
@@ -139,13 +144,14 @@ public class ToggleView: UIControl {
         updateState()
     }
     
-    public func setTitle(_ title: String) {
+    public func setOption(title: String, description: String) {
         titleLabel.text = title
-    }
-    
-    public func setDescription(_ title: String) {
-        descriptionLabel.text = title
-        descriptionLabel.isHidden = false
+        titleLabel.isHidden = title.isEmpty
+        
+        descriptionLabel.text = description
+        descriptionLabel.isHidden = description.isEmpty
+        
+        stackView.spacing = (title.isEmpty && description.isEmpty) ? 0 : 8
     }
     
     public func setImage(_ image: UIImage?) {

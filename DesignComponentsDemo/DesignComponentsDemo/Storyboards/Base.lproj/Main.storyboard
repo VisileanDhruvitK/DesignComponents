@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="EUw-WT-Nzr">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="EUw-WT-Nzr">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -15,7 +15,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="EUw-WT-Nzr" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="yCh-24-tCs">
-                        <rect key="frame" x="0.0" y="50" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="47" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -36,7 +36,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="zhE-kH-rvw">
-                                <rect key="frame" x="0.0" y="94" width="375" height="684"/>
+                                <rect key="frame" x="0.0" y="91" width="375" height="687"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <connections>
                                     <outlet property="dataSource" destination="O1V-V1-Rlb" id="qFM-z5-L0N"/>
@@ -232,13 +232,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="2ca-4P-ydS">
-                                <rect key="frame" x="93.666666666666671" y="254" width="187.66666666666663" height="304"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="2ca-4P-ydS">
+                                <rect key="frame" x="93.666666666666671" y="272" width="187.66666666666663" height="268"/>
                                 <subviews>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lmm-7o-T9T" customClass="VLButton" customModule="DesignComponents">
-                                        <rect key="frame" x="55.333333333333329" y="0.0" width="76.999999999999986" height="48"/>
+                                        <rect key="frame" x="55.333333333333329" y="0.0" width="76.999999999999986" height="36"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="48" id="J6f-bV-lH9"/>
+                                            <constraint firstAttribute="height" constant="36" id="J6f-bV-lH9"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -250,7 +250,10 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v8g-cT-g3P" customClass="VLButton" customModule="DesignComponents">
-                                        <rect key="frame" x="55.333333333333329" y="64" width="76.999999999999986" height="48"/>
+                                        <rect key="frame" x="55.333333333333329" y="52" width="76.999999999999986" height="36"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="36" id="cN7-Rr-SuH"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Button CTA">
@@ -261,7 +264,10 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rs0-6R-DNr" customClass="VLButton" customModule="DesignComponents">
-                                        <rect key="frame" x="55.333333333333329" y="128" width="76.999999999999986" height="48"/>
+                                        <rect key="frame" x="55.333333333333329" y="104" width="76.999999999999986" height="36"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="36" id="dbB-l1-aLq"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Button CTA">
@@ -272,15 +278,21 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SlO-sf-BVs" customClass="ImageButton" customModule="DesignComponents">
-                                        <rect key="frame" x="0.0" y="192" width="187.66666666666666" height="48"/>
+                                        <rect key="frame" x="0.0" y="156" width="187.66666666666666" height="48"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="3yi-hn-yKR"/>
+                                        </constraints>
                                         <connections>
                                             <action selector="rightImageButtonClickedWithSender:" destination="Nwk-Bz-ge2" eventType="touchUpInside" id="Voh-MD-SG8"/>
                                         </connections>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gJ2-9A-LR4" customClass="ImageButton" customModule="DesignComponents">
-                                        <rect key="frame" x="0.0" y="256" width="187.66666666666666" height="48"/>
+                                        <rect key="frame" x="0.0" y="220" width="187.66666666666666" height="48"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="1IL-aS-A5k"/>
+                                        </constraints>
                                         <connections>
                                             <action selector="rightImageButtonClickedWithSender:" destination="Nwk-Bz-ge2" eventType="touchUpInside" id="ja5-O3-V8u"/>
                                         </connections>
@@ -321,6 +333,7 @@
                                 <rect key="frame" x="32" y="386" width="311" height="40"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" priority="750" constant="311" id="TPL-JN-1kK"/>
                                     <constraint firstAttribute="height" constant="40" id="XvA-qs-AW1"/>
                                 </constraints>
                             </view>
@@ -328,7 +341,7 @@
                         <viewLayoutGuide key="safeArea" id="gPh-6A-vIL"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="TgQ-6a-o88" firstAttribute="leading" secondItem="gPh-6A-vIL" secondAttribute="leading" constant="32" id="Um9-bi-0ZO"/>
+                            <constraint firstItem="TgQ-6a-o88" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gPh-6A-vIL" secondAttribute="leading" constant="32" id="Um9-bi-0ZO"/>
                             <constraint firstItem="TgQ-6a-o88" firstAttribute="centerY" secondItem="OjB-DP-uZj" secondAttribute="centerY" id="Wrb-33-L49"/>
                             <constraint firstItem="TgQ-6a-o88" firstAttribute="centerX" secondItem="OjB-DP-uZj" secondAttribute="centerX" id="jMA-LU-AOV"/>
                         </constraints>

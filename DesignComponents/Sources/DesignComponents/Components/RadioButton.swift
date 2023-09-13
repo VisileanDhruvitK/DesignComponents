@@ -61,8 +61,8 @@ public class RadioButton: UIControl {
     
     private func setup() {
         addSubview(stackView)
-        stackView.addArrangedSubview(imageView)
         stackView.addArrangedSubview(titleLabel)
+        stackView.addArrangedSubview(imageView)
         
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: topAnchor),
