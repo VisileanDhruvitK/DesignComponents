@@ -19,7 +19,7 @@ class ToggleVC: UIViewController {
         
         toggleView.addTarget(self, action: #selector(toggleValueChanged(_:)), for: .valueChanged)
         toggleView.setTitle("Remember me")
-        toggleView.setDescription("Save my login details for next time.")
+        // toggleView.setDescription("Save my login details for next time.")
         
         toggleView2 = ToggleView()
         toggleView2.frame = CGRect(x: 32, y: 100, width: self.view.frame.size.width - 64, height: 50)

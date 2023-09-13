@@ -67,6 +67,8 @@ public class VLButton: UIButton {
             self.layer.borderWidth = apperance.borderWidth
             self.layer.borderColor = apperance.borderColor.cgColor
         }
+        
+        contentEdgeInsets = UIEdgeInsets(top: 0, left: 14, bottom: 0, right: 14)
     }
     
     public override func setImage(_ image: UIImage?, for state: UIControl.State) {

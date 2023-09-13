@@ -36,8 +36,8 @@ public extension TextStyle {
     static let linkButton = TextStyle(font: .linkButtonTitle, color: .primary_6)
     static let linkButtonDisabled = TextStyle(font: .linkButtonTitle, color: .neutral_3)
     
-    static let secondaryImageButton = TextStyle(font: .secondaryImageButtonTitle, color: .primary_6)
-    static let secondaryImageButtonDisabled = TextStyle(font: .secondaryImageButtonTitle, color: .neutral_3)
+    static let secondaryImageButton = TextStyle(font: .secondaryImageButtonTitle, color: .primary_6, textAlignment: .center)
+    static let secondaryImageButtonDisabled = TextStyle(font: .secondaryImageButtonTitle, color: .neutral_3, textAlignment: .center)
     
     static let radioButton = TextStyle(font: .radioButton, color: .primary_7)
     static let radioButtonDisabled = TextStyle(font: .radioButton, color: .primary_2)

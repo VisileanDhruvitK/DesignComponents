@@ -52,13 +52,14 @@ public class ToggleView: UIControl {
         label.numberOfLines = 1
         label.textAlignment = .left
         label.font = .systemFont(ofSize: 14)
+        label.isHidden = true
         return label
     }()
     
     private let stackView: UIStackView = {
         let view = UIStackView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.alignment = .top
+        view.alignment = .leading
         view.distribution = .fill
         view.axis = .horizontal
         view.spacing = 8
@@ -94,13 +95,14 @@ public class ToggleView: UIControl {
         stackView.addArrangedSubview(verticalStackView)
         
         NSLayoutConstraint.activate([
-            stackView.centerXAnchor.constraint(equalTo: centerXAnchor),
             stackView.topAnchor.constraint(equalTo: topAnchor),
-            stackView.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor, constant: 20),
+            stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            // stackView.trailingAnchor.constraint(greaterThanOrEqualTo: trailingAnchor, constant: 20),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            
             imageView.heightAnchor.constraint(equalToConstant: 20),
             imageView.widthAnchor.constraint(equalToConstant: 36),
+            
             titleLabel.heightAnchor.constraint(equalToConstant: 20)
         ])
         
@@ -143,6 +145,7 @@ public class ToggleView: UIControl {
     
     public func setDescription(_ title: String) {
         descriptionLabel.text = title
+        descriptionLabel.isHidden = false
     }
     
     public func setImage(_ image: UIImage?) {

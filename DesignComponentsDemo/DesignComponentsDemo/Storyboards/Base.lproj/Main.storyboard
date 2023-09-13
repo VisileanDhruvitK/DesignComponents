@@ -170,11 +170,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="2ca-4P-ydS">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="2ca-4P-ydS">
                                 <rect key="frame" x="93.666666666666671" y="254" width="187.66666666666663" height="304"/>
                                 <subviews>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lmm-7o-T9T" customClass="VLButton" customModule="DesignComponents">
-                                        <rect key="frame" x="0.0" y="0.0" width="187.66666666666666" height="48"/>
+                                        <rect key="frame" x="55.333333333333329" y="0.0" width="76.999999999999986" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="J6f-bV-lH9"/>
                                         </constraints>
@@ -188,10 +188,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v8g-cT-g3P" customClass="VLButton" customModule="DesignComponents">
-                                        <rect key="frame" x="0.0" y="64" width="187.66666666666666" height="48"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="48" id="tqQ-0j-9kg"/>
-                                        </constraints>
+                                        <rect key="frame" x="55.333333333333329" y="64" width="76.999999999999986" height="48"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Button CTA">
@@ -202,7 +199,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rs0-6R-DNr" customClass="VLButton" customModule="DesignComponents">
-                                        <rect key="frame" x="0.0" y="128" width="187.66666666666666" height="48"/>
+                                        <rect key="frame" x="55.333333333333329" y="128" width="76.999999999999986" height="48"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Button CTA">
@@ -212,17 +209,14 @@
                                             <action selector="buttonClickedWithSender:" destination="Nwk-Bz-ge2" eventType="touchUpInside" id="gZ2-fg-NxF"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vgK-QU-Kp0" customClass="VLButton" customModule="DesignComponents">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SlO-sf-BVs" customClass="ImageButton" customModule="DesignComponents">
                                         <rect key="frame" x="0.0" y="192" width="187.66666666666666" height="48"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
-                                        <state key="normal" title="Button CTA">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <connections>
-                                            <action selector="buttonClickedWithSender:" destination="Nwk-Bz-ge2" eventType="touchUpInside" id="y2G-lj-wMP"/>
+                                            <action selector="rightImageButtonClickedWithSender:" destination="Nwk-Bz-ge2" eventType="touchUpInside" id="Voh-MD-SG8"/>
                                         </connections>
-                                    </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gJ2-9A-LR4" customClass="RightImageButton" customModule="DesignComponents">
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gJ2-9A-LR4" customClass="ImageButton" customModule="DesignComponents">
                                         <rect key="frame" x="0.0" y="256" width="187.66666666666666" height="48"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <connections>
@@ -230,9 +224,6 @@
                                         </connections>
                                     </view>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstItem="rs0-6R-DNr" firstAttribute="height" secondItem="v8g-cT-g3P" secondAttribute="height" id="shE-46-sO3"/>
-                                </constraints>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="2l2-DS-rER"/>
@@ -245,11 +236,11 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="leftImageButton" destination="SlO-sf-BVs" id="3Rj-NY-4So"/>
                         <outlet property="linkButton" destination="rs0-6R-DNr" id="1KX-yS-Ti2"/>
                         <outlet property="primaryButton" destination="lmm-7o-T9T" id="vD6-im-Zb7"/>
+                        <outlet property="rightImageButton" destination="gJ2-9A-LR4" id="kMA-RC-oPe"/>
                         <outlet property="secondaryButton" destination="v8g-cT-g3P" id="vZO-nc-U61"/>
-                        <outlet property="secondaryImageButton" destination="vgK-QU-Kp0" id="Ica-3g-X4O"/>
-                        <outlet property="secondaryRightImageButton" destination="gJ2-9A-LR4" id="9FF-mr-p9f"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cyI-JP-E1Z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

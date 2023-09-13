@@ -13,8 +13,8 @@ class ButtonsVC: UIViewController {
     @IBOutlet weak var primaryButton: VLButton!
     @IBOutlet weak var secondaryButton: VLButton!
     @IBOutlet weak var linkButton: VLButton!
-    @IBOutlet weak var secondaryImageButton: VLButton!
-    @IBOutlet weak var secondaryRightImageButton: RightImageButton!
+    @IBOutlet weak var leftImageButton: ImageButton!
+    @IBOutlet weak var rightImageButton: ImageButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,14 +28,17 @@ class ButtonsVC: UIViewController {
         secondaryButton.textStyle = .secondaryButton
         secondaryButton.apperance = .secondaryButton
         
-        secondaryImageButton.textStyle = .secondaryImageButton
-        secondaryImageButton.apperance = .secondaryImageButton
-        secondaryImageButton.setImage(.arrowDown, for: .normal)
+        leftImageButton.textStyle = .secondaryImageButton
+        leftImageButton.apperance = .secondaryImageButton
+        leftImageButton.title = "Left Image"
+        leftImageButton.image = .arrowDown
+        leftImageButton.buttonType = .leftImage
         
-        secondaryRightImageButton.textStyle = .secondaryImageButton
-        secondaryRightImageButton.apperance = .secondaryImageButton
-        secondaryRightImageButton.setTitle("Test")
-        secondaryRightImageButton.setImage(.arrowDown)
+        rightImageButton.textStyle = .secondaryImageButton
+        rightImageButton.apperance = .secondaryImageButton
+        rightImageButton.title = "Right Image"
+        rightImageButton.image = .arrowDown
+        rightImageButton.buttonType = .rightImage
     }
     
     @IBAction func buttonClicked(sender: UIButton) {
@@ -46,7 +49,7 @@ class ButtonsVC: UIViewController {
         }
     }
     
-    @IBAction func rightImageButtonClicked(sender: RightImageButton) {
+    @IBAction func rightImageButtonClicked(sender: ImageButton) {
         sender.isEnabled.toggle()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
