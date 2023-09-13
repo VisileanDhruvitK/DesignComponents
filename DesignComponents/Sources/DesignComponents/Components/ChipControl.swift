@@ -8,45 +8,53 @@
 import Foundation
 import UIKit
 
-import UIKit
-
 public enum ChipType {
-    case withText(String)
-    case withImage(image: UIImage, text: String)
-    case withButton(String)
-
+    case withText(String, isButtonHidden: Bool)
+    case withImage(image: UIImage, text: String, isButtonHidden: Bool)
+    
     var text: String {
         switch self {
-        case .withText(let text):
-            return text
-        case .withImage(_, let text):
-            return text
-        case .withButton(let text):
-            return text
+            case .withText(let text, _), .withImage(_, let text, _):
+                return text
         }
     }
-
+    
     var image: UIImage? {
         switch self {
-        case .withText:
-            return nil
-        case .withImage(let image, _):
-            return image
-        case .withButton:
-            return nil
+            case .withText:
+                return nil
+            case .withImage(let image, _, _):
+                return image
+        }
+    }
+    
+    var isButtonHidden: Bool {
+        switch self {
+            case .withText(_, let isHidden), .withImage(_, _, let isHidden):
+                return isHidden
         }
     }
 }
 
 
+//MARK: - ChipControl
 public class ChipControl: UIControl {
     
-    public var chipType: ChipType = .withText("") {
+    private var textStyle: TextStyle = .chipTitle
+    private var disabledTextStyle: TextStyle = .chipDisabled
+    
+    public override var isEnabled: Bool {
+        didSet {
+            configureUI()
+        }
+    }
+    
+    public var chipType: ChipType = .withText("", isButtonHidden: false) {
         didSet {
             updateUIForChipType()
         }
     }
-
+    
     var onRemove: (() -> Void)?
     
     private let imageView: UIImageView = {
@@ -60,7 +68,7 @@ public class ChipControl: UIControl {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 1
-        label.textAlignment = .left
+        label.textAlignment = .center
         label.font = .systemFont(ofSize: 14)
         return label
     }()
@@ -75,42 +83,40 @@ public class ChipControl: UIControl {
         return view
     }()
     
-    private let Button: UIButton = UIButton(type: .custom)
+    private let button: UIButton = UIButton(type: .custom)
     
     // MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupUI()
     }
-
+    
     // MARK: -  methods
-     private func setupUI() {
+    private func setupUI() {
         self.backgroundColor = .primary_0_2
         addSubview(stackView)
         stackView.addArrangedSubview(imageView)
         stackView.addArrangedSubview(titleLabel)
-        stackView.addArrangedSubview(Button)
-        
-        Button.backgroundColor = .cyan
+        stackView.addArrangedSubview(button)
         
         layer.cornerRadius = self.frame.size.height / 2
-        imageView.layer.cornerRadius = 12
-        imageView.clipsToBounds = true
-        imageView.backgroundColor = .red
-        
         clipsToBounds = true
         
-        Button.addTarget(self, action: #selector(removeChip), for: .touchUpInside)
-
+        //set imageView
+        imageView.layer.cornerRadius = imageView.frame.size.height / 2
+        imageView.clipsToBounds = true
+        
+        button.addTarget(self, action: #selector(removeChip), for: .touchUpInside)
+        
         // Remove fixed leading and trailing constraints on stackView
         stackView.translatesAutoresizingMaskIntoConstraints = false
-
-        // Adjust stackView constraints to make imageView and Button dynamic
+        
+        // Adjust stackView constraints to make imageView and button dynamic
         let topConstraint = stackView.topAnchor.constraint(equalTo: topAnchor, constant: 12)
         let bottomConstraint = stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12)
         
@@ -131,32 +137,42 @@ public class ChipControl: UIControl {
             imageView.heightAnchor.constraint(equalToConstant: 24),
             imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor),
             
-            Button.heightAnchor.constraint(equalToConstant: 24),
-            Button.widthAnchor.constraint(equalToConstant: 24)
+            button.heightAnchor.constraint(equalToConstant: 24),
+            button.widthAnchor.constraint(equalToConstant: 24)
         ])
-
+        
         updateUIForChipType()
+        configureUI()
     }
-
-
-
-
-    private func updateUIForChipType() {
-        switch chipType {
-        case .withText(let text):
-            titleLabel.text = text
-            imageView.isHidden = true
-        case .withImage(let image, let text):
-            titleLabel.text = text
-            imageView.image = image
-            imageView.isHidden = false
-        case .withButton(let text):
-            titleLabel.text = text
-            imageView.isHidden = true
+    
+    private func configureUI() {
+        
+        if isEnabled {
+            titleLabel.textColor = textStyle.color
+            imageView.tintColor = textStyle.color
+            titleLabel.font = textStyle.font
+        } else {
+            imageView.tintColor = disabledTextStyle.color
+            titleLabel.font = disabledTextStyle.font
+            titleLabel.textColor = disabledTextStyle.color
         }
     }
-
-
+    
+    private func updateUIForChipType() {
+        switch chipType {
+            case .withText(let text, let isButtonHidden):
+                titleLabel.text = text
+                imageView.isHidden = true
+                button.isHidden = isButtonHidden
+            case .withImage(let image, let text, let isButtonHidden):
+                titleLabel.text = text
+                imageView.image = image
+                imageView.isHidden = false
+                button.isHidden = isButtonHidden
+        }
+    }
+    
+    
     @objc private func removeChip() {
         onRemove?()
     }

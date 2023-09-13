@@ -125,7 +125,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="I6n-8j-m1b">
-                                <rect key="frame" x="20" y="324" width="335" height="164"/>
+                                <rect key="frame" x="20" y="295" width="335" height="222"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lIq-6m-CQY" customClass="ChipControl" customModule="DesignComponents">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="48"/>
@@ -134,18 +134,25 @@
                                             <constraint firstAttribute="height" constant="48" id="tUj-cx-LMS"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w4h-lZ-kIN" customClass="ChipControl" customModule="DesignComponents">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cKO-cU-ZxP" customClass="ChipControl" customModule="DesignComponents">
                                         <rect key="frame" x="0.0" y="58" width="335" height="48"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="Soo-yp-z67"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w4h-lZ-kIN" customClass="ChipControl" customModule="DesignComponents">
+                                        <rect key="frame" x="0.0" y="116" width="335" height="48"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="b9f-F4-d0a"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2gA-DQ-U7x" customClass="ChipControl" customModule="DesignComponents">
-                                        <rect key="frame" x="0.0" y="116" width="335" height="48"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Qk-cn-isD" customClass="ChipControl" customModule="DesignComponents">
+                                        <rect key="frame" x="0.0" y="174" width="335" height="48"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="48" id="2tb-a0-wwp"/>
+                                            <constraint firstAttribute="height" constant="48" id="0nK-Nn-NbW"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -161,9 +168,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="Chip_Text_btn" destination="cKO-cU-ZxP" id="xkZ-jc-0dq"/>
                         <outlet property="chipTextonly" destination="lIq-6m-CQY" id="EHb-8S-Ehb"/>
                         <outlet property="chipWithImage" destination="w4h-lZ-kIN" id="w1R-xo-yqc"/>
-                        <outlet property="chipwithCloseBTN" destination="2gA-DQ-U7x" id="kfQ-1m-iOB"/>
+                        <outlet property="chip_Img_text_btn" destination="2Qk-cn-isD" id="Lor-L9-Wqy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FEg-Bh-IqH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
