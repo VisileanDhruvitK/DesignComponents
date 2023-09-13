@@ -13,19 +13,22 @@ enum ControlType: CaseIterable {
     case button
     case formTextField
     case toggle
+    case chip
     
     var title: String {
         switch self {
-        case .radio:
-            return "Radio Button"
-        case .checkBox:
-            return "CheckBox"
-        case .button:
-            return "Buttons"
-        case .formTextField:
-            return "FormTextField"
-        case .toggle:
-            return "Toggle"
+            case .radio:
+                return "Radio Button"
+            case .checkBox:
+                return "CheckBox"
+            case .button:
+                return "Buttons"
+            case .formTextField:
+                return "FormTextField"
+            case .toggle:
+                return "Toggle"
+            case .chip:
+                return "chip"
         }
     }
 }
@@ -69,32 +72,32 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch arrayMenu[indexPath.row] {
-        case .radio:
-            let aVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "RadioButtonVC")
-            aVC.title = arrayMenu[indexPath.row].title
-            self.navigationController?.pushViewController(aVC, animated: true)
-            
-        case .checkBox:
-            let aVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "CheckBoxVC")
-            aVC.title = arrayMenu[indexPath.row].title
-            self.navigationController?.pushViewController(aVC, animated: true)
-            
-        case .button:
-            let aVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "ButtonsVC")
-            aVC.title = arrayMenu[indexPath.row].title
-            self.navigationController?.pushViewController(aVC, animated: true)
+        let menuItem = arrayMenu[indexPath.row]
         
-        case .formTextField:
-            let aVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "FormTextFieldVC")
-            aVC.title = arrayMenu[indexPath.row].title
-            self.navigationController?.pushViewController(aVC, animated: true)
-            
-        case .toggle:
-            let aVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "ToggleVC")
-            aVC.title = arrayMenu[indexPath.row].title
-            self.navigationController?.pushViewController(aVC, animated: true)
+        switch menuItem {
+            case .radio:
+                pushViewController(withIdentifier: "RadioButtonVC", title: menuItem.title)
+                
+            case .checkBox:
+                pushViewController(withIdentifier: "CheckBoxVC", title: menuItem.title)
+                
+            case .button:
+                pushViewController(withIdentifier: "ButtonsVC", title: menuItem.title)
+                
+            case .formTextField:
+                pushViewController(withIdentifier: "FormTextFieldVC", title: menuItem.title)
+                
+            case .toggle:
+                pushViewController(withIdentifier: "ToggleVC", title: menuItem.title)
+                
+            case .chip:
+                pushViewController(withIdentifier: "ChipVC", title: menuItem.title)
         }
     }
     
+    func pushViewController(withIdentifier identifier: String, title: String) {
+        let aVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: identifier)
+        aVC.title = title
+        self.navigationController?.pushViewController(aVC, animated: true)
+    }
 }

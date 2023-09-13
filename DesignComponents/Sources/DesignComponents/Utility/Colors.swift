@@ -13,6 +13,7 @@ extension UIColor {
     static let formItemTitle: UIColor = .darkGray
     static let formItemText: UIColor = .black
     
+    static let primary_0_2 = UIColor(red: 243/255, green: 245/255, blue: 249/255, alpha: 1)
     static let primary_0_5 = UIColor(red: 230/255, green: 239/255, blue: 248/255, alpha: 1)
     static let primary_2 = UIColor(red: 162/255, green: 212/255, blue: 245/255, alpha: 1)
     static let primary_3 = UIColor(red: 116/255, green: 190/255, blue: 240/255, alpha: 1)
