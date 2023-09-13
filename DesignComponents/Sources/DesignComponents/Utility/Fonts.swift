@@ -29,6 +29,8 @@ extension UIFont {
     
     static let toggleTitle = VLFont(size: .font14, weigth: .medium)
     static let toggleSubTitle = VLFont(size: .font14, weigth: .regular)
+    
+    static let chipTitle = VLFont(size: .font14, weigth: .medium)
 }
 
 public func VLFont(size: FontSize, weigth: UIFont.Weight) -> UIFont {
