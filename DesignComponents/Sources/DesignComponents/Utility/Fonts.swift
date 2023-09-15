@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-public enum FontSize: CGFloat {
+enum FontSize: CGFloat {
     case font12 = 12
     case font14 = 14
     case font16 = 16
@@ -33,6 +33,6 @@ extension UIFont {
     
 }
 
-public func VLFont(size: FontSize, weigth: UIFont.Weight) -> UIFont {
+func VLFont(size: FontSize, weigth: UIFont.Weight) -> UIFont {
     UIFont.systemFont(ofSize: size.rawValue, weight: weigth)
 }

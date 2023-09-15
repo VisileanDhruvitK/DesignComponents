@@ -18,6 +18,12 @@ public class ToggleView: UIControl {
     
     private var apperance: Appearance = Appearance()
     
+    public var componentSize: ComponentSize = .medium {
+        didSet {
+            setup()
+        }
+    }
+    
     public override var isEnabled: Bool {
         didSet {
             configureUI()
@@ -94,32 +100,44 @@ public class ToggleView: UIControl {
         stackView.addArrangedSubview(verticalStackView)
         stackView.addArrangedSubview(imageView)
         
+        let viewHeight: CGFloat = componentSize == .medium ? 40 : 50
+        
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: topAnchor),
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
             
-            imageView.heightAnchor.constraint(equalToConstant: 20),
-            imageView.widthAnchor.constraint(equalToConstant: 36),
+            imageView.heightAnchor.constraint(equalToConstant: viewHeight / 2),
+            imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: (36/20), constant: 1),
             
-            titleLabel.heightAnchor.constraint(equalToConstant: 20)
+            titleLabel.heightAnchor.constraint(equalToConstant: viewHeight / 2)
         ])
         
         titleLabel.setContentHuggingPriority(UILayoutPriority(1000), for: .horizontal)
+        titleLabel.setContentHuggingPriority(UILayoutPriority(1000), for: .vertical)
         titleLabel.setContentCompressionResistancePriority(UILayoutPriority(1000), for: .horizontal)
+        titleLabel.setContentCompressionResistancePriority(UILayoutPriority(1000), for: .vertical)
+        
         descriptionLabel.setContentHuggingPriority(UILayoutPriority(1000), for: .horizontal)
+        descriptionLabel.setContentHuggingPriority(UILayoutPriority(1000), for: .vertical)
         descriptionLabel.setContentCompressionResistancePriority(UILayoutPriority(1000), for: .horizontal)
+        descriptionLabel.setContentCompressionResistancePriority(UILayoutPriority(1000), for: .vertical)
         
         configureUI()
     }
     
     private func configureUI() {
-        self.titleLabel.textColor = titleStyle.color
-        self.titleLabel.font = titleStyle.font
+        titleLabel.textColor = titleStyle.color
+        descriptionLabel.textColor = subTitleStyle.color
         
-        self.descriptionLabel.textColor = subTitleStyle.color
-        self.descriptionLabel.font = subTitleStyle.font
+        titleLabel.font = titleStyle.font
+        descriptionLabel.font = subTitleStyle.font
+        
+        if componentSize == .extraLarge {
+            titleLabel.font = .font16Medium
+            descriptionLabel.font = .font16Regular
+        }
         
         self.backgroundColor = apperance.backgroundColor
         

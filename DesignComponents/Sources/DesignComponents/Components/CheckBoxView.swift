@@ -22,6 +22,12 @@ public class CheckBoxView: UIView {
     
     public var delegate: CheckBoxSelectionDelegate?
     
+    public var componentSize: ComponentSize = .medium {
+        didSet {
+            setComponentSize()
+        }
+    }
+    
     private let stackView: UIStackView = {
         let view = UIStackView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -74,6 +80,12 @@ public class CheckBoxView: UIView {
             if option.isOn {
                 selectedIndexes.insert(index)
             }
+        }
+    }
+    
+    private func setComponentSize() {
+        for component in checkBoxViews {
+            component.componentSize = componentSize
         }
     }
     

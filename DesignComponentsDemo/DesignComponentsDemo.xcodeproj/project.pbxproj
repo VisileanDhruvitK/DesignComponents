@@ -13,6 +13,7 @@
 		0CA2C5EB2AA88D4B00E3C308 /* FormTextFieldVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA2C5EA2AA88D4B00E3C308 /* FormTextFieldVC.swift */; };
 		0CA2C5ED2AA88D6100E3C308 /* ButtonsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA2C5EC2AA88D6100E3C308 /* ButtonsVC.swift */; };
 		0CAEA95A2AA718600004A11F /* DesignComponents in Frameworks */ = {isa = PBXBuildFile; productRef = 0CAEA9592AA718600004A11F /* DesignComponents */; };
+		0CD6C6202AB42F7E0014075E /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6C61F2AB42F7E0014075E /* Images.swift */; };
 		88AE88D82A248586001D1777 /* UIFont+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AE88D72A248586001D1777 /* UIFont+Custom.swift */; };
 		88AE88E12A24A25E001D1777 /* Inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88AE88DD2A24A25E001D1777 /* Inter-Bold.ttf */; };
 		88AE88E22A24A25E001D1777 /* Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88AE88DE2A24A25E001D1777 /* Inter-Medium.ttf */; };
@@ -33,6 +34,7 @@
 		0CA2C5EA2AA88D4B00E3C308 /* FormTextFieldVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTextFieldVC.swift; sourceTree = "<group>"; };
 		0CA2C5EC2AA88D6100E3C308 /* ButtonsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsVC.swift; sourceTree = "<group>"; };
 		0CAEA9572AA717570004A11F /* DesignComponents */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DesignComponents; path = ../DesignComponents; sourceTree = "<group>"; };
+		0CD6C61F2AB42F7E0014075E /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		88AE88D72A248586001D1777 /* UIFont+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Custom.swift"; sourceTree = "<group>"; };
 		88AE88DD2A24A25E001D1777 /* Inter-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Bold.ttf"; sourceTree = "<group>"; };
 		88AE88DE2A24A25E001D1777 /* Inter-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Medium.ttf"; sourceTree = "<group>"; };
@@ -75,6 +77,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		0CD6C6212AB42FB20014075E /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				88AE88D72A248586001D1777 /* UIFont+Custom.swift */,
+				0CD6C61F2AB42F7E0014075E /* Images.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
 		88AE88D32A248437001D1777 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -115,7 +126,7 @@
 				0C5561D22AA5E11700F71C58 /* RadioButtonVC.swift */,
 				0C56BAF22AAB068200C84187 /* CheckBoxVC.swift */,
 				0C4A42722AAF1137009207EA /* ToggleVC.swift */,
-				88AE88D72A248586001D1777 /* UIFont+Custom.swift */,
+				0CD6C6212AB42FB20014075E /* Utility */,
 				88DF859A2A0CB419001724EC /* Storyboards */,
 				88DF859D2A0CB483001724EC /* Supporting Files */,
 			);
@@ -226,6 +237,7 @@
 				0C4A42732AAF1137009207EA /* ToggleVC.swift in Sources */,
 				C38CED282AAEE9BF00125587 /* ChipVC.swift in Sources */,
 				0C56BAF32AAB068200C84187 /* CheckBoxVC.swift in Sources */,
+				0CD6C6202AB42F7E0014075E /* Images.swift in Sources */,
 				88DF85872A0CB3B5001724EC /* AppDelegate.swift in Sources */,
 				0C5561D32AA5E11700F71C58 /* RadioButtonVC.swift in Sources */,
 			);

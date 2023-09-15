@@ -187,20 +187,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="YQq-SZ-QPn">
-                                <rect key="frame" x="30" y="310" width="315" height="192"/>
+                                <rect key="frame" x="30" y="275" width="315" height="262"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0PP-zF-ILC" customClass="RadioButton" customModule="DesignComponents">
-                                        <rect key="frame" x="0.0" y="0.0" width="315" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="315" height="50"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" priority="750" constant="40" id="7e7-yA-5Xb"/>
+                                            <constraint firstAttribute="height" priority="750" constant="50" id="7e7-yA-5Xb"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KTH-Ar-pVr" customClass="RadioButtonView" customModule="DesignComponents">
-                                        <rect key="frame" x="0.0" y="72" width="315" height="120"/>
+                                        <rect key="frame" x="0.0" y="82" width="315" height="180"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" priority="750" constant="120" id="hUQ-4y-h6c"/>
+                                            <constraint firstAttribute="height" priority="750" constant="180" id="hUQ-4y-h6c"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -281,7 +281,7 @@
                                         <rect key="frame" x="0.0" y="156" width="187.66666666666666" height="48"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="48" id="3yi-hn-yKR"/>
+                                            <constraint firstAttribute="height" priority="750" constant="48" id="3yi-hn-yKR"/>
                                         </constraints>
                                         <connections>
                                             <action selector="rightImageButtonClickedWithSender:" destination="Nwk-Bz-ge2" eventType="touchUpInside" id="Voh-MD-SG8"/>
@@ -291,7 +291,7 @@
                                         <rect key="frame" x="0.0" y="220" width="187.66666666666666" height="48"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="48" id="1IL-aS-A5k"/>
+                                            <constraint firstAttribute="height" priority="750" constant="48" id="1IL-aS-A5k"/>
                                         </constraints>
                                         <connections>
                                             <action selector="rightImageButtonClickedWithSender:" destination="Nwk-Bz-ge2" eventType="touchUpInside" id="ja5-O3-V8u"/>
@@ -330,11 +330,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TgQ-6a-o88" customClass="ToggleView" customModule="DesignComponents">
-                                <rect key="frame" x="32" y="386" width="311" height="40"/>
+                                <rect key="frame" x="32" y="381" width="311" height="50"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" priority="750" constant="311" id="TPL-JN-1kK"/>
-                                    <constraint firstAttribute="height" constant="40" id="XvA-qs-AW1"/>
+                                    <constraint firstAttribute="height" priority="250" constant="50" id="XvA-qs-AW1"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -363,20 +363,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="DRs-R5-Yp7">
-                                <rect key="frame" x="30" y="310" width="315" height="192"/>
+                                <rect key="frame" x="30" y="275" width="315" height="262"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YNm-ZQ-tKm" customClass="CheckBox" customModule="DesignComponents">
-                                        <rect key="frame" x="0.0" y="0.0" width="315" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="315" height="50"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" priority="750" constant="40" id="wTM-em-HYq"/>
+                                            <constraint firstAttribute="height" priority="250" constant="50" id="wTM-em-HYq"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iY3-Au-K4s" customClass="CheckBoxView" customModule="DesignComponents">
-                                        <rect key="frame" x="0.0" y="72" width="315" height="120"/>
+                                        <rect key="frame" x="0.0" y="82" width="315" height="180"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" priority="750" constant="120" id="Lkq-vL-6TV"/>
+                                            <constraint firstAttribute="height" priority="250" constant="180" id="Lkq-vL-6TV"/>
                                         </constraints>
                                     </view>
                                 </subviews>

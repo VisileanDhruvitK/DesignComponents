@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-public struct Appearance {
+struct Appearance {
     
     var backgroundColor: UIColor = .white
     var borderWidth: CGFloat = 0
@@ -24,7 +24,7 @@ public struct Appearance {
     
 }
 
-public extension Appearance {
+extension Appearance {
     
     static let primaryButton = Appearance(backgroundColor: .primary_5, cornerRadius: 10)
     static let primaryButtonDisabled = Appearance(backgroundColor: .neutral_0_5, cornerRadius: 10)
@@ -37,12 +37,12 @@ public extension Appearance {
     
 }
 
-public struct Appearances {
+struct Appearances {
     var enableUI: Appearance = Appearance()
     var disableUI: Appearance = Appearance()
 }
 
-public extension Appearances {
+extension Appearances {
     
     static let primaryButton = Appearances(enableUI: .primaryButton, disableUI: .primaryButtonDisabled)
     static let secondaryButton = Appearances(enableUI: .secondaryButton, disableUI: .secondaryButtonDisabled)

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-public struct TextStyle {
+struct TextStyle {
     
     var font: UIFont = UIFont.systemFont(ofSize: 14, weight: .medium)
     var color: UIColor = .black
@@ -22,7 +22,7 @@ public struct TextStyle {
     
 }
 
-public extension TextStyle {
+extension TextStyle {
     
     static let formTitle = TextStyle(font: .font16Medium, color: .formItemTitle)
     static let formTextField = TextStyle(font: .font16Regular, color: .formItemText)
@@ -52,7 +52,7 @@ public extension TextStyle {
     static let chipDisabled = TextStyle(font: .font14Medium, color: .primary_2)
 }
 
-public struct TextStyles {
+struct TextStyles {
     var enableUI: TextStyle = TextStyle()
     var disableUI: TextStyle = TextStyle()
     
@@ -63,7 +63,7 @@ public struct TextStyles {
     
 }
 
-public extension TextStyles {
+extension TextStyles {
     
     static let linkButton = TextStyles(enableUI: .linkButton, disableUI: .linkButtonDisabled)
     static let primaryButton = TextStyles(enableUI: .primaryButton, disableUI: .primaryButtonDisabled)

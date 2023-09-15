@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-public enum ImageButtonType {
+public enum ImageButtonStyle {
     case leftImage
     case rightImage
 }
@@ -16,21 +16,15 @@ public enum ImageButtonType {
 public class ImageButton: UIControl {
     
     // MARK: - Properties
-    public var buttonType: ImageButtonType = .rightImage {
+    public var componentSize: ComponentSize = .medium {
         didSet {
             setup()
         }
     }
     
-    public var textStyle: TextStyles = TextStyles() {
+    public var buttonStyle: ImageButtonStyle = .leftImage {
         didSet {
-            configureUI()
-        }
-    }
-    
-    public var apperance: Appearances = Appearances() {
-        didSet {
-            configureUI()
+            setup()
         }
     }
     
@@ -92,7 +86,7 @@ public class ImageButton: UIControl {
     private func setup() {
         stackView.removeFromSuperview()
         addSubview(stackView)
-        if buttonType == .leftImage {
+        if buttonStyle == .leftImage {
             stackView.addArrangedSubview(imageView)
             stackView.addArrangedSubview(titleLabel)
         } else {
@@ -100,14 +94,16 @@ public class ImageButton: UIControl {
             stackView.addArrangedSubview(imageView)
         }
         
+        let viewHeight: CGFloat = componentSize == .medium ? 36 : 48
+        
         NSLayoutConstraint.activate([
             stackView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            stackView.topAnchor.constraint(equalTo: topAnchor, constant: (frame.size.height / 4)),
+            stackView.topAnchor.constraint(equalTo: topAnchor, constant: (viewHeight / 4)),
             stackView.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor, constant: 20),
-            stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -(frame.size.height / 4)),
+            stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -(viewHeight / 4)),
             
-            imageView.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 1),
-            imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: 1)
+            imageView.heightAnchor.constraint(equalToConstant: viewHeight / 2),
+            imageView.widthAnchor.constraint(equalToConstant: viewHeight / 2)
         ])
         
         titleLabel.setContentHuggingPriority(UILayoutPriority(1000), for: .horizontal)
@@ -120,8 +116,8 @@ public class ImageButton: UIControl {
         titleLabel.text = title
         imageView.image = image
         
-        let textStyle = isEnabled ? textStyle.enableUI : textStyle.disableUI
-        let apperance = isEnabled ? apperance.enableUI : apperance.disableUI
+        let textStyle: TextStyle = isEnabled ? .secondaryImageButton : .secondaryImageButtonDisabled
+        let apperance: Appearance = isEnabled ? .secondaryImageButton : .secondaryImageButtonDisabled
         
         self.titleLabel.textColor = textStyle.color
         self.titleLabel.font = textStyle.font

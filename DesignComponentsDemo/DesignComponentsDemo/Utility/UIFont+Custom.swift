@@ -23,13 +23,13 @@ extension UIFont {
     
     @objc class func mySystemFont(ofSize size: CGFloat, weight: UIFont.Weight) -> UIFont {
         switch weight {
-        case .medium, .regular:
+        case .regular:
             return UIFont(name: AppFontName.regular, size: size) ?? UIFont.systemFont(ofSize: size, weight: .regular)
         case .medium:
             return UIFont(name: AppFontName.medium, size: size) ?? UIFont.systemFont(ofSize: size, weight: .medium)
         case .semibold:
             return UIFont(name: AppFontName.semiBold, size: size) ?? UIFont.systemFont(ofSize: size, weight: .semibold)
-        case .semibold, .bold, .heavy, .black:
+        case .bold, .heavy, .black:
             return UIFont(name: AppFontName.bold, size: size) ?? UIFont.systemFont(ofSize: size, weight: .bold)
         default:
             return UIFont(name: AppFontName.regular, size: size) ?? UIFont.systemFont(ofSize: size, weight: .regular)

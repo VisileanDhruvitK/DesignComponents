@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-public extension UIImage {
+extension UIImage {
     
     static let radio = VLImage(named: "radio")
     static let radioSelected = VLImage(named: "radio_selected")
@@ -25,6 +25,6 @@ public extension UIImage {
 }
 
 
-public func VLImage(named name: String) -> UIImage? {
+func VLImage(named name: String) -> UIImage? {
     UIImage(named: name, in: Bundle.module, compatibleWith: nil)
 }

@@ -20,25 +20,19 @@ class ButtonsVC: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        linkButton.textStyle = TextStyles.linkButton
+        primaryButton.buttonStyle = .primary
+        secondaryButton.buttonStyle = .secondary
+        linkButton.buttonStyle = .link
         
-        primaryButton.textStyle = .primaryButton
-        primaryButton.apperance = .primaryButton
-        
-        secondaryButton.textStyle = .secondaryButton
-        secondaryButton.apperance = .secondaryButton
-        
-        leftImageButton.textStyle = .secondaryImageButton
-        leftImageButton.apperance = .secondaryImageButton
         leftImageButton.title = "Left Image"
         leftImageButton.image = .arrowDown
-        leftImageButton.buttonType = .leftImage
+        leftImageButton.buttonStyle = .leftImage
+        leftImageButton.componentSize = .medium
         
-        rightImageButton.textStyle = .secondaryImageButton
-        rightImageButton.apperance = .secondaryImageButton
         rightImageButton.title = "Right Image"
         rightImageButton.image = .arrowDown
-        rightImageButton.buttonType = .rightImage
+        rightImageButton.buttonStyle = .rightImage
+        leftImageButton.componentSize = .extraLarge
     }
     
     @IBAction func buttonClicked(sender: UIButton) {

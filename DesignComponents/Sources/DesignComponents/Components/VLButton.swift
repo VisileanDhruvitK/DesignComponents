@@ -7,16 +7,16 @@
 
 import UIKit
 
+public enum VLButtonStyle {
+    case primary
+    case secondary
+    case link
+}
+
 public class VLButton: UIButton {
     
     // MARK: - Properties
-    public var textStyle: TextStyles = TextStyles() {
-        didSet {
-            configureUI()
-        }
-    }
-    
-    public var apperance: Appearances = Appearances() {
+    public var buttonStyle: VLButtonStyle = .primary {
         didSet {
             configureUI()
         }
@@ -50,8 +50,20 @@ public class VLButton: UIButton {
     }
     
     private func configureUI() {
-        let textStyle = isEnabled ? textStyle.enableUI : textStyle.disableUI
-        let apperance = isEnabled ? apperance.enableUI : apperance.disableUI
+        var textStyle: TextStyle = TextStyle()
+        var apperance: Appearance = Appearance()
+        
+        switch buttonStyle {
+        case .primary:
+            textStyle = isEnabled ? .primaryButton : .primaryButtonDisabled
+            apperance = isEnabled ? .primaryButton : .primaryButtonDisabled
+        case .secondary:
+            textStyle = isEnabled ? .secondaryButton : .secondaryButtonDisabled
+            apperance = isEnabled ? .secondaryButton : .secondaryButtonDisabled
+        case .link:
+            textStyle = isEnabled ? .linkButton : .linkButtonDisabled
+        }
+        
         
         self.setTitleColor(textStyle.color, for: .normal)
         self.titleLabel?.font = textStyle.font

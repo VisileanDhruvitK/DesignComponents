@@ -25,6 +25,7 @@ class RadioButtonVC: UIViewController {
         radioButton.addTarget(self, action: #selector(radioSelected(_:)), for: .valueChanged)
         
         radioButtons.set(options)
+        radioButtons.componentSize = .extraLarge
         radioButtons.delegate = self
     }
     

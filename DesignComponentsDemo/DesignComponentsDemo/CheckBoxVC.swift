@@ -25,6 +25,7 @@ class CheckBoxVC: UIViewController {
         checkBox.addTarget(self, action: #selector(checkBoxSelected(_:)), for: .valueChanged)
         
         checkBoxes.set(options)
+        checkBoxes.componentSize = .extraLarge
         checkBoxes.delegate = self
     }
     

@@ -22,6 +22,12 @@ public class RadioButtonView: UIView {
     
     public var delegate: RadioSelectionDelegate?
     
+    public var componentSize: ComponentSize = .medium {
+        didSet {
+            setComponentSize()
+        }
+    }
+    
     private let stackView: UIStackView = {
         let view = UIStackView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -74,6 +80,12 @@ public class RadioButtonView: UIView {
             if option.isOn {
                 selectedIndexes.insert(index)
             }
+        }
+    }
+    
+    private func setComponentSize() {
+        for component in radioViews {
+            component.componentSize = componentSize
         }
     }
     
