@@ -64,11 +64,11 @@ public class FormTextFieldView: UIView {
     func applyDefaultStyle() {
         titleLabel.textColor = .formItemTitle
         titleLabel.numberOfLines = 1
-        // titleLabel.font = .formItemTitle
+        titleLabel.font = .font16Medium
         titleLabel.textAlignment = .left
         
         textField.textColor = .formItemText
-        // textField.font = .formItemText
+        textField.font = .font16Regular
         textField.borderStyle = .roundedRect
     }
     

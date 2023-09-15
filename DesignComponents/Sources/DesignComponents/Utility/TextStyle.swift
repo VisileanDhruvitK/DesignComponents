@@ -24,32 +24,32 @@ public struct TextStyle {
 
 public extension TextStyle {
     
-    static let formTitle = TextStyle(font: .formItemTitle, color: .formItemTitle)
-    static let formTextField = TextStyle(font: .formItemText, color: .formItemText)
+    static let formTitle = TextStyle(font: .font16Medium, color: .formItemTitle)
+    static let formTextField = TextStyle(font: .font16Regular, color: .formItemText)
     
-    static let primaryButton = TextStyle(font: .primaryButtonTitle, color: .white)
-    static let primaryButtonDisabled = TextStyle(font: .primaryButtonTitle, color: .primary_3)
+    static let primaryButton = TextStyle(font: .font12Semibold, color: .white)
+    static let primaryButtonDisabled = TextStyle(font: .font12Semibold, color: .primary_3)
     
-    static let secondaryButton = TextStyle(font: .secondaryButtonTitle, color: .neutral_7)
-    static let secondaryButtonDisabled = TextStyle(font: .secondaryButtonTitle, color: .neutral_3)
+    static let secondaryButton = TextStyle(font: .font12Semibold, color: .neutral_7)
+    static let secondaryButtonDisabled = TextStyle(font: .font12Semibold, color: .neutral_3)
     
-    static let linkButton = TextStyle(font: .linkButtonTitle, color: .primary_6)
-    static let linkButtonDisabled = TextStyle(font: .linkButtonTitle, color: .neutral_3)
+    static let linkButton = TextStyle(font: .font14Semibold, color: .primary_6)
+    static let linkButtonDisabled = TextStyle(font: .font14Semibold, color: .neutral_3)
     
-    static let secondaryImageButton = TextStyle(font: .secondaryImageButtonTitle, color: .primary_6, textAlignment: .center)
-    static let secondaryImageButtonDisabled = TextStyle(font: .secondaryImageButtonTitle, color: .neutral_3, textAlignment: .center)
+    static let secondaryImageButton = TextStyle(font: .font16Semibold, color: .primary_6, textAlignment: .center)
+    static let secondaryImageButtonDisabled = TextStyle(font: .font16Semibold, color: .neutral_3, textAlignment: .center)
     
-    static let radioButton = TextStyle(font: .radioButton, color: .primary_7)
-    static let radioButtonDisabled = TextStyle(font: .radioButton, color: .primary_2)
+    static let radioButton = TextStyle(font: .font14Medium, color: .primary_7)
+    static let radioButtonDisabled = TextStyle(font: .font14Medium, color: .primary_2)
     
-    static let checkBox = TextStyle(font: .checkBox, color: .primary_7)
-    static let checkBoxDisabled = TextStyle(font: .checkBox, color: .primary_2)
+    static let checkBoxTitle = TextStyle(font: .font14Medium, color: .primary_7)
+    static let checkBoxSubTitle = TextStyle(font: .font14Regular, color: .neutral_7)
     
-    static let toggleTitle = TextStyle(font: .toggleTitle, color: .neutral_8_5)
-    static let toggleSubTitle = TextStyle(font: .toggleSubTitle, color: .neutral_7)
+    static let toggleTitle = TextStyle(font: .font14Medium, color: .neutral_8_5)
+    static let toggleSubTitle = TextStyle(font: .font14Medium, color: .neutral_7)
     
-    static let chipTitle = TextStyle(font: .chipTitle, color: .primary_7)
-    static let chipDisabled = TextStyle(font: .chipTitle, color: .primary_2)
+    static let chipTitle = TextStyle(font: .font14Medium, color: .primary_7)
+    static let chipDisabled = TextStyle(font: .font14Medium, color: .primary_2)
 }
 
 public struct TextStyles {

@@ -16,21 +16,21 @@ public enum FontSize: CGFloat {
 
 extension UIFont {
     
-    static let formItemTitle = VLFont(size: .font16, weigth: .medium)
-    static let formItemText = VLFont(size: .font16, weigth: .regular)
+    static let font12Regular = VLFont(size: .font12, weigth: .regular)
+    static let font12Medium = VLFont(size: .font12, weigth: .medium)
+    static let font12Semibold = VLFont(size: .font12, weigth: .semibold)
+    static let font12Bold = VLFont(size: .font12, weigth: .bold)
     
-    static let primaryButtonTitle = VLFont(size: .font12, weigth: .semibold)
-    static let secondaryButtonTitle = VLFont(size: .font12, weigth: .semibold)
-    static let linkButtonTitle = VLFont(size: .font14, weigth: .semibold)
-    static let secondaryImageButtonTitle = VLFont(size: .font16, weigth: .semibold)
+    static let font14Regular = VLFont(size: .font14, weigth: .regular)
+    static let font14Medium = VLFont(size: .font14, weigth: .medium)
+    static let font14Semibold = VLFont(size: .font14, weigth: .semibold)
+    static let font14Bold = VLFont(size: .font14, weigth: .bold)
     
-    static let radioButton = VLFont(size: .font14, weigth: .medium)
-    static let checkBox = VLFont(size: .font14, weigth: .medium)
+    static let font16Regular = VLFont(size: .font16, weigth: .regular)
+    static let font16Medium = VLFont(size: .font16, weigth: .medium)
+    static let font16Semibold = VLFont(size: .font16, weigth: .semibold)
+    static let font16Bold = VLFont(size: .font16, weigth: .bold)
     
-    static let toggleTitle = VLFont(size: .font14, weigth: .medium)
-    static let toggleSubTitle = VLFont(size: .font14, weigth: .regular)
-    
-    static let chipTitle = VLFont(size: .font14, weigth: .medium)
 }
 
 public func VLFont(size: FontSize, weigth: UIFont.Weight) -> UIFont {

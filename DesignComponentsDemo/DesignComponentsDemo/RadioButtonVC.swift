@@ -31,9 +31,9 @@ class RadioButtonVC: UIViewController {
     func fetchOptions() {
         options.removeAll()
         
-        let option1 = SelectionOption(title: "One", isOn: true)
-        let option2 = SelectionOption(title: "Two")
-        let option3 = SelectionOption(title: "Three")
+        let option1 = SelectionOption(title: "Select One", description: "Save my login details for next time.", isOn: true)
+        let option2 = SelectionOption(title: "Select Two", description: "Save my login details for next time.")
+        let option3 = SelectionOption(title: "Select Three", description: "Save my login details for next time.")
         // let option4 = SelectionOption(title: "Four")
         
         options.append(contentsOf: [option1, option2, option3])

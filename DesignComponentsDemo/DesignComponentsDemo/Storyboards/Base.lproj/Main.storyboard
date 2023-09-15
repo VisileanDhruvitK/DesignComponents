@@ -193,14 +193,14 @@
                                         <rect key="frame" x="0.0" y="0.0" width="315" height="40"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="7e7-yA-5Xb"/>
+                                            <constraint firstAttribute="height" priority="750" constant="40" id="7e7-yA-5Xb"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KTH-Ar-pVr" customClass="RadioButtonView" customModule="DesignComponents">
                                         <rect key="frame" x="0.0" y="72" width="315" height="120"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="120" id="hUQ-4y-h6c"/>
+                                            <constraint firstAttribute="height" priority="750" constant="120" id="hUQ-4y-h6c"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -369,14 +369,14 @@
                                         <rect key="frame" x="0.0" y="0.0" width="315" height="40"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="wTM-em-HYq"/>
+                                            <constraint firstAttribute="height" priority="750" constant="40" id="wTM-em-HYq"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iY3-Au-K4s" customClass="CheckBoxView" customModule="DesignComponents">
                                         <rect key="frame" x="0.0" y="72" width="315" height="120"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="120" id="Lkq-vL-6TV"/>
+                                            <constraint firstAttribute="height" priority="750" constant="120" id="Lkq-vL-6TV"/>
                                         </constraints>
                                     </view>
                                 </subviews>
