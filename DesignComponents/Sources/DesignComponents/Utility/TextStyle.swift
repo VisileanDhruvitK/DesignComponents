@@ -48,8 +48,11 @@ extension TextStyle {
     static let toggleTitle = TextStyle(font: .font14Medium, color: .neutral_8_5)
     static let toggleSubTitle = TextStyle(font: .font14Medium, color: .neutral_7)
     
-    static let chipTitle = TextStyle(font: .font14Medium, color: .primary_7)
-    static let chipDisabled = TextStyle(font: .font14Medium, color: .primary_2)
+    static let chipTitlePA = TextStyle(font: .font14Medium, color: .neutral_7)
+    static let chipDisabledPA = TextStyle(font: .font14Medium, color: .primary_2)
+    
+    static let chipTitleSU = TextStyle(font: .font14Medium, color: .primary_6)
+    static let chipDisabledSU = TextStyle(font: .font14Medium, color: .primary_2)
 }
 
 struct TextStyles {

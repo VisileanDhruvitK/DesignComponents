@@ -9,12 +9,12 @@ import Foundation
 import UIKit
 
 public enum ChipType {
-    case withText(String, isButtonHidden: Bool)
-    case withImage(image: UIImage, text: String, isButtonHidden: Bool)
+    case withText(String, isButtonHidden: Bool, chipStyle: ChipStyle)
+    case withImage(image: UIImage, text: String, isButtonHidden: Bool, chipStyle: ChipStyle)
     
     var text: String {
         switch self {
-            case .withText(let text, _), .withImage(_, let text, _):
+            case .withText(let text, _, _), .withImage(_, let text, _, _):
                 return text
         }
     }
@@ -23,25 +23,63 @@ public enum ChipType {
         switch self {
             case .withText:
                 return nil
-            case .withImage(let image, _, _):
+            case .withImage(let image, _, _, _):
                 return image
         }
     }
     
     var isButtonHidden: Bool {
         switch self {
-            case .withText(_, let isHidden), .withImage(_, _, let isHidden):
+            case .withText(_, let isHidden, _), .withImage(_, _, let isHidden, _):
                 return isHidden
+        }
+    }
+    
+    var chipStyle: ChipStyle {
+        switch self {
+            case .withText(_, _, let style):
+                return style
+            case .withImage(_, _, _, let style):
+                return style
         }
     }
 }
 
+public enum ChipStyle {
+    case roundPA
+    case roundSU
+    case squrePA
+    case squreSU
+    
+    var bgColor: UIColor {
+        switch self {
+            case .roundPA, .squrePA:
+                return .neutral_0_5
+            case .roundSU, .squreSU:
+                return .primary_0_2
+        }
+    }
+    
+    var bgColorSelected: UIColor {
+        switch self {
+            case .roundPA, .squrePA:
+                return .neutral_0_5
+            case .roundSU, .squreSU:
+                return .primary_0_2
+        }
+    }
+}
 
-//MARK: - ChipControl
 public class ChipControl: UIControl {
     
-    private var textStyle: TextStyle = .chipTitle
-    private var disabledTextStyle: TextStyle = .chipDisabled
+    private var textStyle: TextStyles = TextStyles()
+    private var chipStyle: ChipStyle = .roundPA
+    
+    private var appearance: Appearances = Appearances() {
+        didSet {
+            configureUI()
+        }
+    }
     
     public override var isEnabled: Bool {
         didSet {
@@ -49,13 +87,20 @@ public class ChipControl: UIControl {
         }
     }
     
-    public var chipType: ChipType = .withText("", isButtonHidden: false) {
+    public override var isSelected: Bool {
+        didSet {
+            setSelectionState()
+        }
+    }
+    
+    public var chipType: ChipType = .withText("", isButtonHidden: false, chipStyle: .roundPA) {
         didSet {
             updateUIForChipType()
         }
     }
     
     var onRemove: (() -> Void)?
+    private var leadingConstraint: NSLayoutConstraint!
     
     private let imageView: UIImageView = {
         let view = UIImageView()
@@ -89,22 +134,28 @@ public class ChipControl: UIControl {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
+        setupTapGesture()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupUI()
+        setupTapGesture()
     }
     
-    // MARK: -  methods
+    private func setupTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+        self.addGestureRecognizer(tapGesture)
+        self.isUserInteractionEnabled = true
+    }
+    
     private func setupUI() {
-        self.backgroundColor = .primary_0_2
         addSubview(stackView)
         stackView.addArrangedSubview(imageView)
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(button)
         
-        layer.cornerRadius = self.frame.size.height / 2
+        layer.cornerRadius = frame.size.height / 2
         clipsToBounds = true
         
         //set imageView
@@ -117,16 +168,16 @@ public class ChipControl: UIControl {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
         // Adjust stackView constraints to make imageView and button dynamic
-        let topConstraint = stackView.topAnchor.constraint(equalTo: topAnchor, constant: 12)
-        let bottomConstraint = stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12)
+        let topConstraint = stackView.topAnchor.constraint(equalTo: topAnchor, constant: 5)
+        let bottomConstraint = stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5)
         
         // Allow titleLabel to determine the width
         titleLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         titleLabel.setContentCompressionResistancePriority(UILayoutPriority(1000), for: .horizontal)
         
         // Set dynamic width constraints on the main parent view
-        let leadingConstraint = leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: -12)
-        let trailingConstraint = trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: 12)
+        leadingConstraint = stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 4)
+        let trailingConstraint = stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8)
         
         NSLayoutConstraint.activate([
             topConstraint,
@@ -137,44 +188,106 @@ public class ChipControl: UIControl {
             imageView.heightAnchor.constraint(equalToConstant: 24),
             imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor),
             
-            button.heightAnchor.constraint(equalToConstant: 24),
-            button.widthAnchor.constraint(equalToConstant: 24)
+            button.heightAnchor.constraint(equalToConstant: 20),
+            button.widthAnchor.constraint(equalToConstant: 20)
         ])
         
         updateUIForChipType()
-        configureUI()
+        setSelectionState()
+    }
+    
+    //set Image Of Button
+    private func setButtonImage() {
+        switch chipStyle {
+            case .roundPA, .squrePA:
+                button.setImage(VLImage(named: "close_pa"), for: .normal)
+            case .roundSU, .squreSU:
+                button.setImage(VLImage(named: "close_su"), for: .normal)
+        }
+    }
+    
+    //se Border of Chip
+    private func setSelectionState() {
+        let textStyle = isEnabled ? textStyle.enableUI : textStyle.disableUI
+        layer.borderColor = textStyle.color.cgColor
+        layer.borderWidth = isSelected ? 1 : 0
     }
     
     private func configureUI() {
-        
-        if isEnabled {
-            titleLabel.textColor = textStyle.color
-            imageView.tintColor = textStyle.color
-            titleLabel.font = textStyle.font
-        } else {
-            imageView.tintColor = disabledTextStyle.color
-            titleLabel.font = disabledTextStyle.font
-            titleLabel.textColor = disabledTextStyle.color
-        }
+        let textStyle = isEnabled ? textStyle.enableUI : textStyle.disableUI
+        titleLabel.textColor = textStyle.color
+        titleLabel.font = textStyle.font
+        setButtonImage()
     }
     
     private func updateUIForChipType() {
         switch chipType {
-            case .withText(let text, let isButtonHidden):
+            case .withText(let text, let isButtonHidden, let chipStyle):
                 titleLabel.text = text
                 imageView.isHidden = true
                 button.isHidden = isButtonHidden
-            case .withImage(let image, let text, let isButtonHidden):
+                setChipStyle(chipStyles: chipStyle)
+                leadingConstraint.constant = 10
+                layoutSubviews()
+            case .withImage(let image, let text, let isButtonHidden, let chipStyle):
                 titleLabel.text = text
-                imageView.image = image
                 imageView.isHidden = false
+                imageView.image = image
                 button.isHidden = isButtonHidden
+                setChipStyle(chipStyles: chipStyle)
+                leadingConstraint.constant = 4
+                layoutSubviews()
         }
     }
     
+    private func setChipStyle(chipStyles: ChipStyle) {
+        chipStyle = chipStyles
+        switch chipStyles {
+            case .roundPA:
+                layer.cornerRadius = frame.size.height / 2
+                layer.borderWidth = 0
+                backgroundColor = isSelected ? chipStyle.bgColorSelected : chipStyle.bgColor
+                textStyle = TextStyles(enableUI: .chipTitlePA, disableUI: .chipDisabledPA)
+                configureUI()
+                
+            case .roundSU:
+                layer.cornerRadius = frame.size.height / 2
+                layer.borderWidth = isSelected ? 1 : 0
+                backgroundColor = isSelected ? chipStyle.bgColorSelected : chipStyle.bgColor
+                textStyle = TextStyles(enableUI: .chipTitleSU, disableUI: .chipTitleSU)
+                configureUI()
+                
+            case .squrePA:
+                layer.cornerRadius = 10 // Or any other corner radius value you prefer
+                layer.borderWidth = 0
+                backgroundColor = isSelected ? chipStyle.bgColorSelected : chipStyle.bgColor
+                textStyle = TextStyles(enableUI: .chipTitlePA, disableUI: .chipDisabledPA)
+                configureUI()
+                
+            case .squreSU:
+                layer.cornerRadius = 10 // Or any other corner radius value you prefer
+                layer.borderWidth = isSelected ? 1 : 0
+                backgroundColor = isSelected ? chipStyle.bgColorSelected : chipStyle.bgColor
+                textStyle = TextStyles(enableUI: .chipTitleSU, disableUI: .chipDisabledSU)
+                configureUI()
+        }
+    }
+    
+    @objc private func handleTap(_ sender: UITapGestureRecognizer) {
+        // Handle the tap event here
+        // You can perform actions like toggling the chip's selection state
+        // or invoking a closure like onRemove when the chip is tapped.
+        
+        isSelected.toggle() // Toggle the selection state when tapped
+        setSelectionState() // Update the border based on the new selection state
+        
+        // Trigger the onRemove closure if it's set
+        if isSelected, let onRemove = onRemove {
+            onRemove()
+        }
+    }
     
     @objc private func removeChip() {
         onRemove?()
     }
 }
-

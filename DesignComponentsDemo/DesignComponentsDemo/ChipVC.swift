@@ -20,12 +20,14 @@ class ChipVC: UIViewController {
         super.viewDidLoad()
 
         // Create and configure the chip control
-        chipTextonly.chipType = .withText("text only", isButtonHidden: true)
-        Chip_Text_btn.chipType = .withText("text & btn", isButtonHidden: false)
-        chipWithImage.chipType = .withImage(image: VLImage(named: "arrowDown") ?? UIImage(), text: "text image", isButtonHidden: true)
-        chip_Img_text_btn.chipType = .withImage(image: VLImage(named: "arrowDown") ?? UIImage(), text: "text image btn", isButtonHidden: false)
+        chipTextonly.chipType = .withText("text only", isButtonHidden: true, chipStyle: .roundSU)
+        Chip_Text_btn.chipType = .withText("text & btn", isButtonHidden: false, chipStyle: .squreSU)
+        chipWithImage.chipType = .withImage(image: VLImage(named: "user_Image") ?? UIImage(), text: "text image", isButtonHidden: true, chipStyle: .roundPA)
+        chip_Img_text_btn.chipType = .withImage(image: VLImage(named: "user_Image") ?? UIImage(), text: "text image btn", isButtonHidden: false, chipStyle: .squrePA)
         
-        chip_Img_text_btn.isEnabled = false
+        
+        chipWithImage.isSelected = true
+//        chip_Img_text_btn.isEnabled = false
     }
 
 }
