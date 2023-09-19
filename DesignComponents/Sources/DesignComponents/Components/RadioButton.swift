@@ -29,6 +29,12 @@ public class RadioButton: UIControl {
         }
     }
     
+    public override var isEnabled: Bool {
+        didSet {
+            updateState()
+        }
+    }
+    
     private let imageView: UIImageView = {
         let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -150,6 +156,7 @@ public class RadioButton: UIControl {
     
     private func updateState() {
         imageView.image = (isOn ? selectedImage : image)
+        imageView.tintColor = isEnabled ? .primary_5 : .primary_2
     }
     
     public func setOption(option: SelectionOption) {

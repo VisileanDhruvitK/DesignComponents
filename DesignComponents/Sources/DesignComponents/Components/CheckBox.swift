@@ -8,10 +8,10 @@
 import UIKit
 
 public struct SelectionOption {
-    var title: String = ""
-    var description: String = ""
-    var isOn: Bool = false
-    var isEnabled: Bool = false
+    public var title: String = ""
+    public var description: String = ""
+    public var isOn: Bool = false
+    public var isEnabled: Bool = false
     
     public init(title: String, description: String = "", isOn: Bool = false, isEnabled: Bool = true) {
         self.title = title
@@ -39,6 +39,12 @@ public class CheckBox: UIControl {
     }
     
     public var isOn: Bool = false {
+        didSet {
+            updateState()
+        }
+    }
+    
+    public override var isEnabled: Bool {
         didSet {
             updateState()
         }
@@ -165,6 +171,7 @@ public class CheckBox: UIControl {
     
     private func updateState() {
         imageView.image = (isOn ? selectedImage : image)
+        imageView.tintColor = isEnabled ? .primary_5 : .primary_2
     }
     
     public func setOption(option: SelectionOption) {

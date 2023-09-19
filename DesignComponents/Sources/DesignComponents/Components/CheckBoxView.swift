@@ -8,23 +8,29 @@
 import UIKit
 
 public protocol CheckBoxSelectionDelegate: AnyObject {
-    func didSelectCheckBox(indexes: Set<Int>)
+    func didSelectCheckBox(tag: Int, indexes: Set<Int>)
 }
 
 extension CheckBoxSelectionDelegate {
-    func calculateCheckBoxViewHeight(height: CGFloat) {}
+    func calculateCheckBoxViewHeight(tag: Int, height: CGFloat) {}
 }
 
 public class CheckBoxView: UIView {
     
     public var selectedIndexes = Set<Int>()
-    var allowMultipleSelection = true
+    public var allowMultipleSelection = true
     
     public var delegate: CheckBoxSelectionDelegate?
     
     public var componentSize: ComponentSize = .medium {
         didSet {
             setComponentSize()
+        }
+    }
+    
+    public var isEnabled: Bool = true {
+        didSet {
+            updateState()
         }
     }
     
@@ -89,6 +95,12 @@ public class CheckBoxView: UIView {
         }
     }
     
+    private func updateState() {
+        for component in checkBoxViews {
+            component.isEnabled = isEnabled
+        }
+    }
+    
     @objc private func checkBoxSelected(_ sender: CheckBox) {
         if allowMultipleSelection {
             if let selectedIndex = selectedIndexes.firstIndex(of: sender.tag) {
@@ -109,7 +121,7 @@ public class CheckBoxView: UIView {
             }
         }
         
-        self.delegate?.didSelectCheckBox(indexes: selectedIndexes)
+        self.delegate?.didSelectCheckBox(tag: tag, indexes: selectedIndexes)
     }
     
 }

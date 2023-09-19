@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="EUw-WT-Nzr">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="EUw-WT-Nzr">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -15,7 +15,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="EUw-WT-Nzr" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="yCh-24-tCs">
-                        <rect key="frame" x="0.0" y="50" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="47" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -36,7 +36,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="zhE-kH-rvw">
-                                <rect key="frame" x="0.0" y="94" width="375" height="684"/>
+                                <rect key="frame" x="0.0" y="91" width="375" height="687"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <connections>
                                     <outlet property="dataSource" destination="O1V-V1-Rlb" id="qFM-z5-L0N"/>
@@ -182,38 +182,72 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="YQq-SZ-QPn">
-                                <rect key="frame" x="30" y="275" width="315" height="262"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="PcY-5K-fpm">
+                                <rect key="frame" x="30" y="134" width="315" height="544"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0PP-zF-ILC" customClass="RadioButton" customModule="DesignComponents">
-                                        <rect key="frame" x="0.0" y="0.0" width="315" height="50"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="gCw-1O-wAF">
+                                        <rect key="frame" x="0.0" y="0.0" width="315" height="96"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q42-KO-RE5" customClass="RadioButton" customModule="DesignComponents">
+                                                <rect key="frame" x="0.0" y="0.0" width="315" height="30"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" priority="750" constant="30" id="OPG-rP-zmE"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RsE-Cf-E4i" customClass="RadioButtonView" customModule="DesignComponents">
+                                                <rect key="frame" x="0.0" y="46" width="315" height="50"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" priority="750" constant="50" id="Pj6-YL-WMi"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O7J-uH-Wub">
+                                        <rect key="frame" x="0.0" y="196" width="315" height="2"/>
+                                        <color key="backgroundColor" systemColor="systemGray4Color"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" priority="750" constant="50" id="7e7-yA-5Xb"/>
+                                            <constraint firstAttribute="height" constant="2" id="OBc-CV-ghD"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KTH-Ar-pVr" customClass="RadioButtonView" customModule="DesignComponents">
-                                        <rect key="frame" x="0.0" y="82" width="315" height="180"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" priority="750" constant="180" id="hUQ-4y-h6c"/>
-                                        </constraints>
-                                    </view>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="YQq-SZ-QPn">
+                                        <rect key="frame" x="0.0" y="298" width="315" height="246"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0PP-zF-ILC" customClass="RadioButton" customModule="DesignComponents">
+                                                <rect key="frame" x="0.0" y="0.0" width="315" height="50"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" priority="750" constant="50" id="7e7-yA-5Xb"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KTH-Ar-pVr" customClass="RadioButtonView" customModule="DesignComponents">
+                                                <rect key="frame" x="0.0" y="66" width="315" height="180"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" priority="750" constant="180" id="hUQ-4y-h6c"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="e3X-hd-1o4"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="YQq-SZ-QPn" firstAttribute="leading" secondItem="e3X-hd-1o4" secondAttribute="leading" constant="30" id="8k0-VO-wpU"/>
-                            <constraint firstItem="YQq-SZ-QPn" firstAttribute="centerY" secondItem="yaL-yS-xIE" secondAttribute="centerY" id="T1d-H1-aBs"/>
-                            <constraint firstItem="YQq-SZ-QPn" firstAttribute="centerX" secondItem="yaL-yS-xIE" secondAttribute="centerX" id="gRM-Xq-QTm"/>
+                            <constraint firstItem="PcY-5K-fpm" firstAttribute="centerY" secondItem="yaL-yS-xIE" secondAttribute="centerY" id="D9c-hS-DY9"/>
+                            <constraint firstItem="PcY-5K-fpm" firstAttribute="top" relation="greaterThanOrEqual" secondItem="e3X-hd-1o4" secondAttribute="top" constant="50" id="EtF-6d-DOR"/>
+                            <constraint firstItem="PcY-5K-fpm" firstAttribute="leading" secondItem="e3X-hd-1o4" secondAttribute="leading" constant="30" id="hal-Pg-Ddk"/>
+                            <constraint firstItem="PcY-5K-fpm" firstAttribute="centerX" secondItem="yaL-yS-xIE" secondAttribute="centerX" id="pRR-JL-LHL"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Z0q-Dm-3AX"/>
                     <connections>
                         <outlet property="radioButton" destination="0PP-zF-ILC" id="t7C-cf-ECi"/>
                         <outlet property="radioButtons" destination="KTH-Ar-pVr" id="fNp-hI-7g4"/>
+                        <outlet property="radioSizes" destination="RsE-Cf-E4i" id="FpG-G5-myi"/>
+                        <outlet property="radioState" destination="Q42-KO-RE5" id="bfZ-f7-soz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="irj-Bt-Gfd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -325,25 +359,55 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TgQ-6a-o88" customClass="ToggleView" customModule="DesignComponents">
-                                <rect key="frame" x="32" y="381" width="311" height="50"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" priority="750" constant="311" id="TPL-JN-1kK"/>
-                                    <constraint firstAttribute="height" priority="250" constant="50" id="XvA-qs-AW1"/>
-                                </constraints>
-                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="DWf-oY-E92">
+                                <rect key="frame" x="30" y="306" width="315" height="200"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TgQ-6a-o88" customClass="ToggleView" customModule="DesignComponents">
+                                        <rect key="frame" x="0.0" y="0.0" width="315" height="50"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" priority="750" constant="311" id="TPL-JN-1kK"/>
+                                            <constraint firstAttribute="height" priority="250" constant="50" id="XvA-qs-AW1"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hL7-lQ-vT4" customClass="ToggleView" customModule="DesignComponents">
+                                        <rect key="frame" x="0.0" y="66" width="315" height="50"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" priority="250" constant="50" id="Vgk-ar-YsK"/>
+                                            <constraint firstAttribute="width" priority="750" constant="311" id="bLp-9L-98R"/>
+                                        </constraints>
+                                    </view>
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gdk-Ws-fiR">
+                                        <rect key="frame" x="0.0" y="132" width="315" height="2"/>
+                                        <color key="backgroundColor" systemColor="systemGray4Color"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="2" id="6ud-O3-W2w"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MoB-Ag-6zv" customClass="ToggleView" customModule="DesignComponents">
+                                        <rect key="frame" x="0.0" y="150" width="315" height="50"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" priority="750" constant="311" id="4ac-4A-JxE"/>
+                                            <constraint firstAttribute="height" priority="250" constant="50" id="N6A-gb-To9"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="gPh-6A-vIL"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="TgQ-6a-o88" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gPh-6A-vIL" secondAttribute="leading" constant="32" id="Um9-bi-0ZO"/>
-                            <constraint firstItem="TgQ-6a-o88" firstAttribute="centerY" secondItem="OjB-DP-uZj" secondAttribute="centerY" id="Wrb-33-L49"/>
-                            <constraint firstItem="TgQ-6a-o88" firstAttribute="centerX" secondItem="OjB-DP-uZj" secondAttribute="centerX" id="jMA-LU-AOV"/>
+                            <constraint firstItem="DWf-oY-E92" firstAttribute="centerY" secondItem="OjB-DP-uZj" secondAttribute="centerY" id="C8n-mS-4fZ"/>
+                            <constraint firstItem="DWf-oY-E92" firstAttribute="leading" secondItem="gPh-6A-vIL" secondAttribute="leading" constant="30" id="Vvg-jS-Hdc"/>
+                            <constraint firstItem="DWf-oY-E92" firstAttribute="centerX" secondItem="OjB-DP-uZj" secondAttribute="centerX" id="tnw-Z8-aXb"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="toggleView" destination="TgQ-6a-o88" id="0Zm-Oy-gf0"/>
+                        <outlet property="toggleSize" destination="hL7-lQ-vT4" id="8Ay-fe-wdN"/>
+                        <outlet property="toggleState" destination="TgQ-6a-o88" id="5ZI-qT-ZdU"/>
+                        <outlet property="toggleView" destination="MoB-Ag-6zv" id="rdv-SJ-bcL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fOX-5H-e8M" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -358,37 +422,71 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="DRs-R5-Yp7">
-                                <rect key="frame" x="30" y="275" width="315" height="262"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="R74-I3-UyH">
+                                <rect key="frame" x="30" y="144" width="315" height="524"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YNm-ZQ-tKm" customClass="CheckBox" customModule="DesignComponents">
-                                        <rect key="frame" x="0.0" y="0.0" width="315" height="50"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Qgs-Cz-qQ2">
+                                        <rect key="frame" x="0.0" y="0.0" width="315" height="96"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="reM-tl-D3g" customClass="CheckBox" customModule="DesignComponents">
+                                                <rect key="frame" x="0.0" y="0.0" width="315" height="30"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" priority="750" constant="30" id="JTm-Mb-t8O"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DfG-Ux-v8b" customClass="CheckBoxView" customModule="DesignComponents">
+                                                <rect key="frame" x="0.0" y="46" width="315" height="50"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" priority="750" constant="50" id="Osp-Hm-o3x"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3uB-da-wE5">
+                                        <rect key="frame" x="0.0" y="196" width="315" height="2"/>
+                                        <color key="backgroundColor" systemColor="systemGray4Color"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" priority="250" constant="50" id="wTM-em-HYq"/>
+                                            <constraint firstAttribute="height" constant="2" id="s1Y-r6-MLZ"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iY3-Au-K4s" customClass="CheckBoxView" customModule="DesignComponents">
-                                        <rect key="frame" x="0.0" y="82" width="315" height="180"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" priority="250" constant="180" id="Lkq-vL-6TV"/>
-                                        </constraints>
-                                    </view>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="DRs-R5-Yp7">
+                                        <rect key="frame" x="0.0" y="298" width="315" height="226"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YNm-ZQ-tKm" customClass="CheckBox" customModule="DesignComponents">
+                                                <rect key="frame" x="0.0" y="0.0" width="315" height="30"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" priority="750" constant="30" id="wTM-em-HYq"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iY3-Au-K4s" customClass="CheckBoxView" customModule="DesignComponents">
+                                                <rect key="frame" x="0.0" y="46" width="315" height="180"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" priority="750" constant="180" id="Lkq-vL-6TV"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="kTf-T8-m6U"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="DRs-R5-Yp7" firstAttribute="centerX" secondItem="taM-Uy-U46" secondAttribute="centerX" id="PbG-Sc-Wrk"/>
-                            <constraint firstItem="DRs-R5-Yp7" firstAttribute="centerY" secondItem="taM-Uy-U46" secondAttribute="centerY" id="hIT-w4-VkO"/>
-                            <constraint firstItem="DRs-R5-Yp7" firstAttribute="leading" secondItem="kTf-T8-m6U" secondAttribute="leading" constant="30" id="sSB-5i-iDk"/>
+                            <constraint firstItem="R74-I3-UyH" firstAttribute="leading" secondItem="kTf-T8-m6U" secondAttribute="leading" constant="30" id="5dV-VJ-ooU"/>
+                            <constraint firstItem="R74-I3-UyH" firstAttribute="top" relation="greaterThanOrEqual" secondItem="kTf-T8-m6U" secondAttribute="top" constant="50" id="8Ja-hO-wxZ"/>
+                            <constraint firstItem="R74-I3-UyH" firstAttribute="centerX" secondItem="taM-Uy-U46" secondAttribute="centerX" id="LTp-78-cAM"/>
+                            <constraint firstItem="R74-I3-UyH" firstAttribute="centerY" secondItem="taM-Uy-U46" secondAttribute="centerY" id="fDv-JJ-k72"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="wxm-k0-YGv"/>
                     <connections>
                         <outlet property="checkBox" destination="YNm-ZQ-tKm" id="awi-o2-R9u"/>
+                        <outlet property="checkBoxSizes" destination="DfG-Ux-v8b" id="hN5-nI-rAm"/>
+                        <outlet property="checkBoxState" destination="reM-tl-D3g" id="N1D-Bs-yKN"/>
                         <outlet property="checkBoxes" destination="iY3-Au-K4s" id="NsN-No-7yC"/>
                     </connections>
                 </viewController>
@@ -400,6 +498,9 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray4Color">
+            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

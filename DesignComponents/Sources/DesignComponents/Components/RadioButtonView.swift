@@ -8,11 +8,11 @@
 import UIKit
 
 public protocol RadioSelectionDelegate: AnyObject {
-    func didSelectRadioButton(indexes: Set<Int>)
+    func didSelectRadioButton(tag: Int, indexes: Set<Int>)
 }
 
 extension RadioSelectionDelegate {
-    func calculateRadioViewHeight(height: CGFloat) {}
+    func calculateRadioViewHeight(tag: Int, height: CGFloat) {}
 }
 
 public class RadioButtonView: UIView {
@@ -25,6 +25,12 @@ public class RadioButtonView: UIView {
     public var componentSize: ComponentSize = .medium {
         didSet {
             setComponentSize()
+        }
+    }
+    
+    public var isEnabled: Bool = true {
+        didSet {
+            updateState()
         }
     }
     
@@ -89,6 +95,12 @@ public class RadioButtonView: UIView {
         }
     }
     
+    private func updateState() {
+        for component in radioViews {
+            component.isEnabled = isEnabled
+        }
+    }
+    
     @objc private func radioSelected(_ sender: RadioButton) {
         if allowMultipleSelection {
             if let selectedIndex = selectedIndexes.firstIndex(of: sender.tag) {
@@ -109,7 +121,7 @@ public class RadioButtonView: UIView {
             }
         }
         
-        self.delegate?.didSelectRadioButton(indexes: selectedIndexes)
+        self.delegate?.didSelectRadioButton(tag: tag, indexes: selectedIndexes)
     }
     
 }
