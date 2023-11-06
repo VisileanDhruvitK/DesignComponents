@@ -12,6 +12,7 @@ enum FontSize: CGFloat {
     case font12 = 12
     case font14 = 14
     case font16 = 16
+    case font18 = 18
 }
 
 extension UIFont {

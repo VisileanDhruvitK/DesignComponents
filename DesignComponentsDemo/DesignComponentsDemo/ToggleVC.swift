@@ -39,7 +39,7 @@ class ToggleVC: UIViewController {
     
     @objc func toggleSizeSelected(_ sender: ToggleView) {
         sender.isOn.toggle()
-        toggleView.componentSize = toggleSize.isOn ? .extraLarge : .medium
+        toggleView.componentSize = toggleSize.isOn ? .xl : .medium
     }
     
     @objc func toggleValueChanged(_ sender: ToggleView) {

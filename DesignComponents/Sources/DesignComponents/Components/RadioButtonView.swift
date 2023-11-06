@@ -66,7 +66,7 @@ public class RadioButtonView: UIView {
         ])
     }
     
-    public func set(_ options: [SelectionOption]) {
+    public func set(_ options: [RadioOption]) {
         radioViews.removeAll()
         stackView.removeAllArrangedSubviews()
         

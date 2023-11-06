@@ -16,17 +16,17 @@ class RadioButtonVC: UIViewController {
     @IBOutlet weak var radioButton: RadioButton!
     @IBOutlet weak var radioButtons: RadioButtonView!
     
-    var sizeOptions = [SelectionOption]()
-    var radioOptions = [SelectionOption]()
+    var sizeOptions = [RadioOption]()
+    var radioOptions = [RadioOption]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        radioState.setOption(option: SelectionOption(title: "Enable", isOn: true))
+        radioState.setOption(option: RadioOption(title: "Enable", isOn: true))
         radioState.addTarget(self, action: #selector(radioStateSelected(_:)), for: .valueChanged)
         
-        radioButton.setOption(option: SelectionOption(title: "Single Radio", isOn: true))
+        radioButton.setOption(option: RadioOption(title: "Single Radio", isOn: true))
         radioButton.addTarget(self, action: #selector(radioSelected(_:)), for: .valueChanged)
         
         fetchSizes()
@@ -36,8 +36,8 @@ class RadioButtonVC: UIViewController {
     func fetchSizes() {
         sizeOptions.removeAll()
         
-        let option1 = SelectionOption(title: "Medium", description: "", isOn: true)
-        let option2 = SelectionOption(title: "Extra Large", description: "")
+        let option1 = RadioOption(title: "Medium", description: "", isOn: true)
+        let option2 = RadioOption(title: "Extra Large", description: "")
         
         sizeOptions.append(contentsOf: [option1, option2])
         
@@ -49,9 +49,9 @@ class RadioButtonVC: UIViewController {
     func fetchOptions() {
         radioOptions.removeAll()
         
-        let option1 = SelectionOption(title: "Select One", description: "Save my login details for next time.", isOn: true)
-        let option2 = SelectionOption(title: "Select Two", description: "Save my login details for next time.")
-        let option3 = SelectionOption(title: "Select Three", description: "Save my login details for next time.")
+        let option1 = RadioOption(title: "Select One", description: "Save my login details for next time.", isOn: true)
+        let option2 = RadioOption(title: "Select Two", description: "Save my login details for next time.")
+        let option3 = RadioOption(title: "Select Three", description: "Save my login details for next time.")
         // let option4 = SelectionOption(title: "Four")
         
         radioOptions.append(contentsOf: [option1, option2, option3])
@@ -80,8 +80,8 @@ extension RadioButtonVC: RadioSelectionDelegate {
         if tag == 1 {
             let option = sizeOptions[indexes.first ?? 0]
             if option.title == "Extra Large" {
-                radioButton.componentSize = .extraLarge
-                radioButtons.componentSize = .extraLarge
+                radioButton.componentSize = .xl
+                radioButtons.componentSize = .xl
             } else {
                 radioButton.componentSize = .medium
                 radioButtons.componentSize = .medium

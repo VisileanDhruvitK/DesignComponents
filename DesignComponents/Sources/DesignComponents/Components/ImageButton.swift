@@ -119,21 +119,17 @@ public class ImageButton: UIControl {
         let textStyle: TextStyle = isEnabled ? .secondaryImageButton : .secondaryImageButtonDisabled
         let apperance: Appearance = isEnabled ? .secondaryImageButton : .secondaryImageButtonDisabled
         
-        self.titleLabel.textColor = textStyle.color
-        self.titleLabel.font = textStyle.font
-        self.titleLabel.textAlignment = textStyle.textAlignment
-        self.backgroundColor = apperance.backgroundColor
-        self.imageView.tintColor = textStyle.color
+        titleLabel.textColor = textStyle.color
+        titleLabel.font = textStyle.font
+        titleLabel.textAlignment = textStyle.textAlignment
+        backgroundColor = apperance.backgroundColor
+        imageView.tintColor = textStyle.color
         
-        if apperance.cornerRadius > 0 {
-            self.layer.cornerRadius = apperance.cornerRadius
-            self.clipsToBounds = true
-        }
+        layer.cornerRadius = apperance.cornerRadius
+        clipsToBounds = true
         
-        if apperance.borderWidth > 0 {
-            self.layer.borderWidth = apperance.borderWidth
-            self.layer.borderColor = apperance.borderColor.cgColor
-        }
+        layer.borderWidth = apperance.borderWidth
+        layer.borderColor = apperance.borderColor.cgColor
         
         imageView.isHidden = imageView.image == nil
     }

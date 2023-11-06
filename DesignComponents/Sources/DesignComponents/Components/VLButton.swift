@@ -22,6 +22,12 @@ public class VLButton: UIButton {
         }
     }
     
+    public var componentSize: ComponentSize = .medium {
+        didSet {
+            configureSize()
+        }
+    }
+    
     public override var isEnabled: Bool {
         didSet {
             configureUI()
@@ -65,22 +71,40 @@ public class VLButton: UIButton {
         }
         
         
-        self.setTitleColor(textStyle.color, for: .normal)
-        self.titleLabel?.font = textStyle.font
-        self.backgroundColor = apperance.backgroundColor
-        self.imageView?.tintColor = textStyle.color
+        setTitleColor(textStyle.color, for: .normal)
+        titleLabel?.font = textStyle.font
+        backgroundColor = apperance.backgroundColor
+        imageView?.tintColor = textStyle.color
         
-        if apperance.cornerRadius > 0 {
-            self.layer.cornerRadius = apperance.cornerRadius
-            self.clipsToBounds = true
-        }
+        layer.cornerRadius = apperance.cornerRadius
+        clipsToBounds = true
         
-        if apperance.borderWidth > 0 {
-            self.layer.borderWidth = apperance.borderWidth
-            self.layer.borderColor = apperance.borderColor.cgColor
-        }
+        layer.borderWidth = apperance.borderWidth
+        layer.borderColor = apperance.borderColor.cgColor
         
         contentEdgeInsets = UIEdgeInsets(top: 0, left: 14, bottom: 0, right: 14)
+        
+        configureSize()
+    }
+    
+    private func configureSize() {
+        var fontSize: FontSize = .font12
+        
+        switch componentSize {
+        case .small:
+            fontSize = .font12
+        case .medium:
+            fontSize = .font14
+        case .large:
+            fontSize = .font14
+        case .xl:
+            fontSize = .font16
+        case .xxl:
+            fontSize = .font18
+        }
+        
+        let font = VLFont(size: fontSize, weigth: .semibold)
+        titleLabel?.font = font
     }
     
     public override func setImage(_ image: UIImage?, for state: UIControl.State) {

@@ -16,17 +16,17 @@ class CheckBoxVC: UIViewController {
     @IBOutlet weak var checkBox: CheckBox!
     @IBOutlet weak var checkBoxes: CheckBoxView!
     
-    var sizeOptions = [SelectionOption]()
-    var radioOptions = [SelectionOption]()
+    var sizeOptions = [CheckboxOption]()
+    var radioOptions = [CheckboxOption]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
                 
-        checkBoxState.setOption(option: SelectionOption(title: "Enable", isOn: true))
+        checkBoxState.setOption(option: CheckboxOption(title: "Enable", selectionState: .selected))
         checkBoxState.addTarget(self, action: #selector(checkBoxStateSelected(_:)), for: .valueChanged)
         
-        checkBox.setOption(option: SelectionOption(title: "Single CheckBox", isOn: true))
+        checkBox.setOption(option: CheckboxOption(title: "Single CheckBox", selectionState: .selected))
         checkBox.addTarget(self, action: #selector(checkBoxSelected(_:)), for: .valueChanged)
         
         fetchSizes()
@@ -36,8 +36,8 @@ class CheckBoxVC: UIViewController {
     func fetchSizes() {
         sizeOptions.removeAll()
         
-        let option1 = SelectionOption(title: "Medium", description: "", isOn: true)
-        let option2 = SelectionOption(title: "Extra Large", description: "")
+        let option1 = CheckboxOption(title: "Medium", description: "", selectionState: .selected)
+        let option2 = CheckboxOption(title: "Extra Large", description: "")
         
         sizeOptions.append(contentsOf: [option1, option2])
         
@@ -50,9 +50,9 @@ class CheckBoxVC: UIViewController {
     func fetchOptions() {
         radioOptions.removeAll()
         
-        let option1 = SelectionOption(title: "Select One", description: "Save my login details for next time.", isOn: true)
-        let option2 = SelectionOption(title: "Select Two", description: "Save my login details for next time.")
-        let option3 = SelectionOption(title: "Select Three", description: "Save my login details for next time.")
+        let option1 = CheckboxOption(title: "Select One", description: "Save my login details for next time.", selectionState: .selected)
+        let option2 = CheckboxOption(title: "Select Two", description: "Save my login details for next time.")
+        let option3 = CheckboxOption(title: "Select Three", description: "Save my login details for next time.")
         // let option4 = SelectionOption(title: "Four")
         
         radioOptions.append(contentsOf: [option1, option2, option3])
@@ -61,15 +61,25 @@ class CheckBoxVC: UIViewController {
         checkBoxes.delegate = self
     }
     
-    @objc func checkBoxStateSelected(_ sender: RadioButton) {
-        sender.isOn.toggle()
-        checkBox.isEnabled = sender.isOn
-        checkBoxes.isEnabled = sender.isOn
+    @objc func checkBoxStateSelected(_ sender: CheckBox) {
+        if sender.selectionState == .selected {
+            sender.selectionState = .deselected
+        } else {
+            sender.selectionState = .selected
+        }
+        
+        checkBox.isEnabled = sender.selectionState == .selected
+        checkBoxes.isEnabled = sender.selectionState == .selected
     }
     
     @objc func checkBoxSelected(_ sender: CheckBox) {
-        sender.isOn.toggle()
-        print("isON - ",sender.isOn)
+        if sender.selectionState == .selected {
+            sender.selectionState = .deselected
+        } else {
+            sender.selectionState = .selected
+        }
+        
+        print("isSelected - ",sender.selectionState)
     }
     
 }
@@ -80,8 +90,8 @@ extension CheckBoxVC: CheckBoxSelectionDelegate {
         if tag == 1 {
             let option = sizeOptions[indexes.first ?? 0]
             if option.title == "Extra Large" {
-                checkBox.componentSize = .extraLarge
-                checkBoxes.componentSize = .extraLarge
+                checkBox.componentSize = .xl
+                checkBoxes.componentSize = .xl
             } else {
                 checkBox.componentSize = .medium
                 checkBoxes.componentSize = .medium

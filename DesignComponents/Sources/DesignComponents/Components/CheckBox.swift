@@ -7,16 +7,16 @@
 
 import UIKit
 
-public struct SelectionOption {
+public struct CheckboxOption {
     public var title: String = ""
     public var description: String = ""
-    public var isOn: Bool = false
+    public var selectionState: SelectionState = .deselected
     public var isEnabled: Bool = false
     
-    public init(title: String, description: String = "", isOn: Bool = false, isEnabled: Bool = true) {
+    public init(title: String, description: String = "", selectionState: SelectionState = .deselected, isEnabled: Bool = true) {
         self.title = title
         self.description = description
-        self.isOn = isOn
+        self.selectionState = selectionState
         self.isEnabled = isEnabled
     }
     
@@ -25,6 +25,7 @@ public struct SelectionOption {
 public class CheckBox: UIControl {
     
     private var image: UIImage? = .checkBox
+    private var indeterminantImage: UIImage? = .checkBoxIndeterminant
     private var selectedImage: UIImage? = .checkBoxSelected
     
     private var titleStyle: TextStyle = .checkBoxTitle
@@ -38,7 +39,7 @@ public class CheckBox: UIControl {
         }
     }
     
-    public var isOn: Bool = false {
+    public var selectionState: SelectionState = .deselected {
         didSet {
             updateState()
         }
@@ -108,6 +109,7 @@ public class CheckBox: UIControl {
     
     private func setup() {
         addSubview(stackView)
+        stackView.removeAllArrangedSubviews()
         
         verticalStackView.addArrangedSubview(titleLabel)
         verticalStackView.addArrangedSubview(descriptionLabel)
@@ -149,32 +151,36 @@ public class CheckBox: UIControl {
         titleLabel.font = titleStyle.font
         descriptionLabel.font = subTitleStyle.font
         
-        if componentSize == .extraLarge {
+        if componentSize == .xl {
             titleLabel.font = .font16Medium
             descriptionLabel.font = .font16Regular
         }
         
-        self.backgroundColor = apperance.backgroundColor
+        backgroundColor = apperance.backgroundColor
         
-        if apperance.cornerRadius > 0 {
-            self.layer.cornerRadius = apperance.cornerRadius
-            self.clipsToBounds = true
-        }
+        layer.cornerRadius = apperance.cornerRadius
+        clipsToBounds = true
         
-        if apperance.borderWidth > 0 {
-            self.layer.borderWidth = apperance.borderWidth
-            self.layer.borderColor = apperance.borderColor.cgColor
-        }
+        layer.borderWidth = apperance.borderWidth
+        layer.borderColor = apperance.borderColor.cgColor
         
         imageView.tintColor = isEnabled ? .primary_5 : .primary_2
     }
     
     private func updateState() {
-        imageView.image = (isOn ? selectedImage : image)
+        switch selectionState {
+        case .deselected:
+            imageView.image = image
+        case .indeterminant:
+            imageView.image = indeterminantImage
+        case .selected:
+            imageView.image = selectedImage
+        }
+        
         imageView.tintColor = isEnabled ? .primary_5 : .primary_2
     }
     
-    public func setOption(option: SelectionOption) {
+    public func setOption(option: CheckboxOption) {
         titleLabel.text = option.title
         titleLabel.isHidden = option.title.isEmpty
         
@@ -183,15 +189,15 @@ public class CheckBox: UIControl {
         
         stackView.spacing = (option.title.isEmpty && option.description.isEmpty) ? 0 : 8
         
-        isOn = option.isOn
+        selectionState = option.selectionState
         isEnabled = option.isEnabled
         isUserInteractionEnabled = option.isEnabled
         
         setupUI()
     }
     
-    func select(_ select: Bool) {
-        isOn = select
+    func select(state: SelectionState) {
+        self.selectionState = state
     }
     
     public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {

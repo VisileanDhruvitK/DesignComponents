@@ -94,6 +94,7 @@ public class ToggleView: UIControl {
     
     private func setup() {
         addSubview(stackView)
+        stackView.removeAllArrangedSubviews()
         
         verticalStackView.addArrangedSubview(titleLabel)
         verticalStackView.addArrangedSubview(descriptionLabel)
@@ -134,29 +135,25 @@ public class ToggleView: UIControl {
         titleLabel.font = titleStyle.font
         descriptionLabel.font = subTitleStyle.font
         
-        if componentSize == .extraLarge {
+        if componentSize == .xl {
             titleLabel.font = .font16Medium
             descriptionLabel.font = .font16Regular
         }
         
         self.backgroundColor = apperance.backgroundColor
         
-        if apperance.cornerRadius > 0 {
-            self.layer.cornerRadius = apperance.cornerRadius
-            self.clipsToBounds = true
-        }
+        layer.cornerRadius = apperance.cornerRadius
+        clipsToBounds = true
         
-        if apperance.borderWidth > 0 {
-            self.layer.borderWidth = apperance.borderWidth
-            self.layer.borderColor = apperance.borderColor.cgColor
-        }
+        layer.borderWidth = apperance.borderWidth
+        layer.borderColor = apperance.borderColor.cgColor
         
         if isEnabled {
-            self.selectedImage = .toggleOn
-            self.image = .toggleOff
+            selectedImage = .toggleOn
+            image = .toggleOff
         } else {
-            self.selectedImage = .toggleOnDisabled
-            self.image = .toggleOffDIsabled
+            selectedImage = .toggleOnDisabled
+            image = .toggleOffDIsabled
         }
         
         updateState()

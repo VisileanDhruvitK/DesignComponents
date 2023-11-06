@@ -66,7 +66,7 @@ public class CheckBoxView: UIView {
         ])
     }
     
-    public func set(_ options: [SelectionOption]) {
+    public func set(_ options: [CheckboxOption]) {
         checkBoxViews.removeAll()
         stackView.removeAllArrangedSubviews()
         
@@ -83,7 +83,7 @@ public class CheckBoxView: UIView {
         }
         
         for (index, option) in options.enumerated() {
-            if option.isOn {
+            if option.selectionState == .selected {
                 selectedIndexes.insert(index)
             }
         }
@@ -115,9 +115,9 @@ public class CheckBoxView: UIView {
         
         checkBoxViews.forEach {
             if let _ = selectedIndexes.firstIndex(of: $0.tag) {
-                $0.select(true)
+                $0.select(state: .selected)
             } else {
-                $0.select(false)
+                $0.select(state: .deselected)
             }
         }
         

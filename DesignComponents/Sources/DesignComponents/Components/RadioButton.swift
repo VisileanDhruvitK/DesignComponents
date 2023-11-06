@@ -7,6 +7,21 @@
 
 import UIKit
 
+public struct RadioOption {
+    public var title: String = ""
+    public var description: String = ""
+    public var isOn: Bool = false
+    public var isEnabled: Bool = false
+    
+    public init(title: String, description: String = "", isOn: Bool = false, isEnabled: Bool = true) {
+        self.title = title
+        self.description = description
+        self.isOn = isOn
+        self.isEnabled = isEnabled
+    }
+    
+}
+
 public class RadioButton: UIControl {
     
     private var image: UIImage? = .radio
@@ -93,6 +108,7 @@ public class RadioButton: UIControl {
     
     private func setup() {
         addSubview(stackView)
+        stackView.removeAllArrangedSubviews()
         
         verticalStackView.addArrangedSubview(titleLabel)
         verticalStackView.addArrangedSubview(descriptionLabel)
@@ -134,22 +150,18 @@ public class RadioButton: UIControl {
         titleLabel.font = titleStyle.font
         descriptionLabel.font = subTitleStyle.font
         
-        if componentSize == .extraLarge {
+        if componentSize == .xl {
             titleLabel.font = .font16Medium
             descriptionLabel.font = .font16Regular
         }
         
-        self.backgroundColor = apperance.backgroundColor
+        backgroundColor = apperance.backgroundColor
         
-        if apperance.cornerRadius > 0 {
-            self.layer.cornerRadius = apperance.cornerRadius
-            self.clipsToBounds = true
-        }
+        layer.cornerRadius = apperance.cornerRadius
+        clipsToBounds = true
         
-        if apperance.borderWidth > 0 {
-            self.layer.borderWidth = apperance.borderWidth
-            self.layer.borderColor = apperance.borderColor.cgColor
-        }
+        layer.borderWidth = apperance.borderWidth
+        layer.borderColor = apperance.borderColor.cgColor
         
         imageView.tintColor = isEnabled ? .primary_5 : .primary_2
     }
@@ -159,7 +171,7 @@ public class RadioButton: UIControl {
         imageView.tintColor = isEnabled ? .primary_5 : .primary_2
     }
     
-    public func setOption(option: SelectionOption) {
+    public func setOption(option: RadioOption) {
         titleLabel.text = option.title
         titleLabel.isHidden = option.title.isEmpty
         
