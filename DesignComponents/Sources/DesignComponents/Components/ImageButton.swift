@@ -16,9 +16,12 @@ public enum ImageButtonStyle {
 public class ImageButton: UIControl {
     
     // MARK: - Properties
+    private var titleHeightConst: NSLayoutConstraint!
+    private var imageHeightConst: NSLayoutConstraint!
+    
     public var componentSize: ComponentSize = .medium {
         didSet {
-            setup()
+            updateSize()
         }
     }
     
@@ -100,16 +103,32 @@ public class ImageButton: UIControl {
             stackView.centerXAnchor.constraint(equalTo: centerXAnchor),
             stackView.topAnchor.constraint(equalTo: topAnchor, constant: (viewHeight / 4)),
             stackView.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor, constant: 20),
-            stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -(viewHeight / 4)),
-            
-            imageView.heightAnchor.constraint(equalToConstant: viewHeight / 2),
-            imageView.widthAnchor.constraint(equalToConstant: viewHeight / 2)
+            stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -(viewHeight / 4))
         ])
         
         titleLabel.setContentHuggingPriority(UILayoutPriority(1000), for: .horizontal)
         titleLabel.setContentCompressionResistancePriority(UILayoutPriority(1000), for: .horizontal)
         
+        updateSize()
         configureUI()
+    }
+    
+    private func updateSize() {
+        let viewHeight: CGFloat = componentSize == .medium ? 36 : 48
+        
+        if imageHeightConst != nil {
+            titleHeightConst?.constant = (viewHeight / 2)
+            imageHeightConst?.constant = (viewHeight / 2)
+        } else {
+            titleHeightConst = titleLabel.heightAnchor.constraint(equalToConstant: viewHeight / 2)
+            imageHeightConst = imageView.heightAnchor.constraint(equalToConstant: viewHeight / 2)
+        }
+        
+        NSLayoutConstraint.activate([
+            imageHeightConst,
+            imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: 1, constant: 1),
+            titleHeightConst
+        ])
     }
     
     private func configureUI() {

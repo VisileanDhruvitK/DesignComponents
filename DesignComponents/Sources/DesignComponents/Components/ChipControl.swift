@@ -9,40 +9,7 @@ import Foundation
 import UIKit
 
 public enum ChipType {
-    case withText(String, isButtonHidden: Bool, chipStyle: ChipStyle)
-    case withImage(image: UIImage, text: String, isButtonHidden: Bool, chipStyle: ChipStyle)
-    
-    var text: String {
-        switch self {
-            case .withText(let text, _, _), .withImage(_, let text, _, _):
-                return text
-        }
-    }
-    
-    var image: UIImage? {
-        switch self {
-            case .withText:
-                return nil
-            case .withImage(let image, _, _, _):
-                return image
-        }
-    }
-    
-    var isButtonHidden: Bool {
-        switch self {
-            case .withText(_, let isHidden, _), .withImage(_, _, let isHidden, _):
-                return isHidden
-        }
-    }
-    
-    var chipStyle: ChipStyle {
-        switch self {
-            case .withText(_, _, let style):
-                return style
-            case .withImage(_, _, _, let style):
-                return style
-        }
-    }
+    case with(image: UIImage? = nil, text: String = "", isButtonHidden: Bool = true, chipStyle: ChipStyle = .roundSU)
 }
 
 public enum ChipStyle {
@@ -93,7 +60,7 @@ public class ChipControl: UIControl {
         }
     }
     
-    public var chipType: ChipType = .withText("", isButtonHidden: false, chipStyle: .roundPA) {
+    public var chipType: ChipType = .with(text: "", isButtonHidden: false, chipStyle: .roundPA) {
         didSet {
             updateUIForChipType()
         }
@@ -210,7 +177,12 @@ public class ChipControl: UIControl {
     private func setSelectionState() {
         let textStyle = isEnabled ? textStyle.enableUI : textStyle.disableUI
         layer.borderColor = textStyle.color.cgColor
-        layer.borderWidth = isSelected ? 1 : 0
+        
+        if chipStyle == .roundPA || chipStyle == .squrePA {
+            layer.borderWidth = 1
+        } else {
+            layer.borderWidth = isSelected ? 1 : 0
+        }
     }
     
     private func configureUI() {
@@ -222,21 +194,21 @@ public class ChipControl: UIControl {
     
     private func updateUIForChipType() {
         switch chipType {
-            case .withText(let text, let isButtonHidden, let chipStyle):
-                titleLabel.text = text
-                imageView.isHidden = true
-                button.isHidden = isButtonHidden
-                setChipStyle(chipStyles: chipStyle)
-                leadingConstraint.constant = 10
-                layoutSubviews()
-            case .withImage(let image, let text, let isButtonHidden, let chipStyle):
-                titleLabel.text = text
+        case .with(let image, let text, let isButtonHidden, let chipStyle):
+            titleLabel.text = text
+            if let img = image {
+                imageView.image = img
                 imageView.isHidden = false
-                imageView.image = image
-                button.isHidden = isButtonHidden
-                setChipStyle(chipStyles: chipStyle)
                 leadingConstraint.constant = 4
-                layoutSubviews()
+            } else {
+                imageView.isHidden = true
+                leadingConstraint.constant = 10
+            }
+            
+            button.isHidden = isButtonHidden
+            setChipStyle(chipStyles: chipStyle)
+            layoutSubviews()
+            
         }
     }
     
@@ -245,7 +217,7 @@ public class ChipControl: UIControl {
         switch chipStyles {
             case .roundPA:
                 layer.cornerRadius = frame.size.height / 2
-                layer.borderWidth = 0
+                layer.borderWidth = 1
                 backgroundColor = isSelected ? chipStyle.bgColorSelected : chipStyle.bgColor
                 textStyle = TextStyles(enableUI: .chipTitlePA, disableUI: .chipDisabledPA)
                 configureUI()
@@ -259,7 +231,7 @@ public class ChipControl: UIControl {
                 
             case .squrePA:
                 layer.cornerRadius = 10 // Or any other corner radius value you prefer
-                layer.borderWidth = 0
+                layer.borderWidth = 1
                 backgroundColor = isSelected ? chipStyle.bgColorSelected : chipStyle.bgColor
                 textStyle = TextStyles(enableUI: .chipTitlePA, disableUI: .chipDisabledPA)
                 configureUI()

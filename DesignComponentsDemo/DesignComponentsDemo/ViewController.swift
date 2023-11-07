@@ -28,7 +28,7 @@ enum ControlType: CaseIterable {
             case .toggle:
                 return "Toggle"
             case .chip:
-                return "chip"
+                return "Chip"
         }
     }
 }

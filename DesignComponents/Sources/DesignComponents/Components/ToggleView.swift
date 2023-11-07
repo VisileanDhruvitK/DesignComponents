@@ -10,6 +10,9 @@ import UIKit
 public class ToggleView: UIControl {
     
     // MARK: - Properties
+    private var titleHeightConst: NSLayoutConstraint!
+    private var imageHeightConst: NSLayoutConstraint!
+    
     private var image: UIImage? = .toggleOff
     private var selectedImage: UIImage? = .toggleOn
     
@@ -20,7 +23,7 @@ public class ToggleView: UIControl {
     
     public var componentSize: ComponentSize = .medium {
         didSet {
-            setup()
+            updateSize()
         }
     }
     
@@ -101,18 +104,11 @@ public class ToggleView: UIControl {
         stackView.addArrangedSubview(verticalStackView)
         stackView.addArrangedSubview(imageView)
         
-        let viewHeight: CGFloat = componentSize == .medium ? 40 : 50
-        
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: topAnchor),
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            
-            imageView.heightAnchor.constraint(equalToConstant: viewHeight / 2),
-            imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: (36/20), constant: 1),
-            
-            titleLabel.heightAnchor.constraint(equalToConstant: viewHeight / 2)
         ])
         
         titleLabel.setContentHuggingPriority(UILayoutPriority(1000), for: .horizontal)
@@ -125,7 +121,26 @@ public class ToggleView: UIControl {
         descriptionLabel.setContentCompressionResistancePriority(UILayoutPriority(1000), for: .horizontal)
         descriptionLabel.setContentCompressionResistancePriority(UILayoutPriority(1000), for: .vertical)
         
+        updateSize()
         configureUI()
+    }
+    
+    private func updateSize() {
+        let viewHeight: CGFloat = componentSize == .medium ? 40 : 50
+        
+        if imageHeightConst != nil {
+            titleHeightConst?.constant = (viewHeight / 2)
+            imageHeightConst?.constant = (viewHeight / 2)
+        } else {
+            titleHeightConst = titleLabel.heightAnchor.constraint(equalToConstant: viewHeight / 2)
+            imageHeightConst = imageView.heightAnchor.constraint(equalToConstant: viewHeight / 2)
+        }
+        
+        NSLayoutConstraint.activate([
+            imageHeightConst,
+            imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: (36/20), constant: 1),
+            titleHeightConst
+        ])
     }
     
     private func configureUI() {

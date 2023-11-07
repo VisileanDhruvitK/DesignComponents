@@ -25,6 +25,7 @@ extension UIImage {
     static let checkBoxIndeterminant_XL = VLImage(named: "checkBox_indeterminant_XL")
     
     static let arrowDown = VLImage(named: "arrowDown")
+    public static let user_Image = VLImage(named: "user_Image")
     
     static let toggleOn = VLImage(named: "toggle_on")
     static let toggleOnDisabled = VLImage(named: "toggle_on_disabled")
