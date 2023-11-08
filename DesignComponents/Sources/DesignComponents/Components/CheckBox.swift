@@ -157,11 +157,6 @@ public class CheckBox: UIControl {
             imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: 1, constant: 1),
             titleHeightConst
         ])
-    }
-    
-    private func setupUI() {
-        titleLabel.textColor = titleStyle.color
-        descriptionLabel.textColor = subTitleStyle.color
         
         titleLabel.font = titleStyle.font
         descriptionLabel.font = subTitleStyle.font
@@ -169,7 +164,15 @@ public class CheckBox: UIControl {
         if componentSize == .xl {
             titleLabel.font = .font16Medium
             descriptionLabel.font = .font16Regular
+        } else {
+            titleLabel.font = .font14Medium
+            descriptionLabel.font = .font14Regular
         }
+    }
+    
+    private func setupUI() {
+        titleLabel.textColor = titleStyle.color
+        descriptionLabel.textColor = subTitleStyle.color
         
         backgroundColor = apperance.backgroundColor
         

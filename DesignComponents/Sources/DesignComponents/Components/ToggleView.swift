@@ -141,11 +141,6 @@ public class ToggleView: UIControl {
             imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: (36/20), constant: 1),
             titleHeightConst
         ])
-    }
-    
-    private func configureUI() {
-        titleLabel.textColor = titleStyle.color
-        descriptionLabel.textColor = subTitleStyle.color
         
         titleLabel.font = titleStyle.font
         descriptionLabel.font = subTitleStyle.font
@@ -153,7 +148,15 @@ public class ToggleView: UIControl {
         if componentSize == .xl {
             titleLabel.font = .font16Medium
             descriptionLabel.font = .font16Regular
+        } else {
+            titleLabel.font = .font14Medium
+            descriptionLabel.font = .font14Regular
         }
+    }
+    
+    private func configureUI() {
+        titleLabel.textColor = titleStyle.color
+        descriptionLabel.textColor = subTitleStyle.color
         
         self.backgroundColor = apperance.backgroundColor
         

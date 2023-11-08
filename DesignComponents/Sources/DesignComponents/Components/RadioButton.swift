@@ -10,12 +10,14 @@ import UIKit
 public struct RadioOption {
     public var title: String = ""
     public var description: String = ""
+    public var color: UIColor = .clear
     public var isOn: Bool = false
     public var isEnabled: Bool = false
     
-    public init(title: String, description: String = "", isOn: Bool = false, isEnabled: Bool = true) {
+    public init(title: String, description: String = "", color: UIColor = .clear, isOn: Bool = false, isEnabled: Bool = true) {
         self.title = title
         self.description = description
+        self.color = color
         self.isOn = isOn
         self.isEnabled = isEnabled
     }
@@ -26,6 +28,7 @@ public class RadioButton: UIControl {
     
     private var titleHeightConst: NSLayoutConstraint!
     private var imageHeightConst: NSLayoutConstraint!
+    private var colorViewHeightConst: NSLayoutConstraint!
     
     private var image: UIImage? = .radio
     private var selectedImage: UIImage? = .radioSelected
@@ -52,6 +55,14 @@ public class RadioButton: UIControl {
             updateState()
         }
     }
+    
+    private let colorView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.borderWidth = 3
+        view.clipsToBounds = true
+        return view
+    }()
     
     private let imageView: UIImageView = {
         let view = UIImageView()
@@ -113,6 +124,7 @@ public class RadioButton: UIControl {
         addSubview(stackView)
         stackView.removeAllArrangedSubviews()
         
+        stackView.addArrangedSubview(colorView)
         verticalStackView.addArrangedSubview(titleLabel)
         verticalStackView.addArrangedSubview(descriptionLabel)
         stackView.addArrangedSubview(verticalStackView)
@@ -146,21 +158,20 @@ public class RadioButton: UIControl {
         if imageHeightConst != nil {
             titleHeightConst?.constant = (viewHeight / 2)
             imageHeightConst?.constant = (viewHeight / 2)
+            colorViewHeightConst.constant = (viewHeight / 3)
         } else {
             titleHeightConst = titleLabel.heightAnchor.constraint(equalToConstant: viewHeight / 2)
             imageHeightConst = imageView.heightAnchor.constraint(equalToConstant: viewHeight / 2)
+            colorViewHeightConst = colorView.heightAnchor.constraint(equalToConstant: viewHeight / 3)
         }
         
         NSLayoutConstraint.activate([
             imageHeightConst,
             imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: 1, constant: 1),
+            colorViewHeightConst,
+            colorView.widthAnchor.constraint(equalTo: colorView.heightAnchor, multiplier: 1, constant: 1),
             titleHeightConst
         ])
-    }
-    
-    private func setupUI() {
-        titleLabel.textColor = titleStyle.color
-        descriptionLabel.textColor = subTitleStyle.color
         
         titleLabel.font = titleStyle.font
         descriptionLabel.font = subTitleStyle.font
@@ -168,7 +179,22 @@ public class RadioButton: UIControl {
         if componentSize == .xl {
             titleLabel.font = .font16Medium
             descriptionLabel.font = .font16Regular
+        } else {
+            titleLabel.font = .font14Medium
+            descriptionLabel.font = .font14Regular
         }
+        
+        layoutIfNeeded()
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.colorView.layer.cornerRadius = (self?.colorView.frame.size.height ?? 0) / 2
+            self?.layoutIfNeeded()
+        }
+    }
+    
+    private func setupUI() {
+        titleLabel.textColor = titleStyle.color
+        descriptionLabel.textColor = subTitleStyle.color
         
         backgroundColor = apperance.backgroundColor
         
@@ -198,6 +224,13 @@ public class RadioButton: UIControl {
         isOn = option.isOn
         isEnabled = option.isEnabled
         isUserInteractionEnabled = option.isEnabled
+        
+        if option.color == UIColor.clear {
+            colorView.isHidden = true
+        } else {
+            colorView.isHidden = false
+            colorView.layer.borderColor = option.color.cgColor
+        }
         
         setupUI()
     }
