@@ -125,7 +125,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="I6n-8j-m1b">
-                                <rect key="frame" x="20" y="153" width="335" height="506"/>
+                                <rect key="frame" x="20" y="169" width="335" height="474"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="kkz-pk-Pzr">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="96"/>
@@ -156,25 +156,25 @@
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="DC4-Je-mB3">
-                                        <rect key="frame" x="0.0" y="298" width="335" height="208"/>
+                                        <rect key="frame" x="0.0" y="298" width="335" height="176"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lIq-6m-CQY" customClass="ChipControl" customModule="DesignComponents">
-                                                <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="32"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="40" id="bBD-c8-eai"/>
+                                                    <constraint firstAttribute="height" constant="32" id="bBD-c8-eai"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cKO-cU-ZxP" customClass="ChipControl" customModule="DesignComponents">
-                                                <rect key="frame" x="0.0" y="56" width="335" height="40"/>
+                                                <rect key="frame" x="0.0" y="48" width="335" height="32"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w4h-lZ-kIN" customClass="ChipControl" customModule="DesignComponents">
-                                                <rect key="frame" x="0.0" y="112" width="335" height="40"/>
+                                                <rect key="frame" x="0.0" y="96" width="335" height="32"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Qk-cn-isD" customClass="ChipControl" customModule="DesignComponents">
-                                                <rect key="frame" x="0.0" y="168" width="335" height="40"/>
+                                                <rect key="frame" x="0.0" y="144" width="335" height="32"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             </view>
                                         </subviews>
@@ -192,6 +192,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="chipHeightConst" destination="bBD-c8-eai" id="ePx-Fe-bDu"/>
                         <outlet property="chipImageText" destination="w4h-lZ-kIN" id="ign-pW-Czd"/>
                         <outlet property="chipImageTextButton" destination="2Qk-cn-isD" id="wdV-IN-ASR"/>
                         <outlet property="chipText" destination="lIq-6m-CQY" id="hTT-pF-fkc"/>

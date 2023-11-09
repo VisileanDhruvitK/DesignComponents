@@ -21,9 +21,9 @@ public enum ChipStyle {
     var bgColor: UIColor {
         switch self {
             case .roundPA, .squrePA:
-                return .neutral_0_5
+            return .white
             case .roundSU, .squreSU:
-                return .primary_0_2
+                return .primary_0_5
         }
     }
     
@@ -48,6 +48,12 @@ public class ChipControl: UIControl {
         }
     }
     
+    public var componentSize: ComponentSize = .medium {
+        didSet {
+            updateSize()
+        }
+    }
+    
     public override var isEnabled: Bool {
         didSet {
             configureUI()
@@ -68,6 +74,7 @@ public class ChipControl: UIControl {
     
     var onRemove: (() -> Void)?
     private var leadingConstraint: NSLayoutConstraint!
+    private var trailingConstraint: NSLayoutConstraint!
     
     private let imageView: UIImageView = {
         let view = UIImageView()
@@ -88,7 +95,7 @@ public class ChipControl: UIControl {
     private let stackView: UIStackView = {
         let view = UIStackView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.alignment = .fill
+        view.alignment = .center
         view.distribution = .fill
         view.axis = .horizontal
         view.spacing = 8
@@ -118,33 +125,19 @@ public class ChipControl: UIControl {
     
     private func setupUI() {
         addSubview(stackView)
+        
+        stackView.removeAllArrangedSubviews()
         stackView.addArrangedSubview(imageView)
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(button)
         
-        layer.cornerRadius = frame.size.height / 2
-        clipsToBounds = true
-        
-        //set imageView
-        imageView.layer.cornerRadius = imageView.frame.size.height / 2
-        imageView.clipsToBounds = true
-        
-        button.addTarget(self, action: #selector(removeChip), for: .touchUpInside)
-        
-        // Remove fixed leading and trailing constraints on stackView
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        
         // Adjust stackView constraints to make imageView and button dynamic
-        let topConstraint = stackView.topAnchor.constraint(equalTo: topAnchor, constant: 5)
-        let bottomConstraint = stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5)
-        
-        // Allow titleLabel to determine the width
-        titleLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        titleLabel.setContentCompressionResistancePriority(UILayoutPriority(1000), for: .horizontal)
+        let topConstraint = stackView.topAnchor.constraint(equalTo: topAnchor, constant: 8)
+        let bottomConstraint = stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8)
         
         // Set dynamic width constraints on the main parent view
-        leadingConstraint = stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 4)
-        let trailingConstraint = stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8)
+        leadingConstraint = stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8)
+        trailingConstraint = stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8)
         
         NSLayoutConstraint.activate([
             topConstraint,
@@ -159,8 +152,48 @@ public class ChipControl: UIControl {
             button.widthAnchor.constraint(equalToConstant: 20)
         ])
         
+        clipsToBounds = true
+        
+        //set imageView
+        imageView.layer.cornerRadius = imageView.frame.size.height / 2
+        imageView.clipsToBounds = true
+        
+        // Allow titleLabel to determine the width
+        titleLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        titleLabel.setContentCompressionResistancePriority(UILayoutPriority(1000), for: .horizontal)
+        
+        // Add target for button
+        button.addTarget(self, action: #selector(removeChip), for: .touchUpInside)
+        
+        
+        updateSize()
         updateUIForChipType()
         setSelectionState()
+    }
+    
+    private func updateSize() {
+        if componentSize == .small {
+            leadingConstraint.constant = 8
+            trailingConstraint.constant = -8
+        } else {
+            leadingConstraint.constant = 12
+            trailingConstraint.constant = -12
+        }
+        
+        switch chipStyle {
+        case .roundPA, .roundSU:
+            layer.cornerRadius = frame.size.height / 2
+        case .squrePA, .squreSU:
+            layer.cornerRadius = 10
+        }
+        
+        let textStyle = isEnabled ? textStyle.enableUI : textStyle.disableUI
+        titleLabel.font = textStyle.font
+        if componentSize == .medium {
+            titleLabel.font = .font16Medium
+        } else {
+            titleLabel.font = .font14Medium
+        }
     }
     
     //set Image Of Button
@@ -175,21 +208,30 @@ public class ChipControl: UIControl {
     
     //se Border of Chip
     private func setSelectionState() {
-        let textStyle = isEnabled ? textStyle.enableUI : textStyle.disableUI
-        layer.borderColor = textStyle.color.cgColor
-        
         if chipStyle == .roundPA || chipStyle == .squrePA {
             layer.borderWidth = 1
         } else {
             layer.borderWidth = isSelected ? 1 : 0
         }
+        
+        switch chipStyle {
+        case .roundPA, .squrePA:
+            backgroundColor = isSelected ? chipStyle.bgColorSelected : chipStyle.bgColor
+        case .roundSU, .squreSU:
+            backgroundColor = isSelected ? chipStyle.bgColorSelected : chipStyle.bgColor
+        }
+        
+        setChipBorderColor()
     }
     
     private func configureUI() {
         let textStyle = isEnabled ? textStyle.enableUI : textStyle.disableUI
         titleLabel.textColor = textStyle.color
-        titleLabel.font = textStyle.font
+        // titleLabel.font = textStyle.font
         setButtonImage()
+        setChipBorderColor()
+        
+        imageView.alpha = isEnabled ? 1 : 0.5
     }
     
     private func updateUIForChipType() {
@@ -199,10 +241,8 @@ public class ChipControl: UIControl {
             if let img = image {
                 imageView.image = img
                 imageView.isHidden = false
-                leadingConstraint.constant = 4
             } else {
                 imageView.isHidden = true
-                leadingConstraint.constant = 10
             }
             
             button.isHidden = isButtonHidden
@@ -226,7 +266,7 @@ public class ChipControl: UIControl {
                 layer.cornerRadius = frame.size.height / 2
                 layer.borderWidth = isSelected ? 1 : 0
                 backgroundColor = isSelected ? chipStyle.bgColorSelected : chipStyle.bgColor
-                textStyle = TextStyles(enableUI: .chipTitleSU, disableUI: .chipTitleSU)
+                textStyle = TextStyles(enableUI: .chipTitleSU, disableUI: .chipDisabledSU)
                 configureUI()
                 
             case .squrePA:
@@ -242,6 +282,23 @@ public class ChipControl: UIControl {
                 backgroundColor = isSelected ? chipStyle.bgColorSelected : chipStyle.bgColor
                 textStyle = TextStyles(enableUI: .chipTitleSU, disableUI: .chipDisabledSU)
                 configureUI()
+        }
+    }
+    
+    private func setChipBorderColor() {
+        switch chipStyle {
+        case .roundPA, .squrePA:
+            if isEnabled {
+                layer.borderColor = isSelected ? UIColor.neutral_5.cgColor : UIColor.neutral_1_5.cgColor
+            } else {
+                layer.borderColor = UIColor.neutral_3.cgColor
+            }
+        case .roundSU, .squreSU:
+            if isEnabled {
+                layer.borderColor = isSelected ? UIColor.primary_6.cgColor : UIColor.clear.cgColor
+            } else {
+                layer.borderColor = UIColor.neutral_3.cgColor
+            }
         }
     }
     

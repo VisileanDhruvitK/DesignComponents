@@ -24,6 +24,8 @@ extension UIColor {
     static let neutral_0_5 = UIColor(red: 245/255, green: 246/255, blue: 248/255, alpha: 1)
     static let neutral_1_5 = UIColor(red: 224/255, green: 229/255, blue: 233/255, alpha: 1)
     static let neutral_3 = UIColor(red: 194/255, green: 204/255, blue: 211/255, alpha: 1)
+    static let neutral_4 = UIColor(red: 173/255, green: 187/255, blue: 197/255, alpha: 1)
+    static let neutral_5 = UIColor(red: 153/255, green: 170/255, blue: 182/255, alpha: 1)
     static let neutral_7 = UIColor(red: 98/255, green: 110/255, blue: 118/255, alpha: 1)
     static let neutral_8_5 = UIColor(red: 57/255, green: 65/255, blue: 71/255, alpha: 1)
     

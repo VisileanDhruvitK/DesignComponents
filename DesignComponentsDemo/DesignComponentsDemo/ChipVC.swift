@@ -18,6 +18,7 @@ class ChipVC: UIViewController {
     @IBOutlet weak var chipImageText: ChipControl!
     @IBOutlet weak var chipImageTextButton: ChipControl!
     
+    @IBOutlet weak var chipHeightConst: NSLayoutConstraint!
     
     var sizeOptions = [RadioOption]()
     
@@ -31,6 +32,13 @@ class ChipVC: UIViewController {
         chipImageTextButton.chipType = .with(image: UIImage(named: "user_Image"), text: "text image btn", isButtonHidden: false, chipStyle: .squrePA)
         
         chipImageText.isSelected = true
+        
+        chipText.componentSize = .small
+        chipTextButton.componentSize = .small
+        chipImageText.componentSize = .small
+        chipImageTextButton.componentSize = .small
+        chipHeightConst.constant = 32
+        self.view.layoutIfNeeded()
         
         radioState.setOption(option: RadioOption(title: "Enable", isOn: true))
         radioState.addTarget(self, action: #selector(radioStateSelected(_:)), for: .valueChanged)
@@ -66,15 +74,21 @@ extension ChipVC: RadioSelectionDelegate {
     func didSelectRadioButton(tag: Int, indexes: Set<Int>) {
         let option = sizeOptions[indexes.first ?? 0]
         if option.title == "Small" {
-            // chipText.componentSize = .small
-            // chipTextButton.componentSize = .small
-            // chipImageText.componentSize = .small
-            // chipImageTextButton.componentSize = .small
+            chipHeightConst.constant = 32
+            self.view.layoutIfNeeded()
+            
+            chipText.componentSize = .small
+            chipTextButton.componentSize = .small
+            chipImageText.componentSize = .small
+            chipImageTextButton.componentSize = .small
         } else {
-            // chipText.componentSize = .medium
-            // chipTextButton.componentSize = .medium
-            // chipImageText.componentSize = .medium
-            // chipImageTextButton.componentSize = .medium
+            chipHeightConst.constant = 40
+            self.view.layoutIfNeeded()
+            
+            chipText.componentSize = .medium
+            chipTextButton.componentSize = .medium
+            chipImageText.componentSize = .medium
+            chipImageTextButton.componentSize = .medium
         }
     }
     

@@ -158,11 +158,11 @@ public class RadioButton: UIControl {
         if imageHeightConst != nil {
             titleHeightConst?.constant = (viewHeight / 2)
             imageHeightConst?.constant = (viewHeight / 2)
-            colorViewHeightConst.constant = (viewHeight / 3)
+            colorViewHeightConst.constant = (viewHeight / 2)
         } else {
             titleHeightConst = titleLabel.heightAnchor.constraint(equalToConstant: viewHeight / 2)
             imageHeightConst = imageView.heightAnchor.constraint(equalToConstant: viewHeight / 2)
-            colorViewHeightConst = colorView.heightAnchor.constraint(equalToConstant: viewHeight / 3)
+            colorViewHeightConst = colorView.heightAnchor.constraint(equalToConstant: viewHeight / 2)
         }
         
         NSLayoutConstraint.activate([
