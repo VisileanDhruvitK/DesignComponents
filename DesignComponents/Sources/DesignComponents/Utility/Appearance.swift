@@ -15,7 +15,7 @@ struct Appearance {
     var borderColor: UIColor = .clear
     var cornerRadius: CGFloat = 0
     
-    init(backgroundColor: UIColor = .white, borderWidth: CGFloat = 0, borderColor: UIColor = .clear, cornerRadius: CGFloat = 0) {
+    init(backgroundColor: UIColor = .clear, borderWidth: CGFloat = 0, borderColor: UIColor = .clear, cornerRadius: CGFloat = 0) {
         self.backgroundColor = backgroundColor
         self.borderWidth = borderWidth
         self.borderColor = borderColor
