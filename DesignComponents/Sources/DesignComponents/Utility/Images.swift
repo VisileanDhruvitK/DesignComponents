@@ -36,6 +36,10 @@ extension UIImage {
     static let toggleOnDisabled_XL = VLImage(named: "toggle_on_disabled_XL")
     static let toggleOff_XL = VLImage(named: "toggle_off_XL")
     static let toggleOffDIsabled_XL = VLImage(named: "toggle_off_disabled_XL")
+    
+    static let inputDropdown = VLImage(named: "inputDropdown")
+    static let percentageDown = VLImage(named: "percentageDown")
+    
 }
 
 

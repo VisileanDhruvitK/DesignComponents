@@ -70,27 +70,56 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Form TextField Item" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qGR-SA-qaS">
-                                <rect key="frame" x="32" y="172.66666666666666" width="311" height="24"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="27" translatesAutoresizingMaskIntoConstraints="NO" id="uK8-29-sk9">
-                                <rect key="frame" x="0.0" y="296.66666666666669" width="375" height="219.00000000000006"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="uK8-29-sk9">
+                                <rect key="frame" x="15" y="50.000000000000057" width="345" height="1023.3333333333335"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JVd-Cu-QY9" customClass="FormTextFieldView" customModule="DesignComponents">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
-                                        <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="345" height="100"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="96" id="309-nh-IEY"/>
+                                            <constraint firstAttribute="height" priority="750" constant="100" id="309-nh-IEY"/>
                                         </constraints>
                                     </view>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6A0-GP-GBj" customClass="FormTextFieldView" customModule="DesignComponents">
-                                        <rect key="frame" x="0.0" y="123" width="375" height="96"/>
-                                        <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                        <rect key="frame" x="0.0" y="120.00000000000001" width="345" height="165.33333333333337"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="96" id="E2e-U3-cf9"/>
+                                            <constraint firstAttribute="height" priority="250" constant="100" id="E2e-U3-cf9"/>
+                                        </constraints>
+                                    </view>
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B5m-t7-Dh9" customClass="FormTextFieldView" customModule="DesignComponents">
+                                        <rect key="frame" x="0.0" y="305.33333333333331" width="345" height="127.33333333333331"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" priority="250" constant="100" id="5TE-Mp-t1j"/>
+                                        </constraints>
+                                    </view>
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4vx-fi-bEQ" customClass="FormTextFieldView" customModule="DesignComponents">
+                                        <rect key="frame" x="0.0" y="452.66666666666669" width="345" height="127.66666666666669"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" priority="250" constant="100" id="J9n-DX-oW9"/>
+                                        </constraints>
+                                    </view>
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WoI-Cb-oHx" customClass="FormTextFieldView" customModule="DesignComponents">
+                                        <rect key="frame" x="0.0" y="600.33333333333337" width="345" height="127.66666666666663"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" priority="250" constant="100" id="H4q-R5-4Tp"/>
+                                        </constraints>
+                                    </view>
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wfk-79-oOj" customClass="FormTextFieldView" customModule="DesignComponents">
+                                        <rect key="frame" x="0.0" y="748" width="345" height="127.66666666666663"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" priority="250" constant="100" id="iaD-e9-C5o"/>
+                                        </constraints>
+                                    </view>
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l5z-Df-43I" customClass="FormTextFieldView" customModule="DesignComponents">
+                                        <rect key="frame" x="0.0" y="895.66666666666663" width="345" height="127.66666666666663"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" priority="250" constant="100" id="jSh-dY-Pra"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -99,17 +128,19 @@
                         <viewLayoutGuide key="safeArea" id="eUC-wt-dhX"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="qGR-SA-qaS" firstAttribute="centerX" secondItem="iR3-Ba-ytw" secondAttribute="centerX" id="2vU-b1-2fh"/>
-                            <constraint firstItem="uK8-29-sk9" firstAttribute="leading" secondItem="eUC-wt-dhX" secondAttribute="leading" id="3lK-Af-V6c"/>
+                            <constraint firstItem="uK8-29-sk9" firstAttribute="leading" secondItem="eUC-wt-dhX" secondAttribute="leading" constant="15" id="3lK-Af-V6c"/>
+                            <constraint firstItem="uK8-29-sk9" firstAttribute="top" secondItem="eUC-wt-dhX" secondAttribute="top" id="CkO-2R-jOz"/>
                             <constraint firstItem="uK8-29-sk9" firstAttribute="centerX" secondItem="iR3-Ba-ytw" secondAttribute="centerX" id="FN3-Xr-JAw"/>
-                            <constraint firstItem="uK8-29-sk9" firstAttribute="top" secondItem="qGR-SA-qaS" secondAttribute="bottom" constant="100" id="f06-RE-M8C"/>
-                            <constraint firstItem="uK8-29-sk9" firstAttribute="centerY" secondItem="iR3-Ba-ytw" secondAttribute="centerY" id="gLc-Ax-RzP"/>
-                            <constraint firstItem="qGR-SA-qaS" firstAttribute="leading" secondItem="eUC-wt-dhX" secondAttribute="leading" constant="32" id="kce-3F-JYr"/>
+                            <constraint firstItem="eUC-wt-dhX" firstAttribute="trailing" secondItem="uK8-29-sk9" secondAttribute="trailing" constant="15" id="qDS-CO-ZEd"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="passwordView" destination="6A0-GP-GBj" id="uAq-hd-wHv"/>
-                        <outlet property="userNameView" destination="JVd-Cu-QY9" id="2bd-b0-zSn"/>
+                        <outlet property="Default" destination="JVd-Cu-QY9" id="5Xf-IB-70C"/>
+                        <outlet property="DefaultDisable" destination="6A0-GP-GBj" id="4ci-Du-VMu"/>
+                        <outlet property="withDropdown" destination="wfk-79-oOj" id="Hdb-Tj-TdH"/>
+                        <outlet property="withIconPercentageDropdown" destination="WoI-Cb-oHx" id="Nba-5w-7Yz"/>
+                        <outlet property="withLeftImage" destination="B5m-t7-Dh9" id="lyH-2j-0kj"/>
+                        <outlet property="withPercentage" destination="4vx-fi-bEQ" id="uRq-ae-R5D"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xW6-l4-2ZV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -583,9 +614,6 @@
         </systemColor>
         <systemColor name="systemGray4Color">
             <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemGray6Color">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
