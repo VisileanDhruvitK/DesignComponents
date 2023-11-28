@@ -30,7 +30,7 @@ public class FormTextFieldView: UIView {
        }
        
     private lazy var stackView: UIStackView = {
-        let view = UIStackView()
+        let view = UIStackView(arrangedSubviews: [titleLabel, txtView, descriptionLabel])
         view.translatesAutoresizingMaskIntoConstraints = false
         view.alignment = .fill
         view.distribution = .fill
@@ -40,7 +40,7 @@ public class FormTextFieldView: UIView {
     }()
     
     private lazy var stackViewTextField: UIStackView = {
-        let view = UIStackView()
+        let view = UIStackView(arrangedSubviews: [leftImageView, textField, stackViewWithPercentage, buttonDropDown])
         view.translatesAutoresizingMaskIntoConstraints = false
         view.alignment = .fill
         view.distribution = .fill
@@ -72,7 +72,7 @@ public class FormTextFieldView: UIView {
         
     //With Percentage
     private lazy var stackViewWithPercentage: UIStackView = {
-        let view = UIStackView()
+        let view = UIStackView(arrangedSubviews: [percentagelabel, percentageImageView])
         view.translatesAutoresizingMaskIntoConstraints = false
         view.alignment = .fill
         view.distribution = .fill
@@ -177,22 +177,6 @@ public class FormTextFieldView: UIView {
     
     func setUpStackView() {
         addSubview(stackView)
-        stackView.removeAllArrangedSubviews()
-        stackViewTextField.removeAllArrangedSubviews()
-        stackViewWithPercentage.removeAllArrangedSubviews()
-        
-        stackView.addArrangedSubview(titleLabel)
-        stackView.addArrangedSubview(txtView)
-        
-        stackViewTextField.addArrangedSubview(leftImageView)
-        stackViewTextField.addArrangedSubview(textField)
-        stackViewTextField.addArrangedSubview(stackViewWithPercentage)
-        
-        stackViewWithPercentage.addArrangedSubview(percentagelabel)
-        stackViewWithPercentage.addArrangedSubview(percentageImageView)
-        
-        stackViewTextField.addArrangedSubview(buttonDropDown)
-        stackView.addArrangedSubview(descriptionLabel)
         txtView.addSubview(stackViewTextField)
         
         NSLayoutConstraint.activate([
@@ -222,6 +206,16 @@ public class FormTextFieldView: UIView {
             buttonDropDown.heightAnchor.constraint(equalToConstant: 20),
             buttonDropDown.widthAnchor.constraint(equalToConstant: 20),
         ])
+        
+        // height and width constraints for PercentageImage
+        NSLayoutConstraint.activate([
+            percentageImageView.heightAnchor.constraint(equalToConstant: 20),
+            percentageImageView.widthAnchor.constraint(equalToConstant: 20),
+        ])
+        
+        percentagelabel.setContentHuggingPriority(.required, for: .horizontal)
+        percentagelabel.setContentCompressionResistancePriority(.required, for: .horizontal)
+        
     }
     
     // MARK: - Styling
