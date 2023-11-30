@@ -7,6 +7,19 @@
 
 import UIKit
 
+@objc public protocol InputComponentDelegate: AnyObject {
+    func didEndEditing(inputComponent: UITextField)
+    @objc optional  func shouldChangeCharactersIn(formTextFieldView: FormTextFieldView, _ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String, currentText: String, newString: String)
+}
+
+public enum FormTextFieldType {
+    case normal
+    case withLeftIcon
+    case withPercentage
+    case withIconPercentageDropdown
+    case withDropdown
+
+}
 
 public enum FormTextFieldViewState {
     case normal(title: String, placeholder: String)
@@ -22,13 +35,26 @@ public class FormTextFieldView: UIView {
     // MARK: - Properties
     private lazy var titleLabel = UILabel()
     private lazy var textField = UITextField()
-
+    
+    public var fieldType: FormTextFieldType = .normal
+    
     public var currentState: FormTextFieldViewState = .normal(title: "", placeholder: "") {
-           didSet {
-               updateViewState()
-           }
-       }
-       
+        didSet {
+            updateViewState()
+        }
+    }
+    
+    public var delegate: InputComponentDelegate?
+
+    public var validationMsg = "" {
+        didSet {
+            descriptionLabel.text = validationMsg
+            descriptionLabel.isHidden = validationMsg.isEmpty
+        }
+    }
+    
+    private var showWarning: Bool = false
+    
     private lazy var stackView: UIStackView = {
         let view = UIStackView(arrangedSubviews: [titleLabel, txtView, descriptionLabel])
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -51,6 +77,7 @@ public class FormTextFieldView: UIView {
     
     private lazy var txtView: UIView = {
         let view = UIView()
+        view.addSubview(stackViewTextField)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.borderWidth = 1.5
         view.layer.cornerRadius = 10
@@ -69,7 +96,7 @@ public class FormTextFieldView: UIView {
         label.isHidden = true
         return label
     }()
-        
+    
     //With Percentage
     private lazy var stackViewWithPercentage: UIStackView = {
         let view = UIStackView(arrangedSubviews: [percentagelabel, percentageImageView])
@@ -88,7 +115,7 @@ public class FormTextFieldView: UIView {
         label.numberOfLines = 1
         label.textAlignment = .left
         label.font = .systemFont(ofSize: 14)
-        label.textColor = .red
+        label.textColor = .red  //change color
         return label
     }()
     
@@ -99,7 +126,7 @@ public class FormTextFieldView: UIView {
         imgView.image = .percentageDown
         return imgView
     }()
-
+    
     //RightButton
     private lazy var buttonDropDown: UIButton = UIButton(type: .custom)
     
@@ -120,25 +147,31 @@ public class FormTextFieldView: UIView {
     
     private func updateViewState() {
         switch currentState {
-        case .normal(let title, let textFieldPlaceholder):
-            setViewState(title: title, placeholder: textFieldPlaceholder, leftIcon: nil, showDropdown: false, showPercentage: false)
-
-        case .withLeftIcon(let title, let textFieldPlaceholder, let icon):
-            setViewState(title: title, placeholder: textFieldPlaceholder, leftIcon: icon, showDropdown: false, showPercentage: false)
-
-        case .withPercentage(let title, let textFieldPlaceholder, let percent):
-            setViewState(title: title, placeholder: textFieldPlaceholder, leftIcon: nil, showDropdown: false, showPercentage: true)
-            percentagelabel.text = percent + "%"
-
-        case .withIconPercentageDropdown(let title, let textFieldPlaceholder, let icon, let percent):
-            setViewState(title: title, placeholder: textFieldPlaceholder, leftIcon: icon, showDropdown: true, showPercentage: true)
-            percentagelabel.text = percent + "%"
-
-        case .withDropdown(let title, let textFieldPlaceholder):
-            setViewState(title: title, placeholder: textFieldPlaceholder, leftIcon: nil, showDropdown: true, showPercentage: false)
+                
+            case .normal(let title, let textFieldPlaceholder):
+                self.fieldType = .normal
+                setViewState(title: title, placeholder: textFieldPlaceholder, leftIcon: nil, showDropdown: false, showPercentage: false)
+                
+            case .withLeftIcon(let title, let textFieldPlaceholder, let icon):
+                self.fieldType = .withLeftIcon
+                setViewState(title: title, placeholder: textFieldPlaceholder, leftIcon: icon, showDropdown: false, showPercentage: false)
+                
+            case .withPercentage(let title, let textFieldPlaceholder, let percent):
+                self.fieldType = .withPercentage
+                setViewState(title: title, placeholder: textFieldPlaceholder, leftIcon: nil, showDropdown: false, showPercentage: true)
+                percentagelabel.text = percent + "%"
+                
+            case .withIconPercentageDropdown(let title, let textFieldPlaceholder, let icon, let percent):
+                self.fieldType = .withIconPercentageDropdown
+                setViewState(title: title, placeholder: textFieldPlaceholder, leftIcon: icon, showDropdown: true, showPercentage: true)
+                percentagelabel.text = percent + "%"
+                
+            case .withDropdown(let title, let textFieldPlaceholder):
+                self.fieldType = .withDropdown
+                setViewState(title: title, placeholder: textFieldPlaceholder, leftIcon: nil, showDropdown: true, showPercentage: false)
         }
     }
-
+    
     private func setViewState(title: String, placeholder: String, leftIcon: UIImage?, showDropdown: Bool, showPercentage: Bool) {
         titleLabel.text = title
         textField.placeholder = placeholder
@@ -170,14 +203,13 @@ public class FormTextFieldView: UIView {
     }
     
     func initialize() {
-        setUpStackView()
+        setupSubViews()
         applyDefaultStyle()
         textField.delegate = self
     }
     
-    func setUpStackView() {
+    func setupSubViews() {
         addSubview(stackView)
-        txtView.addSubview(stackViewTextField)
         
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: topAnchor),
@@ -231,7 +263,7 @@ public class FormTextFieldView: UIView {
         textField.layer.masksToBounds = true
         txtView.layer.borderColor = UIColor.neutral_1_5.cgColor
     }
-
+    
     //MARK: Enable/Disable state
     func applyEnabledStyle() {
         if isEnabled {
@@ -245,12 +277,38 @@ public class FormTextFieldView: UIView {
             txtView.backgroundColor = UIColor.neutral_0_5
         }
     }
+    
+    public func setValidationUI(validate: Bool) {
+        showWarning = !validate
+        if validate {
+            txtView.layer.borderColor = UIColor.primary_5.cgColor
+            descriptionLabel.isHidden = descriptionLabel.text?.isEmpty == true
+            descriptionLabel.textColor = .primary_7
+            textField.textColor = .primary_7
+        } else {
+            txtView.layer.borderColor = UIColor.red.cgColor //change color
+            descriptionLabel.textColor = .red //change color
+            textField.textColor = .red //change color
+            showValidationMsg(msg: validationMsg)
+        }
+    }
+    
+    public func showValidationMsg(msg: String) {
+        if !msg.isEmpty {
+            descriptionLabel.isHidden = false
+            descriptionLabel.text = msg
+        }
+    }
 }
 
+//MARK: - UITextFieldDelegate
 extension FormTextFieldView : UITextFieldDelegate {
     
     public func textFieldDidBeginEditing(_ textField: UITextField) {
         // Change the border color when the textField gains focus
+        if showWarning {
+            return
+        }
         textField.layer.masksToBounds = true
         textField.textColor = .primary_7
         descriptionLabel.textColor = .primary_5
@@ -259,15 +317,28 @@ extension FormTextFieldView : UITextFieldDelegate {
     
     public func textFieldDidEndEditing(_ textField: UITextField) {
         // Change the border color back when the textField loses focus
+        if showWarning {
+            return
+        }
+        
         textField.layer.masksToBounds = true
         textField.textColor = .formItemText
         descriptionLabel.textColor = .neutral_5
         txtView.layer.borderColor = UIColor.neutral_1_5.cgColor
+        delegate?.didEndEditing(inputComponent: textField)
     }
     
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return textField.resignFirstResponder()
-      
+        
+    }
+    
+    public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        let currentText = textField.text ?? ""
+        let newString  = (currentText as NSString).replacingCharacters(in: range, with: string)
+        delegate?.shouldChangeCharactersIn?(formTextFieldView: self, textField, shouldChangeCharactersIn: range, replacementString: string, currentText: currentText, newString: newString)
+        return true
     }
     
 }
