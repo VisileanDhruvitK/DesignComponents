@@ -18,53 +18,156 @@ public enum FormTextFieldType {
     case withPercentage
     case withIconPercentageDropdown
     case withDropdown
-
 }
 
-public enum FormTextFieldViewState {
+public enum FormTextFieldConfiguration {
     case normal(title: String, placeholder: String)
     case withLeftIcon(title: String, placeholder: String, icon: UIImage)
     case withPercentage(title: String, placeholder: String, percentage: String)
     case withIconPercentageDropdown(title: String, placeholder: String, icon: UIImage, percentage: String)
     case withDropdown(title: String, placeholder: String)
     
+    var fieldType: FormTextFieldType {
+        switch self {
+        case .normal(_, _):
+            return .normal
+        case .withLeftIcon(_, _, _):
+            return .withLeftIcon
+        case .withPercentage(_, _, _):
+            return .withPercentage
+        case .withIconPercentageDropdown(_, _, _, _):
+            return .withIconPercentageDropdown
+        case .withDropdown(_, _):
+            return .withDropdown
+        }
+    }
 }
 
 public class FormTextFieldView: UIView {
     
     // MARK: - Properties
-    private lazy var titleLabel = UILabel()
-    private lazy var textField = UITextField()
+    private var showWarning: Bool = false
     
     public var fieldType: FormTextFieldType = .normal
+    public weak var delegate: InputComponentDelegate?
     
-    public var currentState: FormTextFieldViewState = .normal(title: "", placeholder: "") {
+    public var currentState: FormTextFieldConfiguration = .normal(title: "", placeholder: "") {
         didSet {
             updateViewState()
         }
     }
     
-    public var delegate: InputComponentDelegate?
-
-    public var validationMsg = "" {
+    public var validationMessage = "" {
         didSet {
-            descriptionLabel.text = validationMsg
-            descriptionLabel.isHidden = validationMsg.isEmpty
+            descriptionLabel.text = validationMessage
+            descriptionLabel.isHidden = validationMessage.isEmpty
         }
     }
     
-    private var showWarning: Bool = false
+    private lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 1
+        label.textAlignment = .left
+        label.font = .font14Regular
+        label.textColor = .black_37
+        label.setContentHuggingPriority(UILayoutPriority(rawValue: 1000), for: .horizontal)
+        label.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 1000), for: .horizontal)
+        return label
+    }()
     
-    private lazy var stackView: UIStackView = {
-        let view = UIStackView(arrangedSubviews: [titleLabel, txtView, descriptionLabel])
+    private lazy var optionalLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 1
+        label.textAlignment = .left
+        label.font = .font14Regular
+        label.textColor = .neutral_5
+        return label
+    }()
+    
+    private lazy var hStackView: UIStackView = {
+        let view = UIStackView(arrangedSubviews: [titleLabel, optionalLabel])
         view.translatesAutoresizingMaskIntoConstraints = false
         view.alignment = .fill
         view.distribution = .fill
-        view.axis = .vertical
-        view.spacing = 8
+        view.axis = .horizontal
+        view.spacing = 4
         return view
     }()
     
+    private lazy var textField: UITextField = {
+        let txtField = UITextField()
+        txtField.textColor = .primary_7
+        txtField.font = .font14Regular
+        txtField.autocorrectionType = .no
+        txtField.autocapitalizationType = .none
+        txtField.clipsToBounds = true
+        txtField.delegate = self
+        return txtField
+    }()
+    
+    //percentage label and Image
+    private lazy var percentagelabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.setContentHuggingPriority(.required, for: .horizontal)
+        label.setContentCompressionResistancePriority(.required, for: .horizontal)
+        
+        label.numberOfLines = 1
+        label.textAlignment = .left
+        label.font = .systemFont(ofSize: 14)
+        label.textColor = .destructive_5
+        return label
+    }()
+    
+    private lazy var percentageImageView: UIImageView = {
+        let imgView = UIImageView()
+        imgView.translatesAutoresizingMaskIntoConstraints = false
+        imgView.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        imgView.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        imgView.contentMode = .scaleAspectFit
+        imgView.image = .percentageDown
+        return imgView
+    }()
+    
+    private lazy var stackViewWithPercentage: UIStackView = {
+        let view = UIStackView(arrangedSubviews: [percentagelabel, percentageImageView])
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.alignment = .fill
+        view.distribution = .fill
+        view.axis = .horizontal
+        view.spacing = 0
+        view.isHidden = true
+        return view
+    }()
+    
+    //Left Image
+    private lazy var leftImageView: UIImageView = {
+        let imgView = UIImageView()
+        imgView.translatesAutoresizingMaskIntoConstraints = false
+        imgView.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        imgView.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        imgView.contentMode = .scaleAspectFit
+        imgView.isHidden = true
+        return imgView
+    }()
+    
+    //Right Button
+    private lazy var buttonDropDown: UIButton = {
+        let button = UIButton(type: .custom)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        button.setImage(.inputDropdown, for: .normal)
+        button.isHidden = true
+        return button
+    }()
+    
+    // TextField StackView with Image, TextField, Percentage View & Button
     private lazy var stackViewTextField: UIStackView = {
         let view = UIStackView(arrangedSubviews: [leftImageView, textField, stackViewWithPercentage, buttonDropDown])
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -75,12 +178,14 @@ public class FormTextFieldView: UIView {
         return view
     }()
     
+    // Container View for TextField StackView
     private lazy var txtView: UIView = {
         let view = UIView()
         view.addSubview(stackViewTextField)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.borderWidth = 1.5
         view.layer.cornerRadius = 10
+        view.layer.borderWidth = 1.5
+        view.layer.borderColor = UIColor.neutral_1_5.cgColor
         view.clipsToBounds = true
         return view
     }()
@@ -97,47 +202,17 @@ public class FormTextFieldView: UIView {
         return label
     }()
     
-    //With Percentage
-    private lazy var stackViewWithPercentage: UIStackView = {
-        let view = UIStackView(arrangedSubviews: [percentagelabel, percentageImageView])
+    // Main StackView with all UI elements
+    private lazy var stackView: UIStackView = {
+        let view = UIStackView(arrangedSubviews: [hStackView, txtView, descriptionLabel])
         view.translatesAutoresizingMaskIntoConstraints = false
         view.alignment = .fill
         view.distribution = .fill
-        view.axis = .horizontal
-        view.spacing = 0
-        view.isHidden = true
+        view.axis = .vertical
+        view.spacing = 8
         return view
     }()
     
-    private lazy var percentagelabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 1
-        label.textAlignment = .left
-        label.font = .systemFont(ofSize: 14)
-        label.textColor = .red  //change color
-        return label
-    }()
-    
-    private lazy var percentageImageView: UIImageView = {
-        let imgView = UIImageView()
-        imgView.translatesAutoresizingMaskIntoConstraints = false
-        imgView.contentMode = .scaleAspectFit
-        imgView.image = .percentageDown
-        return imgView
-    }()
-    
-    //RightButton
-    private lazy var buttonDropDown: UIButton = UIButton(type: .custom)
-    
-    //Left Image
-    private lazy var leftImageView: UIImageView = {
-        let imgView = UIImageView()
-        imgView.translatesAutoresizingMaskIntoConstraints = false
-        imgView.contentMode = .scaleAspectFit
-        imgView.isHidden = true
-        return imgView
-    }()
     
     // MARK: - Initializers
     override init(frame: CGRect) {
@@ -146,29 +221,25 @@ public class FormTextFieldView: UIView {
     }
     
     private func updateViewState() {
+        fieldType = currentState.fieldType
+        
         switch currentState {
-                
-            case .normal(let title, let textFieldPlaceholder):
-                self.fieldType = .normal
-                setViewState(title: title, placeholder: textFieldPlaceholder, leftIcon: nil, showDropdown: false, showPercentage: false)
-                
-            case .withLeftIcon(let title, let textFieldPlaceholder, let icon):
-                self.fieldType = .withLeftIcon
-                setViewState(title: title, placeholder: textFieldPlaceholder, leftIcon: icon, showDropdown: false, showPercentage: false)
-                
-            case .withPercentage(let title, let textFieldPlaceholder, let percent):
-                self.fieldType = .withPercentage
-                setViewState(title: title, placeholder: textFieldPlaceholder, leftIcon: nil, showDropdown: false, showPercentage: true)
-                percentagelabel.text = percent + "%"
-                
-            case .withIconPercentageDropdown(let title, let textFieldPlaceholder, let icon, let percent):
-                self.fieldType = .withIconPercentageDropdown
-                setViewState(title: title, placeholder: textFieldPlaceholder, leftIcon: icon, showDropdown: true, showPercentage: true)
-                percentagelabel.text = percent + "%"
-                
-            case .withDropdown(let title, let textFieldPlaceholder):
-                self.fieldType = .withDropdown
-                setViewState(title: title, placeholder: textFieldPlaceholder, leftIcon: nil, showDropdown: true, showPercentage: false)
+        case .normal(let title, let textFieldPlaceholder):
+            setViewState(title: title, placeholder: textFieldPlaceholder, leftIcon: nil, showDropdown: false, showPercentage: false)
+            
+        case .withLeftIcon(let title, let textFieldPlaceholder, let icon):
+            setViewState(title: title, placeholder: textFieldPlaceholder, leftIcon: icon, showDropdown: false, showPercentage: false)
+            
+        case .withPercentage(let title, let textFieldPlaceholder, let percent):
+            setViewState(title: title, placeholder: textFieldPlaceholder, leftIcon: nil, showDropdown: false, showPercentage: true)
+            percentagelabel.text = percent + "%"
+            
+        case .withIconPercentageDropdown(let title, let textFieldPlaceholder, let icon, let percent):
+            setViewState(title: title, placeholder: textFieldPlaceholder, leftIcon: icon, showDropdown: true, showPercentage: true)
+            percentagelabel.text = percent + "%"
+            
+        case .withDropdown(let title, let textFieldPlaceholder):
+            setViewState(title: title, placeholder: textFieldPlaceholder, leftIcon: nil, showDropdown: true, showPercentage: false)
         }
     }
     
@@ -177,7 +248,6 @@ public class FormTextFieldView: UIView {
         textField.placeholder = placeholder
         leftImageView.isHidden = leftIcon == nil
         leftImageView.image = leftIcon
-        buttonDropDown.setImage(.inputDropdown, for: .normal)
         buttonDropDown.isHidden = !showDropdown
         stackViewWithPercentage.isHidden = !showPercentage
     }
@@ -204,8 +274,6 @@ public class FormTextFieldView: UIView {
     
     func initialize() {
         setupSubViews()
-        applyDefaultStyle()
-        textField.delegate = self
     }
     
     func setupSubViews() {
@@ -223,45 +291,8 @@ public class FormTextFieldView: UIView {
             stackViewTextField.topAnchor.constraint(equalTo: txtView.topAnchor, constant: 14),
             stackViewTextField.leadingAnchor.constraint(equalTo: txtView.leadingAnchor, constant: 14),
             stackViewTextField.bottomAnchor.constraint(equalTo: txtView.bottomAnchor, constant: -14),
-            stackViewTextField.trailingAnchor.constraint(equalTo: txtView.trailingAnchor, constant: -14),
-            
+            stackViewTextField.trailingAnchor.constraint(equalTo: txtView.trailingAnchor, constant: -14)
         ])
-        
-        // height and width constraints for leftImageView
-        NSLayoutConstraint.activate([
-            leftImageView.heightAnchor.constraint(equalToConstant: 20),
-            leftImageView.widthAnchor.constraint(equalToConstant: 20),
-        ])
-        
-        // height and width constraints for RightImageView
-        NSLayoutConstraint.activate([
-            buttonDropDown.heightAnchor.constraint(equalToConstant: 20),
-            buttonDropDown.widthAnchor.constraint(equalToConstant: 20),
-        ])
-        
-        // height and width constraints for PercentageImage
-        NSLayoutConstraint.activate([
-            percentageImageView.heightAnchor.constraint(equalToConstant: 20),
-            percentageImageView.widthAnchor.constraint(equalToConstant: 20),
-        ])
-        
-        percentagelabel.setContentHuggingPriority(.required, for: .horizontal)
-        percentagelabel.setContentCompressionResistancePriority(.required, for: .horizontal)
-        
-    }
-    
-    // MARK: - Styling
-    func applyDefaultStyle() {
-        titleLabel.textColor = .formItemTitle
-        titleLabel.numberOfLines = 1
-        titleLabel.font = .font16Medium
-        titleLabel.textAlignment = .left
-        
-        textField.textColor = .formItemText
-        descriptionLabel.textColor = .neutral_5
-        textField.font = .font16Regular
-        textField.layer.masksToBounds = true
-        txtView.layer.borderColor = UIColor.neutral_1_5.cgColor
     }
     
     //MARK: Enable/Disable state
@@ -286,17 +317,17 @@ public class FormTextFieldView: UIView {
             descriptionLabel.textColor = .primary_7
             textField.textColor = .primary_7
         } else {
-            txtView.layer.borderColor = UIColor.red.cgColor //change color
-            descriptionLabel.textColor = .red //change color
-            textField.textColor = .red //change color
-            showValidationMsg(msg: validationMsg)
+            txtView.layer.borderColor = UIColor.destructive_5.cgColor
+            descriptionLabel.textColor = .destructive_5
+            textField.textColor = .destructive_5
+            showValidationMessage(message: validationMessage)
         }
     }
     
-    public func showValidationMsg(msg: String) {
-        if !msg.isEmpty {
+    public func showValidationMessage(message: String) {
+        if !message.isEmpty {
             descriptionLabel.isHidden = false
-            descriptionLabel.text = msg
+            descriptionLabel.text = message
         }
     }
 }

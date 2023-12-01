@@ -34,5 +34,6 @@ extension UIColor {
     static let neutral_8_5 = UIColor(red: 57/255, green: 65/255, blue: 71/255, alpha: 1)
     
     static let destructive_5 = UIColor(red: 255/255, green: 67/255, blue: 67/255, alpha: 1)
+    static let destructive_6 = UIColor(red: 209/255, green: 54/255, blue: 54/255, alpha: 1)
     static let destructive_7 = UIColor(red: 163/255, green: 40/255, blue: 40/255, alpha: 1)
 }

@@ -26,13 +26,13 @@ class FormTextFieldVC: UIViewController {
         withIconPercentageDropdown.delegate = self
         
         Default.currentState = .normal(title: "Normal", placeholder: "Default Varient")
-        Default.validationMsg = "Validation MSG ..."
+        Default.validationMessage = "Validation MSG ..."
         DefaultDisable.currentState = .normal(title: "Normal-Disable", placeholder: "Default with Disable")
         DefaultDisable.isEnabled = false
         withLeftImage.currentState = .withLeftIcon(title: "withLeftImage", placeholder: "withLeftImage",  icon: UIImage(named: "user_Image") ?? UIImage())
         withPercentage.currentState = .withPercentage(title: "withPercentage", placeholder: "withPercentage", percentage: "55")
         withIconPercentageDropdown.currentState = .withIconPercentageDropdown(title: "withIconPercentageDropdown", placeholder: "withIconPercentageDropdown", icon:  UIImage(named: "user_Image") ?? UIImage(), percentage: "85")
-        withIconPercentageDropdown.validationMsg = "Validation MSG..."
+        withIconPercentageDropdown.validationMessage = "Validation MSG..."
         withDropdown.currentState = .withDropdown(title: "withDropdown", placeholder: "withDropdown")
         
     }
@@ -46,9 +46,9 @@ extension FormTextFieldVC: InputComponentDelegate {
             formTextFieldView.setValidationUI(validate: newString.count <= 5)
         } else if formTextFieldView == withPercentage {
             if newString.isEmpty {
-                formTextFieldView.validationMsg = "pls Enter data"
+                formTextFieldView.validationMessage = "pls Enter data"
             } else {
-                formTextFieldView.validationMsg = ""
+                formTextFieldView.validationMessage = ""
             }
             formTextFieldView.setValidationUI(validate: !newString.isEmpty)
         }
