@@ -14,21 +14,24 @@ enum ControlType: CaseIterable {
     case formTextField
     case toggle
     case chip
+    case otpInputView
     
     var title: String {
         switch self {
-            case .radio:
-                return "Radio Button"
-            case .checkBox:
-                return "CheckBox"
-            case .button:
-                return "Buttons"
-            case .formTextField:
-                return "FormTextField"
-            case .toggle:
-                return "Toggle"
-            case .chip:
-                return "Chip"
+        case .radio:
+            return "Radio Button"
+        case .checkBox:
+            return "CheckBox"
+        case .button:
+            return "Buttons"
+        case .formTextField:
+            return "FormTextField"
+        case .toggle:
+            return "Toggle"
+        case .chip:
+            return "Chip"
+        case .otpInputView:
+            return "OTP Input View"
         }
     }
 }
@@ -75,23 +78,26 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         let menuItem = arrayMenu[indexPath.row]
         
         switch menuItem {
-            case .radio:
-                pushViewController(withIdentifier: "RadioButtonVC", title: menuItem.title)
-                
-            case .checkBox:
-                pushViewController(withIdentifier: "CheckBoxVC", title: menuItem.title)
-                
-            case .button:
-                pushViewController(withIdentifier: "ButtonsVC", title: menuItem.title)
-                
-            case .formTextField:
-                pushViewController(withIdentifier: "FormTextFieldVC", title: menuItem.title)
-                
-            case .toggle:
-                pushViewController(withIdentifier: "ToggleVC", title: menuItem.title)
-                
-            case .chip:
-                pushViewController(withIdentifier: "ChipVC", title: menuItem.title)
+        case .radio:
+            pushViewController(withIdentifier: "RadioButtonVC", title: menuItem.title)
+            
+        case .checkBox:
+            pushViewController(withIdentifier: "CheckBoxVC", title: menuItem.title)
+            
+        case .button:
+            pushViewController(withIdentifier: "ButtonsVC", title: menuItem.title)
+            
+        case .formTextField:
+            pushViewController(withIdentifier: "FormTextFieldVC", title: menuItem.title)
+            
+        case .toggle:
+            pushViewController(withIdentifier: "ToggleVC", title: menuItem.title)
+            
+        case .chip:
+            pushViewController(withIdentifier: "ChipVC", title: menuItem.title)
+            
+        case .otpInputView:
+            pushViewController(withIdentifier: "OTPInputVC", title: menuItem.title)
         }
     }
     

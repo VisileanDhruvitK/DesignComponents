@@ -13,6 +13,7 @@ enum FontSize: CGFloat {
     case font14 = 14
     case font16 = 16
     case font18 = 18
+    case font24 = 24
 }
 
 extension UIFont {
@@ -31,6 +32,16 @@ extension UIFont {
     static let font16Medium = VLFont(size: .font16, weigth: .medium)
     static let font16Semibold = VLFont(size: .font16, weigth: .semibold)
     static let font16Bold = VLFont(size: .font16, weigth: .bold)
+    
+    static let font18Regular = VLFont(size: .font18, weigth: .regular)
+    static let font18Medium = VLFont(size: .font18, weigth: .medium)
+    static let font18Semibold = VLFont(size: .font18, weigth: .semibold)
+    static let font18Bold = VLFont(size: .font18, weigth: .bold)
+    
+    static let font24Regular = VLFont(size: .font24, weigth: .regular)
+    static let font24Medium = VLFont(size: .font24, weigth: .medium)
+    static let font24Semibold = VLFont(size: .font24, weigth: .semibold)
+    static let font24Bold = VLFont(size: .font24, weigth: .bold)
     
 }
 
