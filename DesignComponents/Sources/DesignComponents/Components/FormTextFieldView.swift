@@ -21,23 +21,23 @@ public enum FormTextFieldType {
 }
 
 public enum FormTextFieldConfiguration {
-    case normal(title: String, placeholder: String)
-    case withLeftIcon(title: String, placeholder: String, icon: UIImage)
-    case withPercentage(title: String, placeholder: String, percentage: String)
-    case withIconPercentageDropdown(title: String, placeholder: String, icon: UIImage, percentage: String)
-    case withDropdown(title: String, placeholder: String)
+    case normal(title: String, text: String, placeholder: String)
+    case withLeftIcon(title: String, text: String, placeholder: String, icon: UIImage)
+    case withPercentage(title: String, text: String, placeholder: String, percentage: String)
+    case withIconPercentageDropdown(title: String, text: String, placeholder: String, icon: UIImage, percentage: String)
+    case withDropdown(title: String, text: String, placeholder: String)
     
     var fieldType: FormTextFieldType {
         switch self {
-        case .normal(_, _):
+        case .normal(_, _ ,_):
             return .normal
-        case .withLeftIcon(_, _, _):
+        case .withLeftIcon(_, _, _, _):
             return .withLeftIcon
-        case .withPercentage(_, _, _):
+        case .withPercentage(_, _, _, _):
             return .withPercentage
-        case .withIconPercentageDropdown(_, _, _, _):
+        case .withIconPercentageDropdown(_, _, _, _, _):
             return .withIconPercentageDropdown
-        case .withDropdown(_, _):
+        case .withDropdown(_, _, _):
             return .withDropdown
         }
     }
@@ -51,9 +51,27 @@ public class FormTextFieldView: UIView {
     public var fieldType: FormTextFieldType = .normal
     public weak var delegate: InputComponentDelegate?
     
-    public var currentState: FormTextFieldConfiguration = .normal(title: "", placeholder: "") {
+    public var currentState: FormTextFieldConfiguration = .normal(title: "", text: "", placeholder: "") {
         didSet {
             updateViewState()
+        }
+    }
+    
+    public var text: String {
+        get {
+            return textField.text ?? ""
+        }
+        set {
+            textField.text = newValue
+        }
+    }
+    
+    public var placeholder: String {
+        get {
+            return textField.placeholder ?? ""
+        }
+        set {
+            textField.placeholder = newValue
         }
     }
     
@@ -224,27 +242,28 @@ public class FormTextFieldView: UIView {
         fieldType = currentState.fieldType
         
         switch currentState {
-        case .normal(let title, let textFieldPlaceholder):
-            setViewState(title: title, placeholder: textFieldPlaceholder, leftIcon: nil, showDropdown: false, showPercentage: false)
+        case .normal(let title, let text, let textFieldPlaceholder):
+            setViewState(title: title, text: text, placeholder: textFieldPlaceholder, leftIcon: nil, showDropdown: false, showPercentage: false)
             
-        case .withLeftIcon(let title, let textFieldPlaceholder, let icon):
-            setViewState(title: title, placeholder: textFieldPlaceholder, leftIcon: icon, showDropdown: false, showPercentage: false)
+        case .withLeftIcon(let title, let text, let textFieldPlaceholder, let icon):
+            setViewState(title: title, text: text, placeholder: textFieldPlaceholder, leftIcon: icon, showDropdown: false, showPercentage: false)
             
-        case .withPercentage(let title, let textFieldPlaceholder, let percent):
-            setViewState(title: title, placeholder: textFieldPlaceholder, leftIcon: nil, showDropdown: false, showPercentage: true)
+        case .withPercentage(let title, let text, let textFieldPlaceholder, let percent):
+            setViewState(title: title, text: text, placeholder: textFieldPlaceholder, leftIcon: nil, showDropdown: false, showPercentage: true)
             percentagelabel.text = percent + "%"
             
-        case .withIconPercentageDropdown(let title, let textFieldPlaceholder, let icon, let percent):
-            setViewState(title: title, placeholder: textFieldPlaceholder, leftIcon: icon, showDropdown: true, showPercentage: true)
+        case .withIconPercentageDropdown(let title, let text, let textFieldPlaceholder, let icon, let percent):
+            setViewState(title: title, text: text, placeholder: textFieldPlaceholder, leftIcon: icon, showDropdown: true, showPercentage: true)
             percentagelabel.text = percent + "%"
             
-        case .withDropdown(let title, let textFieldPlaceholder):
-            setViewState(title: title, placeholder: textFieldPlaceholder, leftIcon: nil, showDropdown: true, showPercentage: false)
+        case .withDropdown(let title, let text, let textFieldPlaceholder):
+            setViewState(title: title, text: text, placeholder: textFieldPlaceholder, leftIcon: nil, showDropdown: true, showPercentage: false)
         }
     }
     
-    private func setViewState(title: String, placeholder: String, leftIcon: UIImage?, showDropdown: Bool, showPercentage: Bool) {
+    private func setViewState(title: String, text: String, placeholder: String, leftIcon: UIImage?, showDropdown: Bool, showPercentage: Bool) {
         titleLabel.text = title
+        textField.text = text
         textField.placeholder = placeholder
         leftImageView.isHidden = leftIcon == nil
         leftImageView.image = leftIcon
