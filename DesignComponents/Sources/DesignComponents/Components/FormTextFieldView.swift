@@ -292,6 +292,7 @@ public class FormTextFieldView: UIView {
     }
     
     func initialize() {
+        self.backgroundColor = .clear
         setupSubViews()
     }
     

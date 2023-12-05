@@ -49,7 +49,7 @@ public class OTPStackView: UIStackView {
     var activeFieldBorderColor: UIColor = .primary_5
     var warningFieldBorderColor: UIColor = .destructive_5
     
-    var enabledFieldBackgroundColor: UIColor = .white
+    var enabledFieldBackgroundColor: UIColor = .clear
     var disableFieldBackgroundColor: UIColor = .neutral_0_5
     
     var remainingStrStack: [String] = []
