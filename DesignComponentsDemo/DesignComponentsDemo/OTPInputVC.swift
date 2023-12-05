@@ -56,7 +56,7 @@ class OTPInputVC: UIViewController {
 // MARK: - OTPDelegate
 extension OTPInputVC: OTPDelegate {
     
-    func didChangeValidity(isValid: Bool) {
+    func didChangeValidity(isValid: Bool, otpView: OTPInputView) {
         print("OTP valid - ", isValid)
     }
     

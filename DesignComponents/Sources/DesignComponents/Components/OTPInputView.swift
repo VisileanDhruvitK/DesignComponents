@@ -9,6 +9,12 @@ import Foundation
 import UIKit
 
 
+public protocol OTPDelegate: AnyObject {
+    //always triggers when the OTP field is valid
+    func didChangeValidity(isValid: Bool, otpView: OTPInputView)
+}
+
+
 public enum NumberOfFields: Int {
     case four = 4
     case six = 6
@@ -202,10 +208,10 @@ public class OTPInputView: UIView {
 
 
 // MARK: - OTPDelegate
-extension OTPInputView: OTPDelegate {
+extension OTPInputView: OTPStackViewDelegate {
     
     public func didChangeValidity(isValid: Bool) {
-        self.delegate?.didChangeValidity(isValid: isValid)
+        self.delegate?.didChangeValidity(isValid: isValid, otpView: self)
     }
     
 }

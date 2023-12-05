@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 
-public protocol OTPDelegate: AnyObject {
+protocol OTPStackViewDelegate: AnyObject {
     //always triggers when the OTP field is valid
     func didChangeValidity(isValid: Bool)
 }
@@ -37,7 +37,7 @@ public class OTPStackView: UIStackView {
     }
     
     private var textFieldsCollection: [OTPTextField] = []
-    public weak var delegate: OTPDelegate?
+    weak var delegate: OTPStackViewDelegate?
     var showsWarning = false
     
     //Colors
