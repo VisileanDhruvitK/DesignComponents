@@ -323,20 +323,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="PcY-5K-fpm">
-                                <rect key="frame" x="30" y="134" width="315" height="544"/>
+                                <rect key="frame" x="30" y="124" width="315" height="564"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="gCw-1O-wAF">
-                                        <rect key="frame" x="0.0" y="0.0" width="315" height="96"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="315" height="116"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q42-KO-RE5" customClass="RadioButton" customModule="DesignComponents">
-                                                <rect key="frame" x="0.0" y="0.0" width="315" height="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="315" height="50"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" priority="750" constant="30" id="OPG-rP-zmE"/>
+                                                    <constraint firstAttribute="height" priority="750" constant="50" id="OPG-rP-zmE"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RsE-Cf-E4i" customClass="RadioButtonView" customModule="DesignComponents">
-                                                <rect key="frame" x="0.0" y="46" width="315" height="50"/>
+                                                <rect key="frame" x="0.0" y="66" width="315" height="50"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" priority="750" constant="50" id="Pj6-YL-WMi"/>
@@ -345,14 +345,14 @@
                                         </subviews>
                                     </stackView>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O7J-uH-Wub">
-                                        <rect key="frame" x="0.0" y="196" width="315" height="2"/>
+                                        <rect key="frame" x="0.0" y="216" width="315" height="2"/>
                                         <color key="backgroundColor" systemColor="systemGray4Color"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="2" id="OBc-CV-ghD"/>
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="YQq-SZ-QPn">
-                                        <rect key="frame" x="0.0" y="298" width="315" height="246"/>
+                                        <rect key="frame" x="0.0" y="318" width="315" height="246"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0PP-zF-ILC" customClass="RadioButton" customModule="DesignComponents">
                                                 <rect key="frame" x="0.0" y="0.0" width="315" height="50"/>

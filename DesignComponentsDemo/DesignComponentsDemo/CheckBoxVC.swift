@@ -23,7 +23,10 @@ class CheckBoxVC: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
                 
-        checkBoxState.setOption(option: CheckboxOption(title: "Enable", selectionState: .selected))
+        // checkBoxState.setOption(option: CheckboxOption(title: "Enable", selectionState: .selected))
+        checkBoxState.title = "Enable"
+        checkBoxState.descriptionText = "Enable / Disable"
+        checkBoxState.selectionState = .selected
         checkBoxState.addTarget(self, action: #selector(checkBoxStateSelected(_:)), for: .valueChanged)
         
         checkBox.setOption(option: CheckboxOption(title: "Single CheckBox", selectionState: .selected))

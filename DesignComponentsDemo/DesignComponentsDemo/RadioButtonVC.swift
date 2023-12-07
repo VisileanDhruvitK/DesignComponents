@@ -23,7 +23,10 @@ class RadioButtonVC: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        radioState.setOption(option: RadioOption(title: "Enable", isOn: true))
+        // radioState.setOption(option: RadioOption(title: "Enable", isOn: true))
+        radioState.title = "Enable"
+        radioState.descriptionText = "Enable / Disable"
+        radioState.isOn = true
         radioState.addTarget(self, action: #selector(radioStateSelected(_:)), for: .valueChanged)
         
         radioButton.setOption(option: RadioOption(title: "Single Radio", isOn: true))

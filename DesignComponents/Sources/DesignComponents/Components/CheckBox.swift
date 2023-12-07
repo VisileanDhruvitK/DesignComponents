@@ -42,6 +42,20 @@ public class CheckBox: UIControl {
         }
     }
     
+    public var title: String = "" {
+        didSet {
+            titleLabel.text = title
+            titleLabel.isHidden = title.isEmpty
+        }
+    }
+    
+    public var descriptionText: String = "" {
+        didSet {
+            descriptionLabel.text = descriptionText
+            descriptionLabel.isHidden = descriptionText.isEmpty
+        }
+    }
+    
     public var selectionState: SelectionState = .deselected {
         didSet {
             updateState()

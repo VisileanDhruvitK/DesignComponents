@@ -27,15 +27,29 @@ public class ToggleView: UIControl {
         }
     }
     
-    public override var isEnabled: Bool {
+    public var title: String = "" {
         didSet {
-            configureUI()
+            titleLabel.text = title
+            titleLabel.isHidden = title.isEmpty
+        }
+    }
+    
+    public var descriptionText: String = "" {
+        didSet {
+            descriptionLabel.text = descriptionText
+            descriptionLabel.isHidden = descriptionText.isEmpty
         }
     }
     
     public var isOn: Bool = false {
         didSet {
             updateState()
+        }
+    }
+    
+    public override var isEnabled: Bool {
+        didSet {
+            configureUI()
         }
     }
     

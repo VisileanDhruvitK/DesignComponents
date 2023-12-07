@@ -20,8 +20,10 @@ class ToggleVC: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        // toggleState.setOption(title: "Enable", description: "")
+        toggleState.title = "Enable"
+        toggleState.descriptionText = "Enable / Disable"
         toggleState.isOn = true
-        toggleState.setOption(title: "Enable", description: "")
         toggleState.addTarget(self, action: #selector(toggleStateSelected(_:)), for: .valueChanged)
         
         toggleSize.isOn = false
