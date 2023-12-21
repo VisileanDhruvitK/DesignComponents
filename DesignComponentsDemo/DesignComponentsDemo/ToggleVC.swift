@@ -22,7 +22,8 @@ class ToggleVC: UIViewController {
         
         // toggleState.setOption(title: "Enable", description: "")
         toggleState.title = "Enable"
-        toggleState.descriptionText = "Enable / Disable"
+        toggleState.descriptionText = "Enable / Disable \nNew line check 1 \nNew line check 2"
+        toggleState.descriptionLines = 3
         toggleState.isOn = true
         toggleState.addTarget(self, action: #selector(toggleStateSelected(_:)), for: .valueChanged)
         

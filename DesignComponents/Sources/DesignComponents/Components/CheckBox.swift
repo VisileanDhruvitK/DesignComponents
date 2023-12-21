@@ -56,6 +56,13 @@ public class CheckBox: UIControl {
         }
     }
     
+    public var descriptionLines: Int = 2 {
+        didSet {
+            descriptionLabel.numberOfLines = descriptionLines
+            self.layoutIfNeeded()
+        }
+    }
+    
     public var selectionState: SelectionState = .deselected {
         didSet {
             updateState()
@@ -87,7 +94,7 @@ public class CheckBox: UIControl {
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 1
+        label.numberOfLines = 2
         label.textAlignment = .left
         label.font = .systemFont(ofSize: 14)
         label.isHidden = true
@@ -108,7 +115,7 @@ public class CheckBox: UIControl {
         let view = UIStackView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.alignment = .fill
-        view.distribution = .fillEqually
+        view.distribution = .fillProportionally
         view.axis = .vertical
         view.spacing = 0
         return view
@@ -235,7 +242,7 @@ public class CheckBox: UIControl {
     public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
         sendActions(for: .valueChanged)
-        // isOn.toggle()
+        // selectionState = (selectionState == .selected) ? .deselected : .selected
     }
     
     public override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {

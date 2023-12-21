@@ -45,7 +45,7 @@ extension TextStyle {
     static let checkBoxTitle = TextStyle(font: .font14Medium, color: .primary_7)
     static let checkBoxSubTitle = TextStyle(font: .font14Regular, color: .neutral_7)
     
-    static let toggleTitle = TextStyle(font: .font14Medium, color: .neutral_8_5)
+    static let toggleTitle = TextStyle(font: .font14Medium, color: .primary_7)
     static let toggleSubTitle = TextStyle(font: .font14Medium, color: .neutral_7)
     
     static let chipTitlePA = TextStyle(font: .font14Medium, color: .neutral_7)

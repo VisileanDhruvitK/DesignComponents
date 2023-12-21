@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C039F412B34041A00533B0D /* ChipCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C039F3F2B34041A00533B0D /* ChipCollectionCell.swift */; };
+		0C039F422B34041A00533B0D /* ChipCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C039F402B34041A00533B0D /* ChipCollectionCell.xib */; };
+		0C039F452B34059900533B0D /* CustomExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C039F442B34059900533B0D /* CustomExtensions.swift */; };
 		0C4A42732AAF1137009207EA /* ToggleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4A42722AAF1137009207EA /* ToggleVC.swift */; };
 		0C5561D32AA5E11700F71C58 /* RadioButtonVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5561D22AA5E11700F71C58 /* RadioButtonVC.swift */; };
 		0C56BAF32AAB068200C84187 /* CheckBoxVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C56BAF22AAB068200C84187 /* CheckBoxVC.swift */; };
@@ -29,6 +32,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C039F3F2B34041A00533B0D /* ChipCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChipCollectionCell.swift; sourceTree = "<group>"; };
+		0C039F402B34041A00533B0D /* ChipCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChipCollectionCell.xib; sourceTree = "<group>"; };
+		0C039F442B34059900533B0D /* CustomExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomExtensions.swift; sourceTree = "<group>"; };
 		0C4A42722AAF1137009207EA /* ToggleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleVC.swift; sourceTree = "<group>"; };
 		0C5561D22AA5E11700F71C58 /* RadioButtonVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButtonVC.swift; sourceTree = "<group>"; };
 		0C56BAF22AAB068200C84187 /* CheckBoxVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxVC.swift; sourceTree = "<group>"; };
@@ -64,6 +70,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C039F432B34042000533B0D /* ChipCollectionCell */ = {
+			isa = PBXGroup;
+			children = (
+				0C039F3F2B34041A00533B0D /* ChipCollectionCell.swift */,
+				0C039F402B34041A00533B0D /* ChipCollectionCell.xib */,
+			);
+			path = ChipCollectionCell;
+			sourceTree = "<group>";
+		};
 		0CAEA9562AA717570004A11F /* Packages */ = {
 			isa = PBXGroup;
 			children = (
@@ -121,10 +136,12 @@
 			isa = PBXGroup;
 			children = (
 				88DF85862A0CB3B5001724EC /* AppDelegate.swift */,
+				0C039F442B34059900533B0D /* CustomExtensions.swift */,
 				88DF858A2A0CB3B5001724EC /* ViewController.swift */,
 				0CA2C5EA2AA88D4B00E3C308 /* FormTextFieldVC.swift */,
 				0CDD44512B15CD7300BE5896 /* OTPInputVC.swift */,
 				C38CED272AAEE9BF00125587 /* ChipVC.swift */,
+				0C039F432B34042000533B0D /* ChipCollectionCell */,
 				0CA2C5EC2AA88D6100E3C308 /* ButtonsVC.swift */,
 				0C5561D22AA5E11700F71C58 /* RadioButtonVC.swift */,
 				0C56BAF22AAB068200C84187 /* CheckBoxVC.swift */,
@@ -184,7 +201,7 @@
 		88DF857B2A0CB3B5001724EC /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				BuildIndependentTargetsInParallel = 1;
+				BuildIndependentTargetsInParallel = NO;
 				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
@@ -223,6 +240,7 @@
 				88DF858E2A0CB3B5001724EC /* Main.storyboard in Resources */,
 				88AE88E32A24A25E001D1777 /* Inter-Regular.ttf in Resources */,
 				88AE88E22A24A25E001D1777 /* Inter-Medium.ttf in Resources */,
+				0C039F422B34041A00533B0D /* ChipCollectionCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,12 +256,14 @@
 				88DF858B2A0CB3B5001724EC /* ViewController.swift in Sources */,
 				88AE88D82A248586001D1777 /* UIFont+Custom.swift in Sources */,
 				0C4A42732AAF1137009207EA /* ToggleVC.swift in Sources */,
+				0C039F452B34059900533B0D /* CustomExtensions.swift in Sources */,
 				0CDD44522B15CD7300BE5896 /* OTPInputVC.swift in Sources */,
 				C38CED282AAEE9BF00125587 /* ChipVC.swift in Sources */,
 				0C56BAF32AAB068200C84187 /* CheckBoxVC.swift in Sources */,
 				0CD6C6202AB42F7E0014075E /* Images.swift in Sources */,
 				88DF85872A0CB3B5001724EC /* AppDelegate.swift in Sources */,
 				0C5561D32AA5E11700F71C58 /* RadioButtonVC.swift in Sources */,
+				0C039F412B34041A00533B0D /* ChipCollectionCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

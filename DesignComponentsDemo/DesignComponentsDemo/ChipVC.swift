@@ -10,8 +10,10 @@ import DesignComponents
 
 class ChipVC: UIViewController {
     
-    @IBOutlet weak var radioState: RadioButton!
-    @IBOutlet weak var radioSizes: RadioButtonView!
+    @IBOutlet weak var collectionState: UICollectionView!
+    @IBOutlet weak var collectionSizes: UICollectionView!
+    @IBOutlet weak var collectionRole: UICollectionView!
+    @IBOutlet weak var collectionShape: UICollectionView!
     
     @IBOutlet weak var chipText: ChipControl!
     @IBOutlet weak var chipTextButton: ChipControl!
@@ -20,43 +22,51 @@ class ChipVC: UIViewController {
     
     @IBOutlet weak var chipHeightConst: NSLayoutConstraint!
     
-    var sizeOptions = [RadioOption]()
     
+    // MARK: - VARIABLES
+    var stateOptions = [String]()
+    var sizeOptions = [String]()
+    var roleOptions = [String]()
+    var shapeOptions = [String]()
+    
+    var stateIndex = 0
+    var sizeIndex = 0
+    var roleIndex = 0
+    var shapeIndex = 0
+    
+    
+    // MARK: - VIEW LIFE CYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        collectionState.register(nibWithCellClass: ChipCollectionCell.self)
+        collectionSizes.register(nibWithCellClass: ChipCollectionCell.self)
+        collectionRole.register(nibWithCellClass: ChipCollectionCell.self)
+        collectionShape.register(nibWithCellClass: ChipCollectionCell.self)
+        fetchOptions()
+        
         // Create and configure the chip control
-        chipText.chipType = .with(text: "text only", isButtonHidden: true, chipStyle: .roundSU)
-        chipTextButton.chipType = .with(text: "text & btn", isButtonHidden: false, chipStyle: .squreSU)
-        chipImageText.chipType = .with(image: UIImage(named: "user_Image"), text: "text image", isButtonHidden: true, chipStyle: .roundPA)
-        chipImageTextButton.chipType = .with(image: UIImage(named: "user_Image"), text: "text image btn", isButtonHidden: false, chipStyle: .squrePA)
+        chipText.setOption(option: ChipOption(title: "text only", chipType: .textOnly, chipStyle: .roundPA))
+        chipTextButton.setOption(option: ChipOption(title: "text & btn", chipType: .withButton, chipStyle: .roundPA))
+        chipTextButton.delegate = self
         
-        chipImageText.isSelected = true
-        
-        chipText.componentSize = .small
-        chipTextButton.componentSize = .small
-        chipImageText.componentSize = .small
-        chipImageTextButton.componentSize = .small
-        chipHeightConst.constant = 32
-        self.view.layoutIfNeeded()
-        
-        radioState.setOption(option: RadioOption(title: "Enable", isOn: true))
-        radioState.addTarget(self, action: #selector(radioStateSelected(_:)), for: .valueChanged)
-        
-        fetchSizes()
+        chipImageText.setOption(option: ChipOption(image: UIImage(named: "user_Image"), title: "text image", chipType: .withImage, chipStyle: .roundPA))
+        chipImageTextButton.setOption(option: ChipOption(image: UIImage(named: "user_Image"), title: "text image btn", chipType: .withImageAndButton, chipStyle: .roundPA))
+        chipImageTextButton.delegate = self
     }
     
-    func fetchSizes() {
-        sizeOptions.removeAll()
+    
+    // MARK: - FUNCTIONS
+    func fetchOptions() {
+        stateOptions = ["Enable", "Disable"]
+        sizeOptions = ["Medium", "Small"]
+        roleOptions = ["Project Admin", "Standard User"]
+        shapeOptions = ["Round", "Square"]
         
-        let option1 = RadioOption(title: "Small", description: "", isOn: true)
-        let option2 = RadioOption(title: "Medium", description: "")
-        
-        sizeOptions.append(contentsOf: [option1, option2])
-        
-        radioSizes.set(sizeOptions)
-        radioSizes.tag = 1
-        radioSizes.delegate = self
+        collectionState.reloadData()
+        collectionSizes.reloadData()
+        collectionRole.reloadData()
+        collectionShape.reloadData()
     }
     
     @objc func radioStateSelected(_ sender: RadioButton) {
@@ -69,26 +79,118 @@ class ChipVC: UIViewController {
     
 }
 
-extension ChipVC: RadioSelectionDelegate {
+
+extension ChipVC: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
-    func didSelectRadioButton(tag: Int, indexes: Set<Int>) {
-        let option = sizeOptions[indexes.first ?? 0]
-        if option.title == "Small" {
-            chipHeightConst.constant = 32
-            self.view.layoutIfNeeded()
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        switch collectionView {
+        case collectionState:
+            return stateOptions.count
+        case collectionSizes:
+            return sizeOptions.count
+        case collectionRole:
+            return roleOptions.count
+        case collectionShape:
+            return shapeOptions.count
+        default:
+            return 0
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withClass: ChipCollectionCell.self, for: indexPath)
+        var title: String = ""
+        var isSelected: Bool = false
+        
+        switch collectionView {
+        case collectionState:
+            title = stateOptions[indexPath.row]
+            isSelected = stateIndex == indexPath.row
+        case collectionSizes:
+            title = sizeOptions[indexPath.row]
+            isSelected = sizeIndex == indexPath.row
+        case collectionRole:
+            title = roleOptions[indexPath.row]
+            isSelected = roleIndex == indexPath.row
+        case collectionShape:
+            title = shapeOptions[indexPath.row]
+            isSelected = shapeIndex == indexPath.row
+        default:
+            break
+        }
+        
+        cell.configureCell(title: title, isSelected: isSelected)
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch collectionView {
+        case collectionState:
+            stateIndex = indexPath.row
+            collectionState.reloadData()
             
-            chipText.componentSize = .small
-            chipTextButton.componentSize = .small
-            chipImageText.componentSize = .small
-            chipImageTextButton.componentSize = .small
+            let isEnable = stateIndex == 0
+            chipText.isEnabled = isEnable
+            chipTextButton.isEnabled = isEnable
+            chipImageText.isEnabled = isEnable
+            chipImageTextButton.isEnabled = isEnable
+            
+        case collectionSizes:
+            sizeIndex = indexPath.row
+            collectionSizes.reloadData()
+            
+            let isMedium = sizeIndex == 0
+            chipHeightConst.constant = isMedium ? 40 : 32
+            self.view.layoutIfNeeded()
+            chipText.componentSize = isMedium ? .medium : .small
+            chipTextButton.componentSize = isMedium ? .medium : .small
+            chipImageText.componentSize = isMedium ? .medium : .small
+            chipImageTextButton.componentSize = isMedium ? .medium : .small
+            
+        case collectionRole:
+            roleIndex = indexPath.row
+            collectionRole.reloadData()
+            refreshStyle()
+            
+        case collectionShape:
+            shapeIndex = indexPath.row
+            collectionShape.reloadData()
+            refreshStyle()
+            
+        default:
+            break
+        }
+    }
+    
+    func refreshStyle() {
+        let isPA = roleIndex == 0
+        let isRound = shapeIndex == 0
+        
+        if isPA {
+            chipText.chipStyle = isRound ? .roundPA : .squrePA
+            chipTextButton.chipStyle = isRound ? .roundPA : .squrePA
+            chipImageText.chipStyle = isRound ? .roundPA : .squrePA
+            chipImageTextButton.chipStyle = isRound ? .roundPA : .squrePA
         } else {
-            chipHeightConst.constant = 40
-            self.view.layoutIfNeeded()
-            
-            chipText.componentSize = .medium
-            chipTextButton.componentSize = .medium
-            chipImageText.componentSize = .medium
-            chipImageTextButton.componentSize = .medium
+            chipText.chipStyle = isRound ? .roundSU : .squreSU
+            chipTextButton.chipStyle = isRound ? .roundSU : .squreSU
+            chipImageText.chipStyle = isRound ? .roundSU : .squreSU
+            chipImageTextButton.chipStyle = isRound ? .roundSU : .squreSU
+        }
+    }
+    
+}
+
+
+extension ChipVC: ChipControlDelegate {
+    
+    func chipButtonClicked(sender: ChipControl) {
+        sender.isSelected = false
+        
+        if sender == chipTextButton {
+            print("chipTextButton - ", sender.isSelected)
+        } else if sender == chipImageTextButton {
+            print("chipImageTextButton - ", sender.isSelected)
         }
     }
     

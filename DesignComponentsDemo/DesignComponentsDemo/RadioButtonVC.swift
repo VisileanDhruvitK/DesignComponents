@@ -25,7 +25,8 @@ class RadioButtonVC: UIViewController {
         
         // radioState.setOption(option: RadioOption(title: "Enable", isOn: true))
         radioState.title = "Enable"
-        radioState.descriptionText = "Enable / Disable"
+        radioState.descriptionText = "Enable / Disable \nNew line check 1 \nNew line check 2"
+        radioState.descriptionLines = 3
         radioState.isOn = true
         radioState.addTarget(self, action: #selector(radioStateSelected(_:)), for: .valueChanged)
         

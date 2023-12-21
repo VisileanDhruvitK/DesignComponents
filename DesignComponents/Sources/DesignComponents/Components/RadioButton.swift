@@ -55,6 +55,13 @@ public class RadioButton: UIControl {
         }
     }
     
+    public var descriptionLines: Int = 2 {
+        didSet {
+            descriptionLabel.numberOfLines = descriptionLines
+            self.layoutIfNeeded()
+        }
+    }
+    
     public var isOn: Bool = false {
         didSet {
             updateState()
@@ -86,7 +93,7 @@ public class RadioButton: UIControl {
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 1
+        label.numberOfLines = 2
         label.textAlignment = .left
         label.font = .systemFont(ofSize: 14)
         label.isHidden = true
@@ -107,7 +114,7 @@ public class RadioButton: UIControl {
         let view = UIStackView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.alignment = .fill
-        view.distribution = .fillEqually
+        view.distribution = .fillProportionally
         view.axis = .vertical
         view.spacing = 0
         return view

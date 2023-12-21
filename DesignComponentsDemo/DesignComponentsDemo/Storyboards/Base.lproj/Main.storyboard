@@ -181,71 +181,144 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="I6n-8j-m1b">
-                                <rect key="frame" x="20" y="169" width="335" height="474"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="never" translatesAutoresizingMaskIntoConstraints="NO" id="weu-yV-RZY">
+                                <rect key="frame" x="0.0" y="50" width="375" height="728"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="kkz-pk-Pzr">
-                                        <rect key="frame" x="0.0" y="0.0" width="335" height="96"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hq6-DT-VRH">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="594"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3hO-6K-6kf" customClass="RadioButton" customModule="DesignComponents">
-                                                <rect key="frame" x="0.0" y="0.0" width="335" height="30"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="335" id="pEF-gn-PpF"/>
-                                                    <constraint firstAttribute="height" priority="750" constant="30" id="xN1-VB-Zvz"/>
-                                                </constraints>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zk8-ZP-CYD" customClass="RadioButtonView" customModule="DesignComponents">
-                                                <rect key="frame" x="0.0" y="46" width="335" height="50"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="335" id="Dby-nM-dUj"/>
-                                                    <constraint firstAttribute="height" priority="750" constant="50" id="N03-Fg-ycp"/>
-                                                </constraints>
-                                            </view>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="48" translatesAutoresizingMaskIntoConstraints="NO" id="I6n-8j-m1b">
+                                                <rect key="frame" x="16" y="32" width="343" height="530"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="kkz-pk-Pzr">
+                                                        <rect key="frame" x="0.0" y="0.0" width="343" height="224"/>
+                                                        <subviews>
+                                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="q7q-dn-J9s">
+                                                                <rect key="frame" x="0.0" y="0.0" width="343" height="50"/>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="50" id="IMX-94-C51"/>
+                                                                </constraints>
+                                                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="HqV-vR-EOA">
+                                                                    <size key="itemSize" width="128" height="40"/>
+                                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                                </collectionViewFlowLayout>
+                                                                <cells/>
+                                                                <connections>
+                                                                    <outlet property="dataSource" destination="Vfe-tw-Gro" id="bfq-3m-5KV"/>
+                                                                    <outlet property="delegate" destination="Vfe-tw-Gro" id="S5J-Wq-Aj6"/>
+                                                                </connections>
+                                                            </collectionView>
+                                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Iy4-oJ-NUc">
+                                                                <rect key="frame" x="0.0" y="58" width="343" height="50"/>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="0e1-Ou-AoR">
+                                                                    <size key="itemSize" width="128" height="40"/>
+                                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                                </collectionViewFlowLayout>
+                                                                <cells/>
+                                                                <connections>
+                                                                    <outlet property="dataSource" destination="Vfe-tw-Gro" id="eiU-QP-F1y"/>
+                                                                    <outlet property="delegate" destination="Vfe-tw-Gro" id="gwh-Sj-FoX"/>
+                                                                </connections>
+                                                            </collectionView>
+                                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="tMU-7r-0pF">
+                                                                <rect key="frame" x="0.0" y="116" width="343" height="50"/>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ChI-Ei-PGT">
+                                                                    <size key="itemSize" width="128" height="40"/>
+                                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                                </collectionViewFlowLayout>
+                                                                <cells/>
+                                                                <connections>
+                                                                    <outlet property="dataSource" destination="Vfe-tw-Gro" id="jHc-Qk-HOb"/>
+                                                                    <outlet property="delegate" destination="Vfe-tw-Gro" id="SW6-Za-ZDP"/>
+                                                                </connections>
+                                                            </collectionView>
+                                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="qDb-ds-zry">
+                                                                <rect key="frame" x="0.0" y="174" width="343" height="50"/>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="8nr-mf-YHk">
+                                                                    <size key="itemSize" width="128" height="40"/>
+                                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                                </collectionViewFlowLayout>
+                                                                <cells/>
+                                                                <connections>
+                                                                    <outlet property="dataSource" destination="Vfe-tw-Gro" id="jKw-7C-edT"/>
+                                                                    <outlet property="delegate" destination="Vfe-tw-Gro" id="lrs-xJ-oNi"/>
+                                                                </connections>
+                                                            </collectionView>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rlR-cb-qaf">
+                                                        <rect key="frame" x="0.0" y="272" width="343" height="2"/>
+                                                        <color key="backgroundColor" systemColor="systemGray4Color"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="2" id="xb7-BE-FpM"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="DC4-Je-mB3">
+                                                        <rect key="frame" x="0.0" y="322" width="343" height="208"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lIq-6m-CQY" customClass="ChipControl" customModule="DesignComponents">
+                                                                <rect key="frame" x="4" y="0.0" width="335" height="40"/>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="40" id="bBD-c8-eai"/>
+                                                                </constraints>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cKO-cU-ZxP" customClass="ChipControl" customModule="DesignComponents">
+                                                                <rect key="frame" x="4" y="56" width="335" height="40"/>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w4h-lZ-kIN" customClass="ChipControl" customModule="DesignComponents">
+                                                                <rect key="frame" x="4" y="112" width="335" height="40"/>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Qk-cn-isD" customClass="ChipControl" customModule="DesignComponents">
+                                                                <rect key="frame" x="4" y="168" width="335" height="40"/>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                            </view>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
-                                    </stackView>
-                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rlR-cb-qaf">
-                                        <rect key="frame" x="0.0" y="196" width="335" height="2"/>
-                                        <color key="backgroundColor" systemColor="systemGray4Color"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="2" id="xb7-BE-FpM"/>
+                                            <constraint firstAttribute="trailing" secondItem="I6n-8j-m1b" secondAttribute="trailing" constant="16" id="179-SK-T0r"/>
+                                            <constraint firstAttribute="bottom" secondItem="I6n-8j-m1b" secondAttribute="bottom" constant="32" id="L63-fP-2jv"/>
+                                            <constraint firstItem="I6n-8j-m1b" firstAttribute="top" secondItem="hq6-DT-VRH" secondAttribute="top" constant="32" id="hlO-LZ-kyH"/>
+                                            <constraint firstItem="I6n-8j-m1b" firstAttribute="leading" secondItem="hq6-DT-VRH" secondAttribute="leading" constant="16" id="rCO-e9-U96"/>
                                         </constraints>
                                     </view>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="DC4-Je-mB3">
-                                        <rect key="frame" x="0.0" y="298" width="335" height="176"/>
-                                        <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lIq-6m-CQY" customClass="ChipControl" customModule="DesignComponents">
-                                                <rect key="frame" x="0.0" y="0.0" width="335" height="32"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="32" id="bBD-c8-eai"/>
-                                                </constraints>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cKO-cU-ZxP" customClass="ChipControl" customModule="DesignComponents">
-                                                <rect key="frame" x="0.0" y="48" width="335" height="32"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w4h-lZ-kIN" customClass="ChipControl" customModule="DesignComponents">
-                                                <rect key="frame" x="0.0" y="96" width="335" height="32"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Qk-cn-isD" customClass="ChipControl" customModule="DesignComponents">
-                                                <rect key="frame" x="0.0" y="144" width="335" height="32"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                            </view>
-                                        </subviews>
-                                    </stackView>
                                 </subviews>
-                            </stackView>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="hq6-DT-VRH" secondAttribute="bottom" id="7kB-68-Do5"/>
+                                    <constraint firstItem="hq6-DT-VRH" firstAttribute="top" secondItem="weu-yV-RZY" secondAttribute="top" id="CO3-8y-zZ3"/>
+                                    <constraint firstItem="hq6-DT-VRH" firstAttribute="leading" secondItem="weu-yV-RZY" secondAttribute="leading" id="Snz-Xk-xJB"/>
+                                    <constraint firstAttribute="trailing" secondItem="hq6-DT-VRH" secondAttribute="trailing" id="W9e-qj-Mbm"/>
+                                    <constraint firstItem="hq6-DT-VRH" firstAttribute="width" secondItem="weu-yV-RZY" secondAttribute="width" id="pe7-2r-QbT"/>
+                                    <constraint firstItem="hq6-DT-VRH" firstAttribute="centerX" secondItem="weu-yV-RZY" secondAttribute="centerX" id="qUS-ca-gzm"/>
+                                    <constraint firstItem="hq6-DT-VRH" firstAttribute="height" secondItem="weu-yV-RZY" secondAttribute="height" priority="750" id="ySs-hY-NOG"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="uiI-9x-tSX"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="I6n-8j-m1b" firstAttribute="centerX" secondItem="wjy-hB-6iO" secondAttribute="centerX" id="CJY-x2-Iwz"/>
-                            <constraint firstItem="I6n-8j-m1b" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="wjy-hB-6iO" secondAttribute="leading" constant="20" id="XZ2-Q6-mgR"/>
-                            <constraint firstItem="I6n-8j-m1b" firstAttribute="top" relation="greaterThanOrEqual" secondItem="uiI-9x-tSX" secondAttribute="top" constant="50" id="c7I-jK-ZNo"/>
-                            <constraint firstItem="I6n-8j-m1b" firstAttribute="centerY" secondItem="wjy-hB-6iO" secondAttribute="centerY" id="sco-LG-iFh"/>
+                            <constraint firstItem="uiI-9x-tSX" firstAttribute="bottom" secondItem="weu-yV-RZY" secondAttribute="bottom" id="M6l-WB-K2V"/>
+                            <constraint firstItem="weu-yV-RZY" firstAttribute="top" secondItem="uiI-9x-tSX" secondAttribute="top" id="Vwu-9e-xnU"/>
+                            <constraint firstItem="weu-yV-RZY" firstAttribute="leading" secondItem="uiI-9x-tSX" secondAttribute="leading" id="u8m-rP-3Nt"/>
+                            <constraint firstItem="uiI-9x-tSX" firstAttribute="trailing" secondItem="weu-yV-RZY" secondAttribute="trailing" id="xKb-Aw-yfE"/>
                         </constraints>
                     </view>
                     <connections>
@@ -254,8 +327,10 @@
                         <outlet property="chipImageTextButton" destination="2Qk-cn-isD" id="wdV-IN-ASR"/>
                         <outlet property="chipText" destination="lIq-6m-CQY" id="hTT-pF-fkc"/>
                         <outlet property="chipTextButton" destination="cKO-cU-ZxP" id="V6I-qE-ZGw"/>
-                        <outlet property="radioSizes" destination="Zk8-ZP-CYD" id="ZP5-XL-VF6"/>
-                        <outlet property="radioState" destination="3hO-6K-6kf" id="t93-4U-8AU"/>
+                        <outlet property="collectionRole" destination="tMU-7r-0pF" id="b91-s4-uC0"/>
+                        <outlet property="collectionShape" destination="qDb-ds-zry" id="hYL-2l-90m"/>
+                        <outlet property="collectionSizes" destination="Iy4-oJ-NUc" id="QnJ-mp-AZT"/>
+                        <outlet property="collectionState" destination="q7q-dn-J9s" id="cWo-nA-e1a"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FEg-Bh-IqH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -614,20 +689,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="R74-I3-UyH">
-                                <rect key="frame" x="30" y="144" width="315" height="524"/>
+                                <rect key="frame" x="30" y="149" width="315" height="514"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Qgs-Cz-qQ2">
-                                        <rect key="frame" x="0.0" y="0.0" width="315" height="96"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="315" height="86"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="reM-tl-D3g" customClass="CheckBox" customModule="DesignComponents">
-                                                <rect key="frame" x="0.0" y="0.0" width="315" height="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="315" height="20"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" priority="750" constant="30" id="JTm-Mb-t8O"/>
+                                                    <constraint firstAttribute="height" priority="750" constant="20" id="JTm-Mb-t8O"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DfG-Ux-v8b" customClass="CheckBoxView" customModule="DesignComponents">
-                                                <rect key="frame" x="0.0" y="46" width="315" height="50"/>
+                                                <rect key="frame" x="0.0" y="36" width="315" height="50"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" priority="750" constant="50" id="Osp-Hm-o3x"/>
@@ -636,14 +711,14 @@
                                         </subviews>
                                     </stackView>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3uB-da-wE5">
-                                        <rect key="frame" x="0.0" y="196" width="315" height="2"/>
+                                        <rect key="frame" x="0.0" y="186" width="315" height="2"/>
                                         <color key="backgroundColor" systemColor="systemGray4Color"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="2" id="s1Y-r6-MLZ"/>
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="DRs-R5-Yp7">
-                                        <rect key="frame" x="0.0" y="298" width="315" height="226"/>
+                                        <rect key="frame" x="0.0" y="288" width="315" height="226"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YNm-ZQ-tKm" customClass="CheckBox" customModule="DesignComponents">
                                                 <rect key="frame" x="0.0" y="0.0" width="315" height="30"/>

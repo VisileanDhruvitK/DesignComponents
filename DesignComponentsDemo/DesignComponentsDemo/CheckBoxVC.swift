@@ -25,7 +25,8 @@ class CheckBoxVC: UIViewController {
                 
         // checkBoxState.setOption(option: CheckboxOption(title: "Enable", selectionState: .selected))
         checkBoxState.title = "Enable"
-        checkBoxState.descriptionText = "Enable / Disable"
+        checkBoxState.descriptionText = "Enable / Disable \nNew line check 1 \nNew line check 2"
+        checkBoxState.descriptionLines = 3
         checkBoxState.selectionState = .selected
         checkBoxState.addTarget(self, action: #selector(checkBoxStateSelected(_:)), for: .valueChanged)
         
