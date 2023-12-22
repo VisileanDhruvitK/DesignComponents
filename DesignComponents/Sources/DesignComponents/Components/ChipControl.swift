@@ -385,8 +385,8 @@ public class ChipControl: UIControl {
     
     public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
-        isSelected.toggle()
         sendActions(for: .valueChanged)
+        // isSelected.toggle()
     }
     
     public override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {

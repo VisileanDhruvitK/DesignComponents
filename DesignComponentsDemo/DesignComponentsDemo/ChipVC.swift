@@ -57,6 +57,11 @@ class ChipVC: UIViewController {
         chipImageText.chipType = .withImage
         chipImageText.image = UIImage(named: "krishna-asta-gopis")
         chipImageText.title = "krishna-asta-gopis"
+        
+        chipText.addTarget(self, action: #selector(chipTapped(_:)), for: .valueChanged)
+        chipTextButton.addTarget(self, action: #selector(chipTapped(_:)), for: .valueChanged)
+        chipImageText.addTarget(self, action: #selector(chipTapped(_:)), for: .valueChanged)
+        chipImageTextButton.addTarget(self, action: #selector(chipTapped(_:)), for: .valueChanged)
     }
     
     
@@ -73,12 +78,8 @@ class ChipVC: UIViewController {
         collectionShape.reloadData()
     }
     
-    @objc func radioStateSelected(_ sender: RadioButton) {
-        sender.isOn.toggle()
-        chipText.isEnabled = sender.isOn
-        chipTextButton.isEnabled = sender.isOn
-        chipImageText.isEnabled = sender.isOn
-        chipImageTextButton.isEnabled = sender.isOn
+    @objc func chipTapped(_ sender: ChipControl) {
+        sender.isSelected.toggle()
     }
     
 }
