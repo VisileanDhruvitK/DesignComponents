@@ -73,6 +73,19 @@ public class ChipControl: UIControl {
         }
     }
     
+    public var image: UIImage? = nil {
+        didSet {
+            imageView.image = image
+        }
+    }
+    
+    public var title: String = "" {
+        didSet {
+            titleLabel.text = title
+            titleLabel.isHidden = title.isEmpty
+        }
+    }
+    
     public var componentSize: ComponentSize = .medium {
         didSet {
             updateSize()
@@ -113,7 +126,8 @@ public class ChipControl: UIControl {
     private let imageView: UIImageView = {
         let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.contentMode = .scaleAspectFit
+        view.contentMode = .scaleAspectFill
+        view.clipsToBounds = true
         return view
     }()
     
@@ -136,7 +150,14 @@ public class ChipControl: UIControl {
         return view
     }()
     
-    private let button: UIButton = UIButton(type: .custom)
+    private let button: UIButton = {
+        let btn = UIButton(type: .custom)
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.clipsToBounds = true
+        btn.imageView?.contentMode = .scaleAspectFit
+        return btn
+    }()
+    
     
     // MARK: - Initializers
     override init(frame: CGRect) {
@@ -180,9 +201,7 @@ public class ChipControl: UIControl {
         
         clipsToBounds = true
         
-        //set imageView
-        imageView.layer.cornerRadius = imageView.frame.size.height / 2
-        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 12
         
         // Allow titleLabel to determine the width
         titleLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)

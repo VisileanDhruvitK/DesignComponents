@@ -50,9 +50,13 @@ class ChipVC: UIViewController {
         chipTextButton.setOption(option: ChipOption(title: "text & btn", chipType: .withButton, chipStyle: .roundPA))
         chipTextButton.delegate = self
         
-        chipImageText.setOption(option: ChipOption(image: UIImage(named: "user_Image"), title: "text image", chipType: .withImage, chipStyle: .roundPA))
+        // chipImageText.setOption(option: ChipOption(image: UIImage(named: "user_Image"), title: "text image", chipType: .withImage, chipStyle: .roundPA))
         chipImageTextButton.setOption(option: ChipOption(image: UIImage(named: "user_Image"), title: "text image btn", chipType: .withImageAndButton, chipStyle: .roundPA))
         chipImageTextButton.delegate = self
+        
+        chipImageText.chipType = .withImage
+        chipImageText.image = UIImage(named: "krishna-asta-gopis")
+        chipImageText.title = "krishna-asta-gopis"
     }
     
     
