@@ -21,6 +21,9 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JA2-po-OeC" customClass="ChipControl" customModule="DesignComponents">
                         <rect key="frame" x="0.0" y="0.0" width="200" height="40"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="BcD-KA-zbS"/>
+                        </constraints>
                     </view>
                 </subviews>
             </view>
@@ -33,6 +36,7 @@
             </constraints>
             <connections>
                 <outlet property="chipControl" destination="JA2-po-OeC" id="tA5-wX-FAN"/>
+                <outlet property="chipControlHeight" destination="BcD-KA-zbS" id="0eX-gI-vVY"/>
             </connections>
             <point key="canvasLocation" x="37" y="20"/>
         </collectionViewCell>
