@@ -18,23 +18,34 @@ class ChipCollectionCell: UICollectionViewCell {
         // Initialization code
     }
     
-    func configureCell(title: String, isSelected: Bool, size: ComponentSize = .medium, chipStyle: ChipStyle = .roundPA) {
+    func configureCell(image: UIImage? = nil, title: String, buttonImage: UIImage? = nil, isSelected: Bool = false, isEnabled: Bool = true, chipType: ChipType = .textOnly, chipStyle: ChipStyle = .roundPA, size: ComponentSize = .medium) {
+        let option = ChipOption(image: image, title: title, buttonImage: buttonImage, isSelected: isSelected, chipType: chipType, chipStyle: chipStyle)
+        chipControl.setOption(option: option)
         chipControl.componentSize = size
         
-        let option = ChipOption(title: title, isSelected: isSelected, chipType: .textOnly, chipStyle: chipStyle)
-        chipControl.setOption(option: option)
-        chipControl.isUserInteractionEnabled = false
-        setHeight(height: (size == .medium ? 40 : 32))
+        if chipType == .withButton || chipType == .withImageAndButton {
+            chipControl.isUserInteractionEnabled = true
+        } else {
+            chipControl.isUserInteractionEnabled = false
+        }
+        
+        setChipHeight(height: (size == .medium ? 40 : 32))
     }
     
     func configureCell(option: ChipOption, size: ComponentSize = .medium) {
-        chipControl.componentSize = size
         chipControl.setOption(option: option)
-        chipControl.isUserInteractionEnabled = false
-        setHeight(height: (size == .medium ? 40 : 32))
+        chipControl.componentSize = size
+        
+        if option.chipType == .withButton || option.chipType == .withImageAndButton {
+            chipControl.isUserInteractionEnabled = true
+        } else {
+            chipControl.isUserInteractionEnabled = false
+        }
+        
+        setChipHeight(height: (size == .medium ? 40 : 32))
     }
     
-    func setHeight(height: CGFloat) {
+    func setChipHeight(height: CGFloat) {
         chipControlHeight.constant = height
         self.chipControl.layoutIfNeeded()
     }

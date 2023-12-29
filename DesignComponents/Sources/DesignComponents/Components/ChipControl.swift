@@ -11,14 +11,16 @@ import UIKit
 public struct ChipOption {
     public var image: UIImage? = nil
     public var title: String = ""
+    public var buttonImage: UIImage? = nil
     public var isSelected: Bool = false
     public var isEnabled: Bool = false
     public var chipType: ChipType = .textOnly
     public var chipStyle: ChipStyle = .roundPA
     
-    public init(image: UIImage? = nil, title: String, isSelected: Bool = false, isEnabled: Bool = true, chipType: ChipType = .textOnly, chipStyle: ChipStyle = .roundPA) {
+    public init(image: UIImage? = nil, title: String, buttonImage: UIImage? = nil, isSelected: Bool = false, isEnabled: Bool = true, chipType: ChipType = .textOnly, chipStyle: ChipStyle = .roundPA) {
         self.image = image
         self.title = title
+        self.buttonImage = buttonImage
         self.isSelected = isSelected
         self.isEnabled = isEnabled
         self.chipType = chipType
@@ -83,6 +85,12 @@ public class ChipControl: UIControl {
         didSet {
             titleLabel.text = title
             titleLabel.isHidden = title.isEmpty
+        }
+    }
+    
+    public var buttonImage: UIImage? = nil {
+        didSet {
+            button.setImage(buttonImage, for: .normal)
         }
     }
     
@@ -243,17 +251,21 @@ public class ChipControl: UIControl {
         setChipType()
     }
     
-    //set Image Of Button
+    // Set button image
     private func setButtonImage() {
-        switch chipStyle {
+        if let btnImage = buttonImage {
+            button.setImage(btnImage, for: .normal)
+        } else {
+            switch chipStyle {
             case .roundPA, .squrePA:
                 button.setImage(VLImage(named: "close_pa"), for: .normal)
             case .roundSU, .squreSU:
                 button.setImage(VLImage(named: "close_su"), for: .normal)
+            }
         }
     }
     
-    //se Border of Chip
+    // Handle selection state
     private func setSelectionState() {
         if chipStyle == .roundPA || chipStyle == .squrePA {
             layer.borderWidth = 1
@@ -271,16 +283,19 @@ public class ChipControl: UIControl {
         setChipBorderColor()
     }
     
+    // Update UI based on Enable/Disable state
     private func configureUI() {
         let textStyle = isEnabled ? textStyle.enableUI : textStyle.disableUI
         titleLabel.textColor = textStyle.color
-        // titleLabel.font = textStyle.font
+        
         setButtonImage()
         setChipBorderColor()
         
         imageView.alpha = isEnabled ? 1 : 0.5
+        button.alpha = isEnabled ? 1 : 0.5
     }
     
+    // Update UI based on chip type
     private func setChipType() {
         let isRound = (chipStyle == .roundPA || chipStyle == .roundSU)
         
@@ -314,6 +329,7 @@ public class ChipControl: UIControl {
         }
     }
     
+    // Update UI based on chip style
     private func setChipStyle() {
         switch chipStyle {
             case .roundPA:
@@ -346,6 +362,7 @@ public class ChipControl: UIControl {
         }
     }
     
+    // Set chip border
     private func setChipBorderColor() {
         switch chipStyle {
         case .roundPA, .squrePA:
@@ -363,11 +380,14 @@ public class ChipControl: UIControl {
         }
     }
     
+    // Set chip data
     public func setOption(option: ChipOption) {
         imageView.image = option.image
         
         titleLabel.text = option.title
         titleLabel.isHidden = option.title.isEmpty
+        
+        buttonImage = option.buttonImage
         
         isSelected = option.isSelected
         
@@ -379,10 +399,12 @@ public class ChipControl: UIControl {
         layoutSubviews()
     }
     
+    // button click event
     @objc private func buttonClicked() {
         self.delegate?.chipButtonClicked(sender: self)
     }
     
+    // Handle chip touch
     public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
         sendActions(for: .valueChanged)

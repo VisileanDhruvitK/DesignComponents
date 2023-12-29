@@ -22,7 +22,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="200" height="40"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="40" id="BcD-KA-zbS"/>
+                            <constraint firstAttribute="height" priority="750" constant="40" id="BcD-KA-zbS"/>
                         </constraints>
                     </view>
                 </subviews>
