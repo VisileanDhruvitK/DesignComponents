@@ -10,7 +10,7 @@ import UIKit
 
 extension UIImage {
     
-    static let arrowDown = VLImage(named: "arrowDown")
+    // static let arrowDown = VLImage(named: "arrowDown")
     
 }
 

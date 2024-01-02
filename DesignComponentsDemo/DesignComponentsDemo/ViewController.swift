@@ -14,6 +14,7 @@ enum ControlType: CaseIterable {
     case formTextField
     case toggle
     case chip
+    case dynamicChip
     case otpInputView
     
     var title: String {
@@ -30,6 +31,8 @@ enum ControlType: CaseIterable {
             return "Toggle"
         case .chip:
             return "Chip"
+        case .dynamicChip:
+            return "Dynamic Chip"
         case .otpInputView:
             return "OTP Input View"
         }
@@ -95,6 +98,9 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
             
         case .chip:
             pushViewController(withIdentifier: "ChipVC", title: menuItem.title)
+            
+        case .dynamicChip:
+            pushViewController(withIdentifier: "DynamicChipVC", title: menuItem.title)
             
         case .otpInputView:
             pushViewController(withIdentifier: "OTPInputVC", title: menuItem.title)
