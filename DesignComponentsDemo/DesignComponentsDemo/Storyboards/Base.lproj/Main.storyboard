@@ -725,7 +725,7 @@
                                             <constraint firstAttribute="height" priority="750" constant="48" id="3yi-hn-yKR"/>
                                         </constraints>
                                         <connections>
-                                            <action selector="rightImageButtonClickedWithSender:" destination="Nwk-Bz-ge2" eventType="touchUpInside" id="Voh-MD-SG8"/>
+                                            <action selector="imageButtonClickedWithSender:" destination="Nwk-Bz-ge2" eventType="touchUpInside" id="Urv-Vd-PM7"/>
                                         </connections>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gJ2-9A-LR4" customClass="ImageButton" customModule="DesignComponents">
@@ -735,7 +735,7 @@
                                             <constraint firstAttribute="height" priority="750" constant="48" id="1IL-aS-A5k"/>
                                         </constraints>
                                         <connections>
-                                            <action selector="rightImageButtonClickedWithSender:" destination="Nwk-Bz-ge2" eventType="touchUpInside" id="ja5-O3-V8u"/>
+                                            <action selector="imageButtonClickedWithSender:" destination="Nwk-Bz-ge2" eventType="touchUpInside" id="6xg-tz-sKM"/>
                                         </connections>
                                     </view>
                                 </subviews>

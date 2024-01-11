@@ -48,9 +48,14 @@ class ButtonsVC: UIViewController {
         leftImageButton.componentSize = .medium
         
         rightImageButton.title = "Right Image"
-        rightImageButton.image = .arrowDown
+        rightImageButton.image = .highPriority
         rightImageButton.buttonStyle = .rightImage
-        leftImageButton.componentSize = .xl
+        rightImageButton.componentSize = .xl
+        
+        rightImageButton.bgColor = .white
+        rightImageButton.titleColor = .destructive_5
+        rightImageButton.borderColor = .destructive_5
+        rightImageButton.borderWidth = 1
     }
     
     @IBAction func linkButtonClicked(sender: UIButton) {
@@ -79,7 +84,7 @@ class ButtonsVC: UIViewController {
         }
     }
     
-    @IBAction func rightImageButtonClicked(sender: ImageButton) {
+    @IBAction func imageButtonClicked(sender: ImageButton) {
         sender.isEnabled.toggle()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {

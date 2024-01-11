@@ -50,6 +50,30 @@ public class ImageButton: UIControl {
         }
     }
     
+    public var bgColor: UIColor = .primary_0_5 {
+        didSet {
+            backgroundColor = bgColor
+        }
+    }
+    
+    public var titleColor: UIColor = .primary_6 {
+        didSet {
+            titleLabel.textColor = titleColor
+        }
+    }
+    
+    public var borderColor: UIColor = .clear {
+        didSet {
+            layer.borderColor = borderColor.cgColor
+        }
+    }
+    
+    public var borderWidth: CGFloat = 0 {
+        didSet {
+            layer.borderWidth = borderWidth
+        }
+    }
+    
     private let imageView: UIImageView = {
         let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -114,7 +138,26 @@ public class ImageButton: UIControl {
     }
     
     private func updateSize() {
-        let viewHeight: CGFloat = componentSize == .medium ? 36 : 48
+        var viewHeight: CGFloat = componentSize == .medium ? 36 : 48
+        var fontSize: FontSize = .font12
+        
+        switch componentSize {
+        case .small:
+            fontSize = .font12
+            viewHeight = 36
+        case .medium:
+            fontSize = .font14
+            viewHeight = 40
+        case .large:
+            fontSize = .font14
+            viewHeight = 40
+        case .xl:
+            fontSize = .font16
+            viewHeight = 48
+        case .xxl:
+            fontSize = .font18
+            viewHeight = 60
+        }
         
         if imageHeightConst != nil {
             titleHeightConst?.constant = (viewHeight / 2)
@@ -129,28 +172,33 @@ public class ImageButton: UIControl {
             imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: 1, constant: 1),
             titleHeightConst
         ])
+        
+        let font = VLFont(size: fontSize, weigth: .semibold)
+        titleLabel.font = font
     }
     
     private func configureUI() {
         titleLabel.text = title
         imageView.image = image
         
-        let textStyle: TextStyle = isEnabled ? .secondaryImageButton : .secondaryImageButtonDisabled
-        let apperance: Appearance = isEnabled ? .secondaryImageButton : .secondaryImageButtonDisabled
+        titleLabel.textColor = titleColor
+        backgroundColor = bgColor
+        layer.borderWidth = borderWidth
         
-        titleLabel.textColor = textStyle.color
-        titleLabel.font = textStyle.font
-        titleLabel.textAlignment = textStyle.textAlignment
-        backgroundColor = apperance.backgroundColor
-        imageView.tintColor = textStyle.color
-        
-        layer.cornerRadius = apperance.cornerRadius
+        layer.cornerRadius = 10
         clipsToBounds = true
         
-        layer.borderWidth = apperance.borderWidth
-        layer.borderColor = apperance.borderColor.cgColor
-        
         imageView.isHidden = imageView.image == nil
+        
+        if isEnabled {
+            imageView.alpha = 1
+            titleLabel.alpha = 1
+            layer.borderColor = borderColor.cgColor
+        } else {
+            imageView.alpha = 0.5
+            titleLabel.alpha = 0.5
+            layer.borderColor = borderColor.withAlphaComponent(0.5).cgColor
+        }
     }
     
     public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {

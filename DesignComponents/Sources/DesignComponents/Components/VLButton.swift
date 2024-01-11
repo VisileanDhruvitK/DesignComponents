@@ -24,7 +24,7 @@ public class VLButton: UIButton {
     
     public var componentSize: ComponentSize = .medium {
         didSet {
-            configureSize()
+            updateSize()
         }
     }
     
@@ -84,10 +84,10 @@ public class VLButton: UIButton {
         
         contentEdgeInsets = UIEdgeInsets(top: 0, left: 14, bottom: 0, right: 14)
         
-        configureSize()
+        updateSize()
     }
     
-    private func configureSize() {
+    private func updateSize() {
         var fontSize: FontSize = .font12
         
         switch componentSize {
