@@ -11,6 +11,7 @@ public enum VLButtonStyle {
     case primary
     case secondary
     case link
+    case dynamic
 }
 
 public class VLButton: UIButton {
@@ -34,6 +35,29 @@ public class VLButton: UIButton {
         }
     }
     
+    public var bgColor: UIColor = .primary_0_5 {
+        didSet {
+            backgroundColor = bgColor
+        }
+    }
+    
+    public var titleColor: UIColor = .primary_6 {
+        didSet {
+            setTitleColor(titleColor, for: .normal)
+        }
+    }
+    
+    public var borderColor: UIColor = .clear {
+        didSet {
+            layer.borderColor = borderColor.cgColor
+        }
+    }
+    
+    public var borderWidth: CGFloat = 0 {
+        didSet {
+            layer.borderWidth = borderWidth
+        }
+    }
     
     // MARK: - Initializers
     override init(frame: CGRect) {
@@ -68,19 +92,34 @@ public class VLButton: UIButton {
             apperance = isEnabled ? .secondaryButton : .secondaryButtonDisabled
         case .link:
             textStyle = isEnabled ? .linkButton : .linkButtonDisabled
+        case .dynamic:
+            break
         }
         
+        if buttonStyle == .dynamic {
+            if isEnabled {
+                setTitleColor(titleColor, for: .normal)
+                backgroundColor = bgColor
+                layer.borderColor = borderColor.cgColor
+            } else {
+                setTitleColor(titleColor.withAlphaComponent(0.5), for: .normal)
+                backgroundColor = bgColor.withAlphaComponent(0.5)
+                layer.borderColor = borderColor.withAlphaComponent(0.5).cgColor
+            }
+            
+            layer.borderWidth = borderWidth
+            layer.cornerRadius = 10
+        } else {
+            setTitleColor(textStyle.color, for: .normal)
+            backgroundColor = apperance.backgroundColor
+            imageView?.tintColor = textStyle.color
+            
+            layer.cornerRadius = apperance.cornerRadius
+            layer.borderWidth = apperance.borderWidth
+            layer.borderColor = apperance.borderColor.cgColor
+        }
         
-        setTitleColor(textStyle.color, for: .normal)
-        titleLabel?.font = textStyle.font
-        backgroundColor = apperance.backgroundColor
-        imageView?.tintColor = textStyle.color
-        
-        layer.cornerRadius = apperance.cornerRadius
         clipsToBounds = true
-        
-        layer.borderWidth = apperance.borderWidth
-        layer.borderColor = apperance.borderColor.cgColor
         
         contentEdgeInsets = UIEdgeInsets(top: 0, left: 14, bottom: 0, right: 14)
         
@@ -107,9 +146,10 @@ public class VLButton: UIButton {
         titleLabel?.font = font
     }
     
+    /*
     public override func setImage(_ image: UIImage?, for state: UIControl.State) {
         super.setImage(image, for: state)
         self.imageEdgeInsets = UIEdgeInsets(top: 0, left: -16, bottom: 0, right: 0)
-    }
+    }*/
     
 }

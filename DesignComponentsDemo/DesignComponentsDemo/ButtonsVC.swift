@@ -17,6 +17,7 @@ class ButtonsVC: UIViewController {
     @IBOutlet weak var buttonL: VLButton!
     @IBOutlet weak var buttonXL: VLButton!
     @IBOutlet weak var buttonXXL: VLButton!
+    @IBOutlet weak var buttonDynamic: VLButton!
     
     @IBOutlet weak var leftImageButton: ImageButton!
     @IBOutlet weak var rightImageButton: ImageButton!
@@ -41,6 +42,14 @@ class ButtonsVC: UIViewController {
         buttonL.componentSize = .large
         buttonXL.componentSize = .xl
         buttonXXL.componentSize = .xxl
+        
+        buttonDynamic.buttonStyle = .dynamic
+        buttonDynamic.componentSize = .xl
+        buttonDynamic.titleColor = .destructive_5
+        buttonDynamic.borderColor = .destructive_5
+        buttonDynamic.borderWidth = 1
+        buttonDynamic.setImage(.highPriority, for: .normal)
+        buttonDynamic.bgColor = .white
         
         leftImageButton.title = "Left Image"
         leftImageButton.image = .arrowDown
