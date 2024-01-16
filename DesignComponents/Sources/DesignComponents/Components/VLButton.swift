@@ -50,7 +50,7 @@ public class VLButton: UIButton {
         }
     }
     
-    public var bgColor: UIColor = .primary_0_5 {
+    public var bgColor: UIColor = .white {
         didSet {
             backgroundColor = bgColor
         }
