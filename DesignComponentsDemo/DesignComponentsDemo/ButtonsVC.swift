@@ -43,8 +43,8 @@ class ButtonsVC: UIViewController {
         buttonXL.componentSize = .xl
         buttonXXL.componentSize = .xxl
         
-        buttonXXL.setImage(.highPriority, for: .normal)
-        buttonXXL.buttonImageStyle = .left
+        // buttonXXL.setImage(.highPriority, for: .normal)
+        // buttonXXL.buttonImageStyle = .left
         
         buttonDynamic.buttonStyle = .dynamic
         buttonDynamic.componentSize = .xl
@@ -53,8 +53,7 @@ class ButtonsVC: UIViewController {
         buttonDynamic.borderWidth = 1
         buttonDynamic.setImage(.highPriority, for: .normal)
         buttonDynamic.setTitle("Right Image", for: .normal)
-        buttonDynamic.bgColor = .white
-        buttonDynamic.buttonImageStyle = .right
+        // buttonDynamic.buttonImageStyle = .right
         
         leftImageButton.title = "Left Image"
         leftImageButton.image = .arrowDown

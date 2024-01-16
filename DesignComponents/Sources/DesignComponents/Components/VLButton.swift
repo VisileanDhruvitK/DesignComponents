@@ -14,10 +14,10 @@ public enum VLButtonStyle {
     case dynamic
 }
 
-public enum VLButtonImageStyle {
-    case left
-    case right
-}
+// public enum VLButtonImageStyle {
+//     case left
+//     case right
+// }
 
 public class VLButton: UIButton {
     
@@ -28,15 +28,15 @@ public class VLButton: UIButton {
         }
     }
     
-    public var buttonImageStyle: VLButtonImageStyle = .left {
-        didSet {
-            if buttonImageStyle == .right {
-                self.semanticContentAttribute = .forceRightToLeft
-            } else {
-                self.semanticContentAttribute = .forceLeftToRight
-            }
-        }
-    }
+    // public var buttonImageStyle: VLButtonImageStyle = .left {
+    //     didSet {
+    //         if buttonImageStyle == .right {
+    //             self.semanticContentAttribute = .forceRightToLeft
+    //         } else {
+    //             self.semanticContentAttribute = .forceLeftToRight
+    //         }
+    //     }
+    // }
     
     public var componentSize: ComponentSize = .medium {
         didSet {
@@ -74,11 +74,11 @@ public class VLButton: UIButton {
         }
     }
     
-    public override var semanticContentAttribute: UISemanticContentAttribute {
-        didSet {
-            updateContentInsets()
-        }
-    }
+    // public override var semanticContentAttribute: UISemanticContentAttribute {
+    //     didSet {
+    //         updateContentInsets()
+    //     }
+    // }
     
     // MARK: - Initializers
     override init(frame: CGRect) {
@@ -167,30 +167,30 @@ public class VLButton: UIButton {
         titleLabel?.font = font
     }
     
-    public override func setImage(_ image: UIImage?, for state: UIControl.State) {
-        super.setImage(image, for: state)
-        updateContentInsets()
-    }
-    
-    public override func setTitle(_ title: String?, for state: UIControl.State) {
-        super.setTitle(title, for: state)
-        updateContentInsets()
-    }
-    
-    func updateContentInsets() {
-        if self.imageView?.image == nil || self.title(for: .normal) == nil {
-            contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        } else {
-            if semanticContentAttribute == .forceLeftToRight {
-                imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)
-                titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: -8)
-                contentEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 24)
-            } else {
-                imageEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
-                titleEdgeInsets = UIEdgeInsets(top: 0, left: -8, bottom: 0, right: 0)
-                contentEdgeInsets = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
-            }
-        }
-    }
+    // public override func setImage(_ image: UIImage?, for state: UIControl.State) {
+    //     super.setImage(image, for: state)
+    //     updateContentInsets()
+    // }
+    //
+    // public override func setTitle(_ title: String?, for state: UIControl.State) {
+    //     super.setTitle(title, for: state)
+    //     updateContentInsets()
+    // }
+    //
+    // func updateContentInsets() {
+    //     if self.imageView?.image == nil || self.title(for: .normal) == nil {
+    //         contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    //     } else {
+    //         if semanticContentAttribute == .forceLeftToRight {
+    //             imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)
+    //             titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: -8)
+    //             contentEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 24)
+    //         } else {
+    //             imageEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
+    //             titleEdgeInsets = UIEdgeInsets(top: 0, left: -8, bottom: 0, right: 0)
+    //             contentEdgeInsets = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
+    //         }
+    //     }
+    // }
     
 }
