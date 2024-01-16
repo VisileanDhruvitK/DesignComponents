@@ -178,6 +178,17 @@ public class ChipControl: UIControl {
         setupUI()
     }
     
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        switch chipStyle {
+        case .roundPA, .roundSU:
+            layer.cornerRadius = frame.size.height / 2
+        case .squrePA, .squreSU:
+            layer.cornerRadius = 10
+        }
+    }
+    
     private func setupUI() {
         addSubview(stackView)
         

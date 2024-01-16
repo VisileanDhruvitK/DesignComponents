@@ -153,6 +153,17 @@ public class DynamicChipControl: UIControl {
         setupUI()
     }
     
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        switch chipStyle {
+        case .round:
+            layer.cornerRadius = frame.size.height / 2
+        case .squre:
+            layer.cornerRadius = 10
+        }
+    }
+    
     private func setupUI() {
         addSubview(stackView)
         
