@@ -23,10 +23,10 @@ class FormTextFieldVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Default.delegate = self
-        withLeftImage.delegate = self
-        withPercentage.delegate = self
-        withIconPercentageDropdown.delegate = self
+        Default.textField.delegate = self
+        withLeftImage.textField.delegate = self
+        withPercentage.textField.delegate = self
+        withIconPercentageDropdown.textField.delegate = self
         
         Default.currentState = .normal(title: "Normal", text: "New Task 123", placeholder: "Enter activity name")
         Default.validationMessage = "Validation MSG ..."
@@ -48,23 +48,28 @@ class FormTextFieldVC: UIViewController {
 
 
 //MARK: - InputComponentDelegate
-extension FormTextFieldVC: InputComponentDelegate {
+extension FormTextFieldVC: UITextFieldDelegate {
     
-    func shouldChangeCharactersIn(formTextFieldView: FormTextFieldView, _ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String, currentText: String, newString: String) {
-        if formTextFieldView == Default {
-            formTextFieldView.setValidationUI(validate: newString.count <= 5)
-        } else if formTextFieldView == withPercentage {
-            if newString.isEmpty {
-                formTextFieldView.validationMessage = "pls Enter data"
-            } else {
-                formTextFieldView.validationMessage = ""
-            }
-            formTextFieldView.setValidationUI(validate: !newString.isEmpty)
-        }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return textField.resignFirstResponder()
     }
     
-    func didEndEditing(inputComponent: UITextField) {
-        print("inputComponent - ", inputComponent.text ?? "")
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentText = textField.text ?? ""
+        let newString  = (currentText as NSString).replacingCharacters(in: range, with: string)
+        
+        if textField == Default.textField {
+            Default.setValidationUI(validate: newString.count <= 5)
+        } else if textField == withPercentage.textField {
+            if newString.isEmpty {
+                withPercentage.validationMessage = "pls Enter data"
+            } else {
+                withPercentage.validationMessage = ""
+            }
+            withPercentage.setValidationUI(validate: !newString.isEmpty)
+        }
+        
+        return true
     }
     
 }

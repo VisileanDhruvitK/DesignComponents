@@ -7,11 +7,6 @@
 
 import UIKit
 
-@objc public protocol InputComponentDelegate: AnyObject {
-    func didEndEditing(inputComponent: UITextField)
-    @objc optional  func shouldChangeCharactersIn(formTextFieldView: FormTextFieldView, _ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String, currentText: String, newString: String)
-}
-
 public enum FormTextFieldType {
     case normal
     case withLeftIcon
@@ -49,7 +44,6 @@ public class FormTextFieldView: UIView {
     private var showWarning: Bool = false
     
     public var fieldType: FormTextFieldType = .normal
-    public weak var delegate: InputComponentDelegate?
     
     public var currentState: FormTextFieldConfiguration = .normal(title: "", text: "", placeholder: "") {
         didSet {
@@ -114,18 +108,17 @@ public class FormTextFieldView: UIView {
         return view
     }()
     
-    private lazy var textField: UITextField = {
+    public lazy var textField: UITextField = {
         let txtField = UITextField()
         txtField.textColor = .primary_7
         txtField.font = .font14Regular
         txtField.autocorrectionType = .no
         txtField.autocapitalizationType = .none
         txtField.clipsToBounds = true
-        txtField.delegate = self
         return txtField
     }()
     
-    //percentage label and Image
+    // Percentage label and Image
     private lazy var percentagelabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -161,7 +154,7 @@ public class FormTextFieldView: UIView {
         return view
     }()
     
-    //Left Image
+    // Left Image
     private lazy var leftImageView: UIImageView = {
         let imgView = UIImageView()
         imgView.translatesAutoresizingMaskIntoConstraints = false
@@ -294,6 +287,11 @@ public class FormTextFieldView: UIView {
     func initialize() {
         self.backgroundColor = .clear
         setupSubViews()
+        addNotificationObserver()
+    }
+    
+    deinit {
+        removeNotificationObserver()
     }
     
     func setupSubViews() {
@@ -315,7 +313,42 @@ public class FormTextFieldView: UIView {
         ])
     }
     
-    //MARK: Enable/Disable state
+    func addNotificationObserver() {
+        textField.addTarget(self, action: #selector(textFieldBeginEditingNotification(_:)), for: .editingDidBegin)
+        textField.addTarget(self, action: #selector(textFieldEndEditingNotification(_:)), for: .editingDidEnd)
+    }
+    
+    func removeNotificationObserver() {
+        textField.removeTarget(self, action: #selector(textFieldBeginEditingNotification(_:)), for: .editingDidBegin)
+        textField.removeTarget(self, action: #selector(textFieldEndEditingNotification(_:)), for: .editingDidEnd)
+    }
+    
+    @objc func textFieldBeginEditingNotification(_ textField: UITextField) {
+        // Change the border color when the textField gains focus
+        if showWarning {
+            return
+        }
+        
+        textField.layer.masksToBounds = true
+        textField.textColor = .primary_7
+        descriptionLabel.textColor = .primary_5
+        txtView.layer.borderColor = UIColor.primary_5.cgColor
+    }
+    
+    @objc func textFieldEndEditingNotification(_ textField: UITextField) {
+        // Change the border color back when the textField loses focus
+        if showWarning {
+            return
+        }
+        
+        textField.layer.masksToBounds = true
+        textField.textColor = .formItemText
+        descriptionLabel.textColor = .neutral_5
+        txtView.layer.borderColor = UIColor.neutral_1_5.cgColor
+    }
+    
+    
+    // MARK: - Enable/Disable state
     func applyEnabledStyle() {
         if isEnabled {
             // Set styles for enabled state
@@ -349,47 +382,6 @@ public class FormTextFieldView: UIView {
             descriptionLabel.isHidden = false
             descriptionLabel.text = message
         }
-    }
-}
-
-//MARK: - UITextFieldDelegate
-extension FormTextFieldView : UITextFieldDelegate {
-    
-    public func textFieldDidBeginEditing(_ textField: UITextField) {
-        // Change the border color when the textField gains focus
-        if showWarning {
-            return
-        }
-        textField.layer.masksToBounds = true
-        textField.textColor = .primary_7
-        descriptionLabel.textColor = .primary_5
-        txtView.layer.borderColor = UIColor.primary_5.cgColor
-    }
-    
-    public func textFieldDidEndEditing(_ textField: UITextField) {
-        // Change the border color back when the textField loses focus
-        if showWarning {
-            return
-        }
-        
-        textField.layer.masksToBounds = true
-        textField.textColor = .formItemText
-        descriptionLabel.textColor = .neutral_5
-        txtView.layer.borderColor = UIColor.neutral_1_5.cgColor
-        delegate?.didEndEditing(inputComponent: textField)
-    }
-    
-    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        return textField.resignFirstResponder()
-        
-    }
-    
-    public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
-        let currentText = textField.text ?? ""
-        let newString  = (currentText as NSString).replacingCharacters(in: range, with: string)
-        delegate?.shouldChangeCharactersIn?(formTextFieldView: self, textField, shouldChangeCharactersIn: range, replacementString: string, currentText: currentText, newString: newString)
-        return true
     }
     
 }
