@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  Enums.swift
 //  
 //
 //  Created by VisiLean Admin on 15/09/23.
@@ -33,4 +33,30 @@ public enum SelectionState {
     case deselected
     case indeterminant
     case selected
+}
+
+/**
+ Direction
+ 1. Top
+ 2. Left
+ 3. Bottom
+ 4. Right
+ */
+public enum Direction {
+    case top
+    case left
+    case bottom
+    case right
+}
+
+/**
+ Radius Type
+ 1. Round
+ 2. Rounded Rectangle
+ 3. Square
+ */
+public enum RadiusType {
+    case round
+    case roundedRect
+    case square
 }

@@ -38,19 +38,21 @@ class FormTextFieldVC: UIViewController {
         
         normalDisable.setOption(option: FormTextFieldOption(title: "Normal-Disable", placeholder: "Default with Disable", isEnabled: false))
         
-        withLeftImage.setOption(option: FormTextFieldOption(title: "withLeftImage", placeholder: "withLeftImage", leftImage: UIImage(named: "user_Image"), fieldType: .withLeftIcon))
+        withLeftImage.setOption(option: FormTextFieldOption(title: "withLeftImage", placeholder: "withLeftImage", leftImage: UIImage(named: "user_Image"), fieldType: .withLeftAndRightIcon))
         
         withPercentage.setOption(option: FormTextFieldOption(title: "withPercentage", text: "New Constraint 123", placeholder: "Enter constraint name", percentage: "55", fieldType: .withPercentage))
         
         withIconPercentageDropdown.setOption(option: FormTextFieldOption(title: "withIconPercentageDropdown", placeholder: "withIconPercentageDropdown", percentage: "85", validationMessage: "Validation MSG...", leftImage: UIImage(named: "user_Image"), fieldType: .withIconPercentageDropdown))
         withIconPercentageDropdown.showMainButton = true
         
-        withDropdown.setOption(option: FormTextFieldOption(title: "withDropdown", placeholder: "withDropdown", fieldType: .withDropdown))
+        withDropdown.setOption(option: FormTextFieldOption(title: "withDropdown", placeholder: "withDropdown", fieldType: .withRightIcon))
         withDropdown.showMainButton = true
         
         withLeftImage.delegate = self
         withIconPercentageDropdown.delegate = self
         withDropdown.delegate = self
+        
+        withLeftImage.setImageOption(option: ImageOption(color: .red, radiusType: .round), direction: .left)
     }
     
 }
@@ -103,7 +105,9 @@ extension FormTextFieldVC: FormTextFieldDelegate {
     }
     
     func rightButtonClicked(formField: FormTextFieldView) {
-        if formField == withIconPercentageDropdown {
+        if formField == withLeftImage {
+            print("rightButtonClicked - withLeftImage")
+        } else if formField == withIconPercentageDropdown {
             print("rightButtonClicked - withIconPercentageDropdown")
         } else if formField == withDropdown {
             print("rightButtonClicked - withDropdown")

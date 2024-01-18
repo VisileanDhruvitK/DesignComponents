@@ -18,7 +18,7 @@ public struct FormTextFieldOption {
     public var isEnabled: Bool = false
     public var fieldType: FormTextFieldType = .normal
     
-    public init(title: String, text: String = "", placeholder: String = "", percentage: String = "", validationMessage: String = "", leftImage: UIImage? = nil, rightImage: UIImage? = nil, isEnabled: Bool = true, fieldType: FormTextFieldType = .normal) {
+    public init(title: String = "", text: String = "", placeholder: String = "", percentage: String = "", validationMessage: String = "", leftImage: UIImage? = nil, rightImage: UIImage? = nil, isEnabled: Bool = true, fieldType: FormTextFieldType = .normal) {
         self.title = title
         self.text = text
         self.placeholder = placeholder
@@ -35,9 +35,10 @@ public struct FormTextFieldOption {
 public enum FormTextFieldType {
     case normal
     case withLeftIcon
+    case withLeftAndRightIcon
     case withPercentage
     case withIconPercentageDropdown
-    case withDropdown
+    case withRightIcon
 }
 
 @objc public protocol FormTextFieldDelegate: AnyObject {
@@ -215,6 +216,7 @@ public class FormTextFieldView: UIView {
         button.heightAnchor.constraint(equalToConstant: 20).isActive = true
         button.widthAnchor.constraint(equalToConstant: 20).isActive = true
         button.isHidden = true
+        button.clipsToBounds = true
         return button
     }()
     
@@ -226,6 +228,7 @@ public class FormTextFieldView: UIView {
         button.widthAnchor.constraint(equalToConstant: 20).isActive = true
         button.setImage(.inputDropdown, for: .normal)
         button.isHidden = true
+        button.clipsToBounds = true
         return button
     }()
     
@@ -360,6 +363,12 @@ public class FormTextFieldView: UIView {
             break
         case .withLeftIcon:
             leftButton.isHidden = false
+        case .withLeftAndRightIcon:
+            leftButton.isHidden = false
+            rightButton.isHidden = false
+            if rightImage == nil {
+                rightImage = .inputDropdown
+            }
         case .withPercentage:
             stackViewWithPercentage.isHidden = false
         case .withIconPercentageDropdown:
@@ -369,10 +378,36 @@ public class FormTextFieldView: UIView {
             if rightImage == nil {
                 rightImage = .inputDropdown
             }
-        case .withDropdown:
+        case .withRightIcon:
             rightButton.isHidden = false
             if rightImage == nil {
                 rightImage = .inputDropdown
+            }
+        }
+    }
+    
+    public func setImageOption(option: ImageOption, direction: Direction) {
+        if direction == .left {
+            leftImage = option.image
+            leftButton.backgroundColor = option.color
+            leftButton.layer.borderColor = option.borderColor?.cgColor
+            leftButton.layer.borderWidth = option.borderWidth
+            
+            if option.radiusType == .round {
+                leftButton.layer.cornerRadius = 10
+            } else if option.radiusType == .roundedRect {
+                leftButton.layer.cornerRadius = 5
+            }
+        } else {
+            rightImage = option.image
+            rightButton.backgroundColor = option.color
+            rightButton.layer.borderColor = option.borderColor?.cgColor
+            rightButton.layer.borderWidth = option.borderWidth
+            
+            if option.radiusType == .round {
+                rightButton.layer.cornerRadius = 10
+            } else if option.radiusType == .roundedRect {
+                rightButton.layer.cornerRadius = 5
             }
         }
     }
@@ -431,7 +466,11 @@ public class FormTextFieldView: UIView {
     
     // Set styles for enabled/disabled state
     private func updateUIState() {
+        isUserInteractionEnabled = isEnabled
         textField.isEnabled = isEnabled
+        leftButton.isUserInteractionEnabled = isEnabled
+        mainButton.isUserInteractionEnabled = isEnabled
+        rightButton.isUserInteractionEnabled = isEnabled
         
         if isEnabled {
             textField.textColor = .primary_7
