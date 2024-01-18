@@ -7,6 +7,31 @@
 
 import UIKit
 
+public struct FormTextFieldOption {
+    public var title: String = ""
+    public var text: String = ""
+    public var placeholder: String = ""
+    public var percentage: String = ""
+    public var validationMessage = ""
+    public var leftImage: UIImage? = nil
+    public var rightImage: UIImage? = nil
+    public var isEnabled: Bool = false
+    public var fieldType: FormTextFieldType = .normal
+    
+    public init(title: String, text: String = "", placeholder: String = "", percentage: String = "", validationMessage: String = "", leftImage: UIImage? = nil, rightImage: UIImage? = nil, isEnabled: Bool = true, fieldType: FormTextFieldType = .normal) {
+        self.title = title
+        self.text = text
+        self.placeholder = placeholder
+        self.percentage = percentage
+        self.validationMessage = validationMessage
+        self.leftImage = leftImage
+        self.rightImage = rightImage
+        self.isEnabled = isEnabled
+        self.fieldType = fieldType
+    }
+    
+}
+
 public enum FormTextFieldType {
     case normal
     case withLeftIcon
@@ -15,39 +40,45 @@ public enum FormTextFieldType {
     case withDropdown
 }
 
-public enum FormTextFieldConfiguration {
-    case normal(title: String, text: String, placeholder: String)
-    case withLeftIcon(title: String, text: String, placeholder: String, icon: UIImage)
-    case withPercentage(title: String, text: String, placeholder: String, percentage: String)
-    case withIconPercentageDropdown(title: String, text: String, placeholder: String, icon: UIImage, percentage: String)
-    case withDropdown(title: String, text: String, placeholder: String)
-    
-    var fieldType: FormTextFieldType {
-        switch self {
-        case .normal(_, _ ,_):
-            return .normal
-        case .withLeftIcon(_, _, _, _):
-            return .withLeftIcon
-        case .withPercentage(_, _, _, _):
-            return .withPercentage
-        case .withIconPercentageDropdown(_, _, _, _, _):
-            return .withIconPercentageDropdown
-        case .withDropdown(_, _, _):
-            return .withDropdown
-        }
-    }
+@objc public protocol FormTextFieldDelegate: AnyObject {
+    @objc optional func leftButtonClicked(formField: FormTextFieldView)
+    @objc optional func rightButtonClicked(formField: FormTextFieldView)
+    @objc optional func textFieldClicked(formField: FormTextFieldView)
 }
 
 public class FormTextFieldView: UIView {
     
     // MARK: - Properties
-    private var showWarning: Bool = false
-    
-    public var fieldType: FormTextFieldType = .normal
-    
-    public var currentState: FormTextFieldConfiguration = .normal(title: "", text: "", placeholder: "") {
+    public var showWarning: Bool = false {
         didSet {
-            updateViewState()
+            setValidationUI()
+        }
+    }
+    
+    public var delegate: FormTextFieldDelegate?
+    
+    public var fieldType: FormTextFieldType = .normal {
+        didSet {
+            setUI()
+        }
+    }
+    
+    public var isRequired: Bool = false {
+        didSet {
+            titleLabel.attributedText = titleLabel.text?.addRedStar()
+        }
+    }
+    
+    public var showMainButton: Bool = false {
+        didSet {
+            mainButton.isHidden = !showMainButton
+            textField.isUserInteractionEnabled = !showMainButton
+        }
+    }
+    
+    public var title: String = "" {
+        didSet {
+            titleLabel.text = title
         }
     }
     
@@ -60,12 +91,27 @@ public class FormTextFieldView: UIView {
         }
     }
     
-    public var placeholder: String {
-        get {
-            return textField.placeholder ?? ""
+    public var placeholder: String = "" {
+        didSet {
+            textField.placeholder = placeholder
         }
-        set {
-            textField.placeholder = newValue
+    }
+    
+    public var percentage: String = "" {
+        didSet {
+            percentagelabel.text = percentage + "%"
+        }
+    }
+    
+    public var leftImage: UIImage? = nil {
+        didSet {
+            leftButton.setImage(leftImage, for: .normal)
+        }
+    }
+    
+    public var rightImage: UIImage? = nil {
+        didSet {
+            rightButton.setImage(rightImage, for: .normal)
         }
     }
     
@@ -76,6 +122,13 @@ public class FormTextFieldView: UIView {
         }
     }
     
+    public var isEnabled: Bool = true {
+        didSet {
+            updateUIState()
+        }
+    }
+    
+    // Title Label
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -85,6 +138,7 @@ public class FormTextFieldView: UIView {
         label.textColor = .black_37
         label.setContentHuggingPriority(UILayoutPriority(rawValue: 1000), for: .horizontal)
         label.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 1000), for: .horizontal)
+        label.heightAnchor.constraint(equalToConstant: 20).isActive = true
         return label
     }()
     
@@ -154,25 +208,22 @@ public class FormTextFieldView: UIView {
         return view
     }()
     
-    // Left Image
-    private lazy var leftImageView: UIImageView = {
-        let imgView = UIImageView()
-        imgView.translatesAutoresizingMaskIntoConstraints = false
-        imgView.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        imgView.widthAnchor.constraint(equalToConstant: 20).isActive = true
-        
-        imgView.contentMode = .scaleAspectFit
-        imgView.isHidden = true
-        return imgView
-    }()
-    
-    //Right Button
-    private lazy var buttonDropDown: UIButton = {
+    // Left Button
+    private lazy var leftButton: UIButton = {
         let button = UIButton(type: .custom)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.heightAnchor.constraint(equalToConstant: 20).isActive = true
         button.widthAnchor.constraint(equalToConstant: 20).isActive = true
-        
+        button.isHidden = true
+        return button
+    }()
+    
+    // Right Button
+    private lazy var rightButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 20).isActive = true
         button.setImage(.inputDropdown, for: .normal)
         button.isHidden = true
         return button
@@ -180,7 +231,7 @@ public class FormTextFieldView: UIView {
     
     // TextField StackView with Image, TextField, Percentage View & Button
     private lazy var stackViewTextField: UIStackView = {
-        let view = UIStackView(arrangedSubviews: [leftImageView, textField, stackViewWithPercentage, buttonDropDown])
+        let view = UIStackView(arrangedSubviews: [leftButton, textField, stackViewWithPercentage, rightButton])
         view.translatesAutoresizingMaskIntoConstraints = false
         view.alignment = .fill
         view.distribution = .fill
@@ -198,10 +249,11 @@ public class FormTextFieldView: UIView {
         view.layer.borderWidth = 1.5
         view.layer.borderColor = UIColor.neutral_1_5.cgColor
         view.clipsToBounds = true
+        view.heightAnchor.constraint(equalToConstant: 48).isActive = true
         return view
     }()
     
-    //SubText
+    // Description Label
     private lazy var descriptionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -224,54 +276,19 @@ public class FormTextFieldView: UIView {
         return view
     }()
     
+    // Main Button
+    private lazy var mainButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.isHidden = true
+        return button
+    }()
+    
     
     // MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
         initialize()
-    }
-    
-    private func updateViewState() {
-        fieldType = currentState.fieldType
-        
-        switch currentState {
-        case .normal(let title, let text, let textFieldPlaceholder):
-            setViewState(title: title, text: text, placeholder: textFieldPlaceholder, leftIcon: nil, showDropdown: false, showPercentage: false)
-            
-        case .withLeftIcon(let title, let text, let textFieldPlaceholder, let icon):
-            setViewState(title: title, text: text, placeholder: textFieldPlaceholder, leftIcon: icon, showDropdown: false, showPercentage: false)
-            
-        case .withPercentage(let title, let text, let textFieldPlaceholder, let percent):
-            setViewState(title: title, text: text, placeholder: textFieldPlaceholder, leftIcon: nil, showDropdown: false, showPercentage: true)
-            percentagelabel.text = percent + "%"
-            
-        case .withIconPercentageDropdown(let title, let text, let textFieldPlaceholder, let icon, let percent):
-            setViewState(title: title, text: text, placeholder: textFieldPlaceholder, leftIcon: icon, showDropdown: true, showPercentage: true)
-            percentagelabel.text = percent + "%"
-            
-        case .withDropdown(let title, let text, let textFieldPlaceholder):
-            setViewState(title: title, text: text, placeholder: textFieldPlaceholder, leftIcon: nil, showDropdown: true, showPercentage: false)
-        }
-    }
-    
-    private func setViewState(title: String, text: String, placeholder: String, leftIcon: UIImage?, showDropdown: Bool, showPercentage: Bool) {
-        titleLabel.text = title
-        textField.text = text
-        textField.placeholder = placeholder
-        leftImageView.isHidden = leftIcon == nil
-        leftImageView.image = leftIcon
-        buttonDropDown.isHidden = !showDropdown
-        stackViewWithPercentage.isHidden = !showPercentage
-    }
-    
-    public var isEnabled: Bool {
-        get {
-            return textField.isEnabled
-        }
-        set {
-            textField.isEnabled = newValue
-            applyEnabledStyle()
-        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -284,18 +301,19 @@ public class FormTextFieldView: UIView {
         initialize()
     }
     
+    deinit {
+        removeTargets()
+    }
+    
     func initialize() {
         self.backgroundColor = .clear
         setupSubViews()
-        addNotificationObserver()
-    }
-    
-    deinit {
-        removeNotificationObserver()
+        addTargets()
     }
     
     func setupSubViews() {
         addSubview(stackView)
+        addSubview(mainButton)
         
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: topAnchor),
@@ -303,8 +321,10 @@ public class FormTextFieldView: UIView {
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
             
-            titleLabel.heightAnchor.constraint(equalToConstant: 20),
-            txtView.heightAnchor.constraint(equalToConstant: 48),
+            mainButton.topAnchor.constraint(equalTo: txtView.topAnchor, constant: 0),
+            mainButton.leadingAnchor.constraint(equalTo: textField.leadingAnchor, constant: 0),
+            mainButton.bottomAnchor.constraint(equalTo: txtView.bottomAnchor, constant: 0),
+            mainButton.trailingAnchor.constraint(equalTo: textField.trailingAnchor, constant: 0),
             
             stackViewTextField.topAnchor.constraint(equalTo: txtView.topAnchor, constant: 14),
             stackViewTextField.leadingAnchor.constraint(equalTo: txtView.leadingAnchor, constant: 14),
@@ -313,14 +333,66 @@ public class FormTextFieldView: UIView {
         ])
     }
     
-    func addNotificationObserver() {
-        textField.addTarget(self, action: #selector(textFieldBeginEditingNotification(_:)), for: .editingDidBegin)
-        textField.addTarget(self, action: #selector(textFieldEndEditingNotification(_:)), for: .editingDidEnd)
+    public func setOption(option: FormTextFieldOption) {
+        title = option.title
+        text = option.text
+        placeholder = option.placeholder
+        percentage = option.percentage
+        validationMessage = option.validationMessage
+        leftImage = option.leftImage
+        rightImage = option.rightImage
+        
+        isEnabled = option.isEnabled
+        isUserInteractionEnabled = option.isEnabled
+        
+        fieldType = option.fieldType
     }
     
-    func removeNotificationObserver() {
+    func setUI() {
+        leftButton.isHidden = true
+        rightButton.isHidden = true
+        stackViewWithPercentage.isHidden = true
+        
+        stackView.spacing = (title.isEmpty && validationMessage.isEmpty) ? 0 : 8
+        
+        switch fieldType {
+        case .normal:
+            break
+        case .withLeftIcon:
+            leftButton.isHidden = false
+        case .withPercentage:
+            stackViewWithPercentage.isHidden = false
+        case .withIconPercentageDropdown:
+            leftButton.isHidden = false
+            stackViewWithPercentage.isHidden = false
+            rightButton.isHidden = false
+            if rightImage == nil {
+                rightImage = .inputDropdown
+            }
+        case .withDropdown:
+            rightButton.isHidden = false
+            if rightImage == nil {
+                rightImage = .inputDropdown
+            }
+        }
+    }
+    
+    func addTargets() {
+        textField.addTarget(self, action: #selector(textFieldBeginEditingNotification(_:)), for: .editingDidBegin)
+        textField.addTarget(self, action: #selector(textFieldEndEditingNotification(_:)), for: .editingDidEnd)
+        
+        leftButton.addTarget(self, action: #selector(leftButtonClicked(_:)), for: .touchUpInside)
+        mainButton.addTarget(self, action: #selector(mainButtonClicked(_:)), for: .touchUpInside)
+        rightButton.addTarget(self, action: #selector(rightButtonClicked(_:)), for: .touchUpInside)
+    }
+    
+    func removeTargets() {
         textField.removeTarget(self, action: #selector(textFieldBeginEditingNotification(_:)), for: .editingDidBegin)
         textField.removeTarget(self, action: #selector(textFieldEndEditingNotification(_:)), for: .editingDidEnd)
+        
+        leftButton.removeTarget(self, action: #selector(leftButtonClicked(_:)), for: .touchUpInside)
+        mainButton.removeTarget(self, action: #selector(mainButtonClicked(_:)), for: .touchUpInside)
+        rightButton.removeTarget(self, action: #selector(rightButtonClicked(_:)), for: .touchUpInside)
     }
     
     @objc func textFieldBeginEditingNotification(_ textField: UITextField) {
@@ -329,7 +401,6 @@ public class FormTextFieldView: UIView {
             return
         }
         
-        textField.layer.masksToBounds = true
         textField.textColor = .primary_7
         descriptionLabel.textColor = .primary_5
         txtView.layer.borderColor = UIColor.primary_5.cgColor
@@ -341,46 +412,48 @@ public class FormTextFieldView: UIView {
             return
         }
         
-        textField.layer.masksToBounds = true
-        textField.textColor = .formItemText
+        textField.textColor = .primary_7
         descriptionLabel.textColor = .neutral_5
         txtView.layer.borderColor = UIColor.neutral_1_5.cgColor
     }
     
+    @objc func leftButtonClicked(_ sender: UIButton) {
+        delegate?.leftButtonClicked?(formField: self)
+    }
     
-    // MARK: - Enable/Disable state
-    func applyEnabledStyle() {
+    @objc func mainButtonClicked(_ sender: UIButton) {
+        delegate?.textFieldClicked?(formField: self)
+    }
+    
+    @objc func rightButtonClicked(_ sender: UIButton) {
+        delegate?.rightButtonClicked?(formField: self)
+    }
+    
+    // Set styles for enabled/disabled state
+    private func updateUIState() {
+        textField.isEnabled = isEnabled
+        
         if isEnabled {
-            // Set styles for enabled state
-            textField.textColor = .formItemText
+            textField.textColor = .primary_7
             descriptionLabel.textColor = .neutral_5
             txtView.layer.borderColor = UIColor.neutral_1_5.cgColor
             txtView.backgroundColor = UIColor.clear
         } else {
-            // Set styles for disabled state
             txtView.backgroundColor = UIColor.neutral_0_5
         }
     }
     
-    public func setValidationUI(validate: Bool) {
-        showWarning = !validate
-        if validate {
+    private func setValidationUI() {
+        descriptionLabel.isHidden = validationMessage.isEmpty == true
+        
+        if !showWarning {
             txtView.layer.borderColor = UIColor.primary_5.cgColor
-            descriptionLabel.isHidden = descriptionLabel.text?.isEmpty == true
             descriptionLabel.textColor = .primary_7
             textField.textColor = .primary_7
         } else {
             txtView.layer.borderColor = UIColor.destructive_5.cgColor
             descriptionLabel.textColor = .destructive_5
             textField.textColor = .destructive_5
-            showValidationMessage(message: validationMessage)
-        }
-    }
-    
-    public func showValidationMessage(message: String) {
-        if !message.isEmpty {
-            descriptionLabel.isHidden = false
-            descriptionLabel.text = message
         }
     }
     

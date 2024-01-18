@@ -7,7 +7,7 @@
 
 import UIKit
 
-class VLTextField: UITextField {
+public class VLTextField: UITextField {
     
     let padding = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
     

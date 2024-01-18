@@ -11,37 +11,46 @@ import DesignComponents
 class FormTextFieldVC: UIViewController {
     
     // MARK: - OUTLETS
-    @IBOutlet weak var Default: FormTextFieldView!
-    @IBOutlet weak var DefaultDisable: FormTextFieldView!
+    @IBOutlet weak var normal: FormTextFieldView!
+    @IBOutlet weak var normalDisable: FormTextFieldView!
     @IBOutlet weak var withLeftImage: FormTextFieldView!
     @IBOutlet weak var withPercentage : FormTextFieldView!
     @IBOutlet weak var withIconPercentageDropdown: FormTextFieldView!
     @IBOutlet weak var withDropdown: FormTextFieldView!
+    @IBOutlet weak var textField: VLTextField!
     
     
     // MARK: - VIEW LIFE CYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Default.textField.delegate = self
+        textField.delegate = self
+        textField.placeholder = "VLTextField"
+        
+        normal.textField.delegate = self
+        normalDisable.textField.delegate = self
         withLeftImage.textField.delegate = self
         withPercentage.textField.delegate = self
         withIconPercentageDropdown.textField.delegate = self
+        withDropdown.textField.delegate = self
         
-        Default.currentState = .normal(title: "Normal", text: "New Task 123", placeholder: "Enter activity name")
-        Default.validationMessage = "Validation MSG ..."
+        normal.setOption(option: FormTextFieldOption(title: "Normal", text: "New Task 123", placeholder: "Enter activity name", validationMessage: "Validation MSG ..."))
         
-        DefaultDisable.currentState = .normal(title: "Normal-Disable", text: "", placeholder: "Default with Disable")
-        DefaultDisable.isEnabled = false
+        normalDisable.setOption(option: FormTextFieldOption(title: "Normal-Disable", placeholder: "Default with Disable", isEnabled: false))
         
-        withLeftImage.currentState = .withLeftIcon(title: "withLeftImage", text: "", placeholder: "withLeftImage",  icon: UIImage(named: "user_Image") ?? UIImage())
+        withLeftImage.setOption(option: FormTextFieldOption(title: "withLeftImage", placeholder: "withLeftImage", leftImage: UIImage(named: "user_Image"), fieldType: .withLeftIcon))
         
-        withPercentage.currentState = .withPercentage(title: "withPercentage", text: "New Constraint 123", placeholder: "Enter constraint name", percentage: "55")
+        withPercentage.setOption(option: FormTextFieldOption(title: "withPercentage", text: "New Constraint 123", placeholder: "Enter constraint name", percentage: "55", fieldType: .withPercentage))
         
-        withIconPercentageDropdown.currentState = .withIconPercentageDropdown(title: "withIconPercentageDropdown", text: "", placeholder: "withIconPercentageDropdown", icon:  UIImage(named: "user_Image") ?? UIImage(), percentage: "85")
-        withIconPercentageDropdown.validationMessage = "Validation MSG..."
+        withIconPercentageDropdown.setOption(option: FormTextFieldOption(title: "withIconPercentageDropdown", placeholder: "withIconPercentageDropdown", percentage: "85", validationMessage: "Validation MSG...", leftImage: UIImage(named: "user_Image"), fieldType: .withIconPercentageDropdown))
+        withIconPercentageDropdown.showMainButton = true
         
-        withDropdown.currentState = .withDropdown(title: "withDropdown", text: "", placeholder: "withDropdown")
+        withDropdown.setOption(option: FormTextFieldOption(title: "withDropdown", placeholder: "withDropdown", fieldType: .withDropdown))
+        withDropdown.showMainButton = true
+        
+        withLeftImage.delegate = self
+        withIconPercentageDropdown.delegate = self
+        withDropdown.delegate = self
     }
     
 }
@@ -58,18 +67,47 @@ extension FormTextFieldVC: UITextFieldDelegate {
         let currentText = textField.text ?? ""
         let newString  = (currentText as NSString).replacingCharacters(in: range, with: string)
         
-        if textField == Default.textField {
-            Default.setValidationUI(validate: newString.count <= 5)
+        if textField == normal.textField {
+            normal.showWarning = (newString.count > 5)
         } else if textField == withPercentage.textField {
             if newString.isEmpty {
                 withPercentage.validationMessage = "pls Enter data"
             } else {
                 withPercentage.validationMessage = ""
             }
-            withPercentage.setValidationUI(validate: !newString.isEmpty)
+            withPercentage.showWarning = newString.isEmpty
         }
         
         return true
+    }
+    
+}
+
+// MARK: - FormTextFieldDelegate
+extension FormTextFieldVC: FormTextFieldDelegate {
+    
+    func leftButtonClicked(formField: FormTextFieldView) {
+        if formField == withLeftImage {
+            print("leftButtonClicked - withLeftImage")
+        } else if formField == withIconPercentageDropdown {
+            print("leftButtonClicked - withIconPercentageDropdown")
+        }
+    }
+    
+    func textFieldClicked(formField: FormTextFieldView) {
+        if formField == withIconPercentageDropdown {
+            print("textFieldClicked - withIconPercentageDropdown")
+        } else if formField == withDropdown {
+            print("textFieldClicked - withDropdown")
+        }
+    }
+    
+    func rightButtonClicked(formField: FormTextFieldView) {
+        if formField == withIconPercentageDropdown {
+            print("rightButtonClicked - withIconPercentageDropdown")
+        } else if formField == withDropdown {
+            print("rightButtonClicked - withDropdown")
+        }
     }
     
 }
