@@ -24,9 +24,6 @@ struct TextStyle {
 
 extension TextStyle {
     
-    static let formTitle = TextStyle(font: .font16Medium, color: .formItemTitle)
-    static let formTextField = TextStyle(font: .font16Regular, color: .formItemText)
-    
     static let primaryButton = TextStyle(font: .font12Semibold, color: .white)
     static let primaryButtonDisabled = TextStyle(font: .font12Semibold, color: .primary_3)
     

@@ -10,9 +10,7 @@ import UIKit
 
 extension UIColor {
     
-    static let formItemTitle: UIColor = .darkGray
-    static let formItemText: UIColor = .black
-    
+    static let black_25: UIColor = UIColor(red: 25/255, green: 25/255, blue: 25/255, alpha: 1)
     static let black_37: UIColor = UIColor(red: 37/255, green: 37/255, blue: 37/255, alpha: 1)
     
     static let primary_0_2 = UIColor(red: 243/255, green: 245/255, blue: 249/255, alpha: 1)

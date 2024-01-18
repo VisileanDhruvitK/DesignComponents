@@ -79,7 +79,11 @@ public class FormTextFieldView: UIView {
     
     public var title: String = "" {
         didSet {
-            titleLabel.text = title
+            if isRequired {
+                titleLabel.attributedText = titleLabel.text?.addRedStar()
+            } else {
+                titleLabel.text = title
+            }
         }
     }
     
@@ -136,7 +140,7 @@ public class FormTextFieldView: UIView {
         label.numberOfLines = 1
         label.textAlignment = .left
         label.font = .font14Regular
-        label.textColor = .black_37
+        label.textColor = .primary_7
         label.setContentHuggingPriority(UILayoutPriority(rawValue: 1000), for: .horizontal)
         label.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 1000), for: .horizontal)
         label.heightAnchor.constraint(equalToConstant: 20).isActive = true
