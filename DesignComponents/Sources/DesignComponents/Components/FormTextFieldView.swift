@@ -139,7 +139,7 @@ public class FormTextFieldView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 1
         label.textAlignment = .left
-        label.font = .font14Regular
+        label.font = .font14Medium
         label.textColor = .primary_7
         label.setContentHuggingPriority(UILayoutPriority(rawValue: 1000), for: .horizontal)
         label.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 1000), for: .horizontal)
