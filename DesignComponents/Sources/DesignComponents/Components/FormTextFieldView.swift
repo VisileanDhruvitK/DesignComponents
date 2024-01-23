@@ -490,9 +490,15 @@ public class FormTextFieldView: UIView {
         descriptionLabel.isHidden = validationMessage.isEmpty == true
         
         if !showWarning {
-            txtView.layer.borderColor = UIColor.primary_5.cgColor
-            descriptionLabel.textColor = .primary_7
-            textField.textColor = .primary_7
+            if textField.isFirstResponder {
+                txtView.layer.borderColor = UIColor.primary_5.cgColor
+                descriptionLabel.textColor = .primary_5
+                textField.textColor = .primary_7
+            } else {
+                txtView.layer.borderColor = UIColor.neutral_1_5.cgColor
+                descriptionLabel.textColor = .neutral_5
+                textField.textColor = .primary_7
+            }
         } else {
             txtView.layer.borderColor = UIColor.destructive_5.cgColor
             descriptionLabel.textColor = .destructive_5
