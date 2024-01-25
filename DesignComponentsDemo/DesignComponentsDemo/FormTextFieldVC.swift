@@ -17,6 +17,8 @@ class FormTextFieldVC: UIViewController {
     @IBOutlet weak var withPercentage : FormTextFieldView!
     @IBOutlet weak var withIconPercentageDropdown: FormTextFieldView!
     @IBOutlet weak var withDropdown: FormTextFieldView!
+    @IBOutlet weak var withCost: FormTextFieldView!
+    @IBOutlet weak var withCountry: FormTextFieldView!
     @IBOutlet weak var textField: VLTextField!
     
     
@@ -33,6 +35,8 @@ class FormTextFieldVC: UIViewController {
         withPercentage.textField.delegate = self
         withIconPercentageDropdown.textField.delegate = self
         withDropdown.textField.delegate = self
+        withCost.textField.delegate = self
+        withCountry.textField.delegate = self
         
         normal.setOption(option: FormTextFieldOption(title: "Normal", text: "New Task 123", placeholder: "Enter activity name", validationMessage: "Validation MSG ..."))
         
@@ -53,6 +57,12 @@ class FormTextFieldVC: UIViewController {
         withDropdown.delegate = self
         
         withLeftImage.setImageOption(option: ImageOption(color: .red, radiusType: .round), direction: .left)
+        
+        withCost.setOption(option: FormTextFieldOption(title: "Planned cost", placeholder: "Planned cost", leftText: "USD"))
+        withCost.showLeftText = true
+        
+        withCountry.setOption(option: FormTextFieldOption(title: "Country", placeholder: "Choose country", leftText: "IND", leftImage: UIImage(named: "inputDropdown"), fieldType: .withLeftIcon))
+        withCountry.showLeftText = true
     }
     
 }

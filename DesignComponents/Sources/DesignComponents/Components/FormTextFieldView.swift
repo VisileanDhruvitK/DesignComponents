@@ -11,6 +11,7 @@ public struct FormTextFieldOption {
     public var title: String = ""
     public var text: String = ""
     public var placeholder: String = ""
+    public var leftText: String = ""
     public var percentage: String = ""
     public var validationMessage = ""
     public var leftImage: UIImage? = nil
@@ -18,10 +19,11 @@ public struct FormTextFieldOption {
     public var isEnabled: Bool = false
     public var fieldType: FormTextFieldType = .normal
     
-    public init(title: String = "", text: String = "", placeholder: String = "", percentage: String = "", validationMessage: String = "", leftImage: UIImage? = nil, rightImage: UIImage? = nil, isEnabled: Bool = true, fieldType: FormTextFieldType = .normal) {
+    public init(title: String = "", text: String = "", placeholder: String = "", leftText: String = "", percentage: String = "", validationMessage: String = "", leftImage: UIImage? = nil, rightImage: UIImage? = nil, isEnabled: Bool = true, fieldType: FormTextFieldType = .normal) {
         self.title = title
         self.text = text
         self.placeholder = placeholder
+        self.leftText = leftText
         self.percentage = percentage
         self.validationMessage = validationMessage
         self.leftImage = leftImage
@@ -108,6 +110,18 @@ public class FormTextFieldView: UIView {
         }
     }
     
+    public var showLeftText: Bool = false {
+        didSet {
+            setUI()
+        }
+    }
+    
+    public var leftText: String = "" {
+        didSet {
+            leftLabel.text = leftText
+        }
+    }
+    
     public var leftImage: UIImage? = nil {
         didSet {
             leftButton.setImage(leftImage, for: .normal)
@@ -170,6 +184,7 @@ public class FormTextFieldView: UIView {
     public lazy var textField: UITextField = {
         let txtField = UITextField()
         txtField.textColor = .primary_7
+        txtField.tintColor = .primary_7
         txtField.font = .font14Regular
         txtField.autocorrectionType = .no
         txtField.autocapitalizationType = .none
@@ -213,6 +228,18 @@ public class FormTextFieldView: UIView {
         return view
     }()
     
+    // Left Label
+    private lazy var leftLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        label.numberOfLines = 1
+        label.textAlignment = .center
+        label.font = .font14Regular
+        label.textColor = .neutral_5
+        return label
+    }()
+    
     // Left Button
     private lazy var leftButton: UIButton = {
         let button = UIButton(type: .custom)
@@ -222,6 +249,16 @@ public class FormTextFieldView: UIView {
         button.isHidden = true
         button.clipsToBounds = true
         return button
+    }()
+    
+    // Left Separator
+    private lazy var leftSeparator: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.widthAnchor.constraint(equalToConstant: 1.5).isActive = true
+        view.backgroundColor = .neutral_1_5
+        view.clipsToBounds = true
+        return view
     }()
     
     // Right Button
@@ -238,7 +275,7 @@ public class FormTextFieldView: UIView {
     
     // TextField StackView with Image, TextField, Percentage View & Button
     private lazy var stackViewTextField: UIStackView = {
-        let view = UIStackView(arrangedSubviews: [leftButton, textField, stackViewWithPercentage, rightButton])
+        let view = UIStackView(arrangedSubviews: [leftLabel, leftButton, leftSeparator, textField, stackViewWithPercentage, rightButton])
         view.translatesAutoresizingMaskIntoConstraints = false
         view.alignment = .fill
         view.distribution = .fill
@@ -344,6 +381,7 @@ public class FormTextFieldView: UIView {
         title = option.title
         text = option.text
         placeholder = option.placeholder
+        leftText = option.leftText
         percentage = option.percentage
         validationMessage = option.validationMessage
         leftImage = option.leftImage
@@ -356,6 +394,8 @@ public class FormTextFieldView: UIView {
     }
     
     func setUI() {
+        leftLabel.isHidden = !showLeftText
+        leftSeparator.isHidden = !showLeftText
         leftButton.isHidden = true
         rightButton.isHidden = true
         stackViewWithPercentage.isHidden = true
@@ -442,6 +482,7 @@ public class FormTextFieldView: UIView {
         
         textField.textColor = .primary_7
         descriptionLabel.textColor = .primary_5
+        leftSeparator.backgroundColor = .primary_5
         txtView.layer.borderColor = UIColor.primary_5.cgColor
     }
     
@@ -453,6 +494,7 @@ public class FormTextFieldView: UIView {
         
         textField.textColor = .primary_7
         descriptionLabel.textColor = .neutral_5
+        leftSeparator.backgroundColor = .neutral_1_5
         txtView.layer.borderColor = UIColor.neutral_1_5.cgColor
     }
     
@@ -492,15 +534,18 @@ public class FormTextFieldView: UIView {
         if !showWarning {
             if textField.isFirstResponder {
                 txtView.layer.borderColor = UIColor.primary_5.cgColor
+                leftSeparator.backgroundColor = .primary_5
                 descriptionLabel.textColor = .primary_5
                 textField.textColor = .primary_7
             } else {
                 txtView.layer.borderColor = UIColor.neutral_1_5.cgColor
+                leftSeparator.backgroundColor = .neutral_1_5
                 descriptionLabel.textColor = .neutral_5
                 textField.textColor = .primary_7
             }
         } else {
             txtView.layer.borderColor = UIColor.destructive_5.cgColor
+            leftSeparator.backgroundColor = .destructive_5
             descriptionLabel.textColor = .destructive_5
             textField.textColor = .destructive_5
         }
