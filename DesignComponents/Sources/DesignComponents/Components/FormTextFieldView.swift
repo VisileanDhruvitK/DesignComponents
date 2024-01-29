@@ -68,7 +68,7 @@ public class FormTextFieldView: UIView {
     
     public var isRequired: Bool = false {
         didSet {
-            titleLabel.attributedText = titleLabel.text?.addRedStar()
+            titleLabel.attributedText = title.addRedStar()
         }
     }
     
@@ -82,7 +82,7 @@ public class FormTextFieldView: UIView {
     public var title: String = "" {
         didSet {
             if isRequired {
-                titleLabel.attributedText = titleLabel.text?.addRedStar()
+                titleLabel.attributedText = title.addRedStar()
             } else {
                 titleLabel.text = title
             }
