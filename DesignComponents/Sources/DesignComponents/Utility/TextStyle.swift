@@ -8,13 +8,13 @@
 import Foundation
 import UIKit
 
-struct TextStyle {
+public struct TextStyle {
     
     var font: UIFont = UIFont.systemFont(ofSize: 14, weight: .medium)
     var color: UIColor = .black
     var textAlignment: NSTextAlignment = .left
     
-    init(font: UIFont = UIFont.systemFont(ofSize: 14, weight: .medium), color: UIColor = .black, textAlignment: NSTextAlignment = .left) {
+    public init(font: UIFont = UIFont.systemFont(ofSize: 14, weight: .medium), color: UIColor = .black, textAlignment: NSTextAlignment = .left) {
         self.font = font
         self.color = color
         self.textAlignment = textAlignment

@@ -30,6 +30,7 @@ class RadioButtonVC: UIViewController {
         radioState.isOn = true
         radioState.addTarget(self, action: #selector(radioStateSelected(_:)), for: .valueChanged)
         
+        radioButton.titleStyle = TextStyle(color: .red)
         radioButton.setOption(option: RadioOption(title: "Single Radio", isOn: true))
         radioButton.addTarget(self, action: #selector(radioSelected(_:)), for: .valueChanged)
         

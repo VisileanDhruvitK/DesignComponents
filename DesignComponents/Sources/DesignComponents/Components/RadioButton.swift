@@ -30,7 +30,7 @@ public class RadioButton: UIControl {
     private var image: UIImage? = .radio
     private var selectedImage: UIImage? = .radioSelected
     
-    private var titleStyle: TextStyle = .checkBoxTitle
+    public var titleStyle: TextStyle = .checkBoxTitle
     private var subTitleStyle: TextStyle = .toggleSubTitle
     
     private var apperance: Appearance = Appearance()
