@@ -40,6 +40,7 @@ extension UIImage {
     static let inputDropdown = VLImage(named: "inputDropdown")
     static let percentageDown = VLImage(named: "percentageDown")
     
+    static let infoIcon = VLImage(named: "infoIcon")
 }
 
 

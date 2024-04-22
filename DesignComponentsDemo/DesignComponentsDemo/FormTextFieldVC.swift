@@ -38,7 +38,8 @@ class FormTextFieldVC: UIViewController {
         withCost.textField.delegate = self
         withCountry.textField.delegate = self
         
-        normal.setOption(option: FormTextFieldOption(title: "Normal", text: "New Task 123", placeholder: "Enter activity name", validationMessage: "Validation MSG ..."))
+        normal.setOption(option: FormTextFieldOption(title: "Normal", text: "New Task 123", placeholder: "Enter activity name", validationMessage: ""))
+        normal.showInfoButton = true
         
         normalDisable.setOption(option: FormTextFieldOption(title: "Normal-Disable", placeholder: "Default with Disable", isEnabled: false))
         
@@ -52,6 +53,7 @@ class FormTextFieldVC: UIViewController {
         withDropdown.setOption(option: FormTextFieldOption(title: "withDropdown", placeholder: "withDropdown", fieldType: .withRightIcon))
         withDropdown.showMainButton = true
         
+        normal.delegate = self
         withLeftImage.delegate = self
         withIconPercentageDropdown.delegate = self
         withDropdown.delegate = self
@@ -97,6 +99,12 @@ extension FormTextFieldVC: UITextFieldDelegate {
 
 // MARK: - FormTextFieldDelegate
 extension FormTextFieldVC: FormTextFieldDelegate {
+    
+    func infoButtonClicked(formField: FormTextFieldView) {
+        if formField == normal {
+            print("infoButtonClicked - normal")
+        }
+    }
     
     func leftButtonClicked(formField: FormTextFieldView) {
         if formField == withLeftImage {

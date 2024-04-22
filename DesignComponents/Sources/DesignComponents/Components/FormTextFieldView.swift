@@ -44,6 +44,7 @@ public enum FormTextFieldType {
 }
 
 @objc public protocol FormTextFieldDelegate: AnyObject {
+    @objc optional func infoButtonClicked(formField: FormTextFieldView)
     @objc optional func leftButtonClicked(formField: FormTextFieldView)
     @objc optional func rightButtonClicked(formField: FormTextFieldView)
     @objc optional func textFieldClicked(formField: FormTextFieldView)
@@ -68,7 +69,11 @@ public class FormTextFieldView: UIView {
     
     public var isRequired: Bool = false {
         didSet {
-            titleLabel.attributedText = title.addRedStar()
+            if isRequired {
+                titleLabel.attributedText = title.addRedStar()
+            } else {
+                titleLabel.text = title
+            }
         }
     }
     
@@ -86,6 +91,26 @@ public class FormTextFieldView: UIView {
             } else {
                 titleLabel.text = title
             }
+        }
+    }
+    
+    public var optionalTitle: String = "" {
+        didSet {
+            optionalLabel.text = optionalTitle
+            setUI()
+        }
+    }
+    
+    public var infoImage: UIImage? = nil {
+        didSet {
+            infoButton.setImage(infoImage, for: .normal)
+        }
+    }
+    
+    public var showInfoButton: Bool = false {
+        didSet {
+            infoButton.isHidden = !showInfoButton
+            setUI()
         }
     }
     
@@ -171,8 +196,19 @@ public class FormTextFieldView: UIView {
         return label
     }()
     
+    private lazy var infoButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        button.setImage(.infoIcon, for: .normal)
+        button.isHidden = true
+        button.clipsToBounds = true
+        return button
+    }()
+    
     private lazy var hStackView: UIStackView = {
-        let view = UIStackView(arrangedSubviews: [titleLabel, optionalLabel])
+        let view = UIStackView(arrangedSubviews: [titleLabel, optionalLabel, infoButton])
         view.translatesAutoresizingMaskIntoConstraints = false
         view.alignment = .fill
         view.distribution = .fill
@@ -402,6 +438,15 @@ public class FormTextFieldView: UIView {
         
         stackView.spacing = (title.isEmpty && validationMessage.isEmpty) ? 0 : 8
         
+        titleLabel.isHidden = title.isEmpty
+        optionalLabel.isHidden = optionalTitle.isEmpty
+        
+        if titleLabel.isHidden && optionalLabel.isHidden && infoButton.isHidden {
+            hStackView.isHidden = true
+        } else {
+            hStackView.isHidden = false
+        }
+        
         switch fieldType {
         case .normal:
             break
@@ -460,6 +505,7 @@ public class FormTextFieldView: UIView {
         textField.addTarget(self, action: #selector(textFieldBeginEditingNotification(_:)), for: .editingDidBegin)
         textField.addTarget(self, action: #selector(textFieldEndEditingNotification(_:)), for: .editingDidEnd)
         
+        infoButton.addTarget(self, action: #selector(infoButtonClicked(_:)), for: .touchUpInside)
         leftButton.addTarget(self, action: #selector(leftButtonClicked(_:)), for: .touchUpInside)
         mainButton.addTarget(self, action: #selector(mainButtonClicked(_:)), for: .touchUpInside)
         rightButton.addTarget(self, action: #selector(rightButtonClicked(_:)), for: .touchUpInside)
@@ -469,6 +515,7 @@ public class FormTextFieldView: UIView {
         textField.removeTarget(self, action: #selector(textFieldBeginEditingNotification(_:)), for: .editingDidBegin)
         textField.removeTarget(self, action: #selector(textFieldEndEditingNotification(_:)), for: .editingDidEnd)
         
+        infoButton.removeTarget(self, action: #selector(infoButtonClicked(_:)), for: .touchUpInside)
         leftButton.removeTarget(self, action: #selector(leftButtonClicked(_:)), for: .touchUpInside)
         mainButton.removeTarget(self, action: #selector(mainButtonClicked(_:)), for: .touchUpInside)
         rightButton.removeTarget(self, action: #selector(rightButtonClicked(_:)), for: .touchUpInside)
@@ -498,6 +545,10 @@ public class FormTextFieldView: UIView {
         txtView.layer.borderColor = UIColor.neutral_1_5.cgColor
     }
     
+    @objc func infoButtonClicked(_ sender: UIButton) {
+        delegate?.infoButtonClicked?(formField: self)
+    }
+    
     @objc func leftButtonClicked(_ sender: UIButton) {
         delegate?.leftButtonClicked?(formField: self)
     }
@@ -514,6 +565,7 @@ public class FormTextFieldView: UIView {
     private func updateUIState() {
         isUserInteractionEnabled = isEnabled
         textField.isEnabled = isEnabled
+        infoButton.isUserInteractionEnabled = isEnabled
         leftButton.isUserInteractionEnabled = isEnabled
         mainButton.isUserInteractionEnabled = isEnabled
         rightButton.isUserInteractionEnabled = isEnabled
