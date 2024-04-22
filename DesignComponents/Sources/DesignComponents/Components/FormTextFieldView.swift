@@ -196,7 +196,7 @@ public class FormTextFieldView: UIView {
         return label
     }()
     
-    private lazy var infoButton: UIButton = {
+    public lazy var infoButton: UIButton = {
         let button = UIButton(type: .custom)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.heightAnchor.constraint(equalToConstant: 20).isActive = true
