@@ -12,6 +12,7 @@ public struct CheckboxOption {
     public var description: String = ""
     public var selectionState: SelectionState = .deselected
     public var isEnabled: Bool = false
+    public var identifier: String = ""
     
     public init(title: String, description: String = "", selectionState: SelectionState = .deselected, isEnabled: Bool = true) {
         self.title = title
@@ -41,6 +42,8 @@ public class CheckBox: UIControl {
             updateSize()
         }
     }
+    
+    public var identifier: String = ""
     
     public var title: String = "" {
         didSet {
@@ -220,6 +223,8 @@ public class CheckBox: UIControl {
     }
     
     public func setOption(option: CheckboxOption) {
+        identifier = option.identifier
+        
         titleLabel.text = option.title
         titleLabel.isHidden = option.title.isEmpty
         

@@ -12,6 +12,7 @@ public struct RadioOption {
     public var description: String = ""
     public var isOn: Bool = false
     public var isEnabled: Bool = false
+    public var identifier: String = ""
     
     public init(title: String, description: String = "", isOn: Bool = false, isEnabled: Bool = true) {
         self.title = title
@@ -40,6 +41,8 @@ public class RadioButton: UIControl {
             updateSize()
         }
     }
+    
+    public var identifier: String = ""
     
     public var title: String = "" {
         didSet {
@@ -211,6 +214,8 @@ public class RadioButton: UIControl {
     }
     
     public func setOption(option: RadioOption) {
+        identifier = option.identifier
+        
         titleLabel.text = option.title
         titleLabel.isHidden = option.title.isEmpty
         

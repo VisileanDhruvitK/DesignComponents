@@ -16,6 +16,7 @@ public struct ChipOption {
     public var isEnabled: Bool = false
     public var chipType: ChipType = .textOnly
     public var chipStyle: ChipStyle = .roundPA
+    public var identifier: String = ""
     
     public init(image: UIImage? = nil, title: String, buttonImage: UIImage? = nil, isSelected: Bool = false, isEnabled: Bool = true, chipType: ChipType = .textOnly, chipStyle: ChipStyle = .roundPA) {
         self.image = image
@@ -74,6 +75,8 @@ public class ChipControl: UIControl {
             configureUI()
         }
     }
+    
+    public var identifier: String = ""
     
     public var image: UIImage? = nil {
         didSet {
@@ -393,6 +396,8 @@ public class ChipControl: UIControl {
     
     // Set chip data
     public func setOption(option: ChipOption) {
+        identifier = option.identifier
+        
         imageView.image = option.image
         
         titleLabel.text = option.title

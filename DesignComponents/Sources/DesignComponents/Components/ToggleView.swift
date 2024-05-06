@@ -27,6 +27,8 @@ public class ToggleView: UIControl {
         }
     }
     
+    public var identifier: String = ""
+    
     public var title: String = "" {
         didSet {
             titleLabel.text = title
