@@ -14,11 +14,12 @@ public struct CheckboxOption {
     public var isEnabled: Bool = false
     public var identifier: String = ""
     
-    public init(title: String, description: String = "", selectionState: SelectionState = .deselected, isEnabled: Bool = true) {
+    public init(title: String, description: String = "", selectionState: SelectionState = .deselected, isEnabled: Bool = true, identifier: String = "") {
         self.title = title
         self.description = description
         self.selectionState = selectionState
         self.isEnabled = isEnabled
+        self.identifier = identifier
     }
     
 }

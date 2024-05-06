@@ -18,7 +18,7 @@ public struct ChipOption {
     public var chipStyle: ChipStyle = .roundPA
     public var identifier: String = ""
     
-    public init(image: UIImage? = nil, title: String, buttonImage: UIImage? = nil, isSelected: Bool = false, isEnabled: Bool = true, chipType: ChipType = .textOnly, chipStyle: ChipStyle = .roundPA) {
+    public init(image: UIImage? = nil, title: String, buttonImage: UIImage? = nil, isSelected: Bool = false, isEnabled: Bool = true, chipType: ChipType = .textOnly, chipStyle: ChipStyle = .roundPA, identifier: String = "") {
         self.image = image
         self.title = title
         self.buttonImage = buttonImage
@@ -26,6 +26,7 @@ public struct ChipOption {
         self.isEnabled = isEnabled
         self.chipType = chipType
         self.chipStyle = chipStyle
+        self.identifier = identifier
     }
     
 }

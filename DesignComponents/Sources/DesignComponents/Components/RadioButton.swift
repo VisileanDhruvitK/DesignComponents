@@ -14,11 +14,12 @@ public struct RadioOption {
     public var isEnabled: Bool = false
     public var identifier: String = ""
     
-    public init(title: String, description: String = "", isOn: Bool = false, isEnabled: Bool = true) {
+    public init(title: String, description: String = "", isOn: Bool = false, isEnabled: Bool = true, identifier: String = "") {
         self.title = title
         self.description = description
         self.isOn = isOn
         self.isEnabled = isEnabled
+        self.identifier = identifier
     }
     
 }
