@@ -38,6 +38,12 @@ public protocol DynamicChipDelegate: AnyObject {
 
 public class DynamicChipControl: UIControl {
     
+    public var imageTint: UIColor? = nil {
+        didSet {
+            imageView.tintColor = imageTint
+        }
+    }
+    
     public var image: UIImage? = nil {
         didSet {
             imageView.image = image

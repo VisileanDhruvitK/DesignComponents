@@ -46,7 +46,7 @@ class DynamicChipVC: UIViewController {
         chipTextButton.setOption(option: DynamicChipOption(title: "text and button", buttonImage: .arrowDown, chipType: .withButton, chipStyle: .round))
         chipTextButton.delegate = self
         
-        chipImageTextButton.setOption(option: DynamicChipOption(image: UIImage(named: "krishna-asta-gopis"), title: "text, image and button", buttonImage: .arrowDown, chipType: .withImageAndButton, chipStyle: .round))
+        chipImageTextButton.setOption(option: DynamicChipOption(image: UIImage(named: "category_icon"), title: "text, image and button", buttonImage: .arrowDown, chipType: .withImageAndButton, chipStyle: .round))
         chipImageTextButton.delegate = self
         
         // Manual Configuration of Chip
@@ -77,6 +77,7 @@ class DynamicChipVC: UIViewController {
         
         chipImageTextButton.borderColor = .neutral_7
         chipImageTextButton.borderWidth = 1
+        chipImageTextButton.imageTint = .red
     }
     
     
