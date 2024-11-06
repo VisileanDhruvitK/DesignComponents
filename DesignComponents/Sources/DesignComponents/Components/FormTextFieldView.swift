@@ -59,7 +59,7 @@ public class FormTextFieldView: UIView {
         }
     }
     
-    public var delegate: FormTextFieldDelegate?
+    public weak var delegate: FormTextFieldDelegate?
     
     public var fieldType: FormTextFieldType = .normal {
         didSet {
@@ -386,7 +386,7 @@ public class FormTextFieldView: UIView {
     }
     
     func initialize() {
-        self.backgroundColor = .clear
+        backgroundColor = .clear
         setupSubViews()
         addTargets()
     }

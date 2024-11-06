@@ -62,7 +62,7 @@ public class RadioButton: UIControl {
     public var descriptionLines: Int = 2 {
         didSet {
             descriptionLabel.numberOfLines = descriptionLines
-            self.layoutIfNeeded()
+            layoutIfNeeded()
         }
     }
     

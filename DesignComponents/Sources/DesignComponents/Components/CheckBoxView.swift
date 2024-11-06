@@ -20,7 +20,7 @@ public class CheckBoxView: UIView {
     public var selectedIndexes = Set<Int>()
     public var allowMultipleSelection = true
     
-    public var delegate: CheckBoxSelectionDelegate?
+    public weak var delegate: CheckBoxSelectionDelegate?
     
     public var componentSize: ComponentSize = .medium {
         didSet {
@@ -121,7 +121,7 @@ public class CheckBoxView: UIView {
             }
         }
         
-        self.delegate?.didSelectCheckBox(tag: tag, indexes: selectedIndexes)
+        delegate?.didSelectCheckBox(tag: tag, indexes: selectedIndexes)
     }
     
 }

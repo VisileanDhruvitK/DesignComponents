@@ -28,9 +28,10 @@ public class OTPInputView: UIView {
     
     public var hint: String = "" {
         didSet {
-            self.hintLabel.text = hint
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self.hintLabel.isHidden = self.hint.isEmpty
+            hintLabel.text = hint
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                guard let self else { return }
+                hintLabel.isHidden = hint.isEmpty
             }
         }
     }
@@ -165,7 +166,7 @@ public class OTPInputView: UIView {
     
     //update UI for OTP validation state
     private func updateValidationState() {
-        otpStackView.isValidOTP = self.isValidOTP
+        otpStackView.isValidOTP = isValidOTP
         
         if isValidOTP {
             hintLabel.textColor = .neutral_5
@@ -176,7 +177,7 @@ public class OTPInputView: UIView {
     
     //update UI state
     private func updateState() {
-        otpStackView.isEnabled = self.isEnabled
+        otpStackView.isEnabled = isEnabled
     }
     
     //set title, optionalTitle & hint text
@@ -211,7 +212,7 @@ public class OTPInputView: UIView {
 extension OTPInputView: OTPStackViewDelegate {
     
     public func didChangeValidity(isValid: Bool) {
-        self.delegate?.didChangeValidity(isValid: isValid, otpView: self)
+        delegate?.didChangeValidity(isValid: isValid, otpView: self)
     }
     
 }

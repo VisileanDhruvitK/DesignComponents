@@ -20,7 +20,7 @@ public class RadioButtonView: UIView {
     var selectedIndexes = Set<Int>()
     var allowMultipleSelection = false
     
-    public var delegate: RadioSelectionDelegate?
+    public weak var delegate: RadioSelectionDelegate?
     
     public var componentSize: ComponentSize = .medium {
         didSet {
@@ -121,7 +121,7 @@ public class RadioButtonView: UIView {
             }
         }
         
-        self.delegate?.didSelectRadioButton(tag: tag, indexes: selectedIndexes)
+        delegate?.didSelectRadioButton(tag: tag, indexes: selectedIndexes)
     }
     
 }
@@ -129,7 +129,7 @@ public class RadioButtonView: UIView {
 extension UIStackView {
     func removeAllArrangedSubviews() {
         let removedSubviews = arrangedSubviews.reduce([]) { (allSubviews, subview) -> [UIView] in
-            self.removeArrangedSubview(subview)
+            removeArrangedSubview(subview)
             return allSubviews + [subview]
         }
         NSLayoutConstraint.deactivate(removedSubviews.flatMap({ $0.constraints }))

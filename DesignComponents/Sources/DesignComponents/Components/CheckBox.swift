@@ -63,7 +63,7 @@ public class CheckBox: UIControl {
     public var descriptionLines: Int = 2 {
         didSet {
             descriptionLabel.numberOfLines = descriptionLines
-            self.layoutIfNeeded()
+            layoutIfNeeded()
         }
     }
     
@@ -242,7 +242,7 @@ public class CheckBox: UIControl {
     }
     
     func select(state: SelectionState) {
-        self.selectionState = state
+        selectionState = state
     }
     
     public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {

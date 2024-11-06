@@ -68,18 +68,18 @@ public class OTPStackView: UIStackView {
     
     //Customisation and setting stackView
     private final func setupStackView() {
-        self.axis = .horizontal
-        self.backgroundColor = .clear
-        self.isUserInteractionEnabled = true
-        self.translatesAutoresizingMaskIntoConstraints = false
-        self.contentMode = .center
-        self.distribution = .fillEqually
-        self.spacing = 8
+        axis = .horizontal
+        backgroundColor = .clear
+        isUserInteractionEnabled = true
+        translatesAutoresizingMaskIntoConstraints = false
+        contentMode = .center
+        distribution = .fillEqually
+        spacing = 8
     }
     
     //Adding each OTPfield to stack view
     private final func addOTPFields() {
-        self.removeAllArrangedSubviews()
+        removeAllArrangedSubviews()
         textFieldsCollection.removeAll()
         
         for index in 0..<numberOfFields {
@@ -113,9 +113,9 @@ public class OTPStackView: UIStackView {
         textField.layer.borderWidth = 1.5
         textField.layer.cornerRadius = 10
         
-        self.addArrangedSubview(textField)
-        textField.heightAnchor.constraint(equalTo: self.heightAnchor).isActive = true
-        textField.widthAnchor.constraint(equalTo: self.heightAnchor).isActive = true
+        addArrangedSubview(textField)
+        textField.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
+        textField.widthAnchor.constraint(equalTo: heightAnchor).isActive = true
     }
     
     //update UI state

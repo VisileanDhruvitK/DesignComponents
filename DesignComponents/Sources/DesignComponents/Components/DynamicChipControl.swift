@@ -105,7 +105,7 @@ public class DynamicChipControl: UIControl {
         }
     }
     
-    public var delegate: DynamicChipDelegate?
+    public weak var delegate: DynamicChipDelegate?
     
     private var leadingConstraint: NSLayoutConstraint!
     private var trailingConstraint: NSLayoutConstraint!
@@ -306,7 +306,7 @@ public class DynamicChipControl: UIControl {
     }
     
     @objc private func buttonClicked() {
-        self.delegate?.chipButtonClicked(sender: self)
+        delegate?.chipButtonClicked(sender: self)
     }
     
     public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {

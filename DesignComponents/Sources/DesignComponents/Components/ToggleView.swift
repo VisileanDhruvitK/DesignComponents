@@ -46,7 +46,7 @@ public class ToggleView: UIControl {
     public var descriptionLines: Int = 2 {
         didSet {
             descriptionLabel.numberOfLines = descriptionLines
-            self.layoutIfNeeded()
+            layoutIfNeeded()
         }
     }
     
@@ -181,7 +181,7 @@ public class ToggleView: UIControl {
         titleLabel.textColor = titleStyle.color
         descriptionLabel.textColor = subTitleStyle.color
         
-        self.backgroundColor = apperance.backgroundColor
+        backgroundColor = apperance.backgroundColor
         
         layer.cornerRadius = apperance.cornerRadius
         clipsToBounds = true

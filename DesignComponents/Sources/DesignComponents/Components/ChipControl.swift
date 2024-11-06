@@ -128,7 +128,7 @@ public class ChipControl: UIControl {
         }
     }
     
-    public var delegate: ChipControlDelegate?
+    public weak var delegate: ChipControlDelegate?
     
     private var leadingConstraint: NSLayoutConstraint!
     private var trailingConstraint: NSLayoutConstraint!
@@ -418,7 +418,7 @@ public class ChipControl: UIControl {
     
     // button click event
     @objc private func buttonClicked() {
-        self.delegate?.chipButtonClicked(sender: self)
+        delegate?.chipButtonClicked(sender: self)
     }
     
     // Handle chip touch
